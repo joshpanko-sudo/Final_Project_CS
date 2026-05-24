@@ -88,6 +88,7 @@ class Belly_Badge_Care_Bear(Care_Bear):
     def __init__(self, name, power):
         Care_Bear.__init__(self, name)
         self.power = Power(power)
+        print("self power:",self.power.strength)
         
     def help_(self):
         print(f"{self.name} joins in for the Care Bear Stare and "
@@ -98,6 +99,8 @@ class Belly_Badge_Care_Bear(Care_Bear):
         print(self.power.strength)
         
     def inflict_damage(self, enemy, used_power):
+        self.power.strength = power_data[used_power]["strength"]
+        #print("self.power:", self.power.strength)
         attack = random.randint(self.power.strength-5,self.power.strength+5)
         print(f"{self.name}",power_data[used_power]["power"], f"strength: {attack}")
 

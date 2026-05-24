@@ -42,3 +42,7 @@ slow_print("*A monster approaches you*", delay=0.05)
 from combat_system import Belly_Badge_Care_Bear
 
 slow_print("*Wow that was a close one*", delay=0.05)
+slow_print("*Villager: Wow, I have never seen that before!*", delay=0.05)
+slow_print("*Villager: Here you are, here is your very own wooden sword*", delay=0.05)
+my_backpack.add_item("Wooden Sword", 1.0)
+my_backpack.show_inventory()
