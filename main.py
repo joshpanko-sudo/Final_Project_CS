@@ -3,6 +3,10 @@ Main Script for StoneKnight
 Created by Josh and Allen
 Version 1.0
 """
+from backpack_system import Backpack
+
+
+
 
 import time
 import sys
@@ -24,6 +28,7 @@ def slow_print(text, delay=0.1):
     print()  # Final newline after the text is finished
 
 
+my_backpack = Backpack(300, capacity=5)
 
 
 name = input("Choose your name: ")
@@ -32,3 +37,8 @@ slow_print("Mom: You must save the village!!", delay=0.05)
 slow_print("*You walk out of your house*", delay=0.05)
 slow_print("*You see monsters everwhere*", delay=0.05)
 slow_print("*A monster approaches you*", delay=0.05)
+
+
+from combat_system import Belly_Badge_Care_Bear
+
+slow_print("*Wow that was a close one*", delay=0.05)

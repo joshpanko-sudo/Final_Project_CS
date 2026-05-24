@@ -7,14 +7,35 @@ random_item = random.choice(wild_pokemon)
 print(f"You encountered a wild Pikachu!")
 
 
-power_data = {"thundershock" : {"strength": 10, "power": "uses thundershock!",
-                         "description": "red apple", "stun": "true"},
-            "star" : {"strength": 10, "power": "creates a shooting stars.",
-                         "description": "yellow star", "stun": "false" },
-            "thunderwave" : {"strength": 10, "power": "uses thunderwave!",
-                         "description": "yellow star",  "stun": "false"}
+power_data = {
+    "thundershock": {
+        "strength": 10,
+        "power": "uses thundershock!",
+        "description": "red apple",
+        "stun": True
+    },
+    "star": {
+        "strength": 10,
+        "power": "creates a shooting stars.",
+        "description": "yellow star",
+        "stun": False
+    },
+    "thunderwave": {
+        "strength": 10,
+        "power": "uses thunderwave!",
+        "description": "yellow star",
+        "stun": False
+    },
+    "kill": {
+        "strength": 300,
+        "power": "kills quickly",
+        "description": "yellow star",
+        "stun": False
+    }
+}
+
                
-              }
+              
 class Power:
     def __init__(self, power_type):
         self.name = power_type
@@ -123,6 +144,7 @@ while True:
                 if(pikachu_attack == "thundershock"):
                     Pikachu.inflict_damage(Charizard, pikachu_attack)
                     Stun = True
+
                 else:
                     healcooldown += 1
 
