@@ -66,6 +66,7 @@ def update_map(input_map):
 
 
 def move_player(direction, input_map): # Move the player
+    global player_location
     rows, cols = player_location["row"], player_location["col"]
     new_row, new_col = rows, cols
     match direction:
@@ -78,8 +79,8 @@ def move_player(direction, input_map): # Move the player
         case "d":
             new_col += 1
 
-    if player_location == {"row":6, "col": 7} or {"row":7, "col": 6}:
-        player_location == {"row":0, "col": 0}
+    if player_location == {"row":6, "col": 7} or player_location == {"row":7, "col": 6}:
+        player_location = {"row":0, "col": 0}
         gameloop(minimap_2)
     
 
@@ -87,17 +88,18 @@ def move_player(direction, input_map): # Move the player
     if 0 <= new_row < len(input_map) and 0 <=new_col < len(input_map[0]):
         if input_map[new_row][new_col] is not None:
             player_location["row"] = new_row
-            player_location["col"] = new_col
+            player_ocation["col"] = new_col
 
     
 def gameloop(input_map):
-    update_map(input_map)
-    print(player_location)
-    print(f"Current location:{input_map[player_location["row"]][player_location["col"]]}")
-    while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d"}:
-        print("Wrong Move")
-    else:
-        move_player(command, input_map)
-        gameloop(input_map)
+    global player_location
+    while True:
+        update_map(input_map)
+        print(player_location)
+        print(f"Current location: {input_map[player_location["row"]][player_location["col"]]}")
+        while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d"}:
+            print("Wrong Move")
+        else:
+            move_player(command, input_map)
 
 gameloop(minimap)
