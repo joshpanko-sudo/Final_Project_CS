@@ -79,16 +79,15 @@ def move_player(direction, input_map): # Move the player
         case "d":
             new_col += 1
 
+    if new_col == 6 and new_row == 7:
+        player_location = {"row":0, "col": 0}
+        gameloop(minimap_2)
+        return
     
-    
-    # if 0 <= new_row < len(input_map) and 0 <=new_col < len(input_map[0]):
-    if input_map[new_row][new_col] is not None:
+    if 0 <= new_row < len(input_map) and 0 <=new_col < len(input_map[0]):
+        if input_map[new_row][new_col] is not None:
             player_location["row"] = new_row
             player_location["col"] = new_col
-            
-            if player_location == {"row":6, "col": 7} or player_location == {"row":7, "col": 6}:
-                player_location = {"row":0, "col": 0}
-                gameloop(minimap_2)
 
 
     
