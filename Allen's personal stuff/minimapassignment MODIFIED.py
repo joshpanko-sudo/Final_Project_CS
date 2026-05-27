@@ -1,26 +1,8 @@
 from tabulate import tabulate
+import maps
 
-minimap = [
-    [None, "Garden", None, None, None, None, None, ],
-    [None, "Path", None, None, None, None, None, ],
-    [None, "Castle", None, None, None, None, None, ],
-    ["Tower", "Portal", "Temple", "Home", None, None, None, ],
-    [None, None, None, "Garden", None, None, None, ],
-    [None, None, None, "Cave", None, None, "None", ],
-    ["None", None, None, "Garden", "Farm", "Gate", "Path", ],
-]
-
-minimap_2 = [
-    ["Path", "Path", None, None, None],
-    [None, "House", None, None, None],
-    [None, "Garden", None, None, None],
-    [None, "Yard", None, None, None],
-    [None, None, None, None, None],
-]
-
-
+default_player_location = {"row": 0, "col": 0}
 player_location = {"row":0, "col":1}
-
 
 
 def longest_map_name(input_map):
@@ -46,10 +28,6 @@ def format_map(rows, columns, input_map):
     else:
         player_tile = f" {check_tile} " #No brackts, no player occupation
     return f"{player_tile}" # Return the tile modified by palayer location
-
-    
-
-
 
 
 def update_map(input_map):
@@ -81,7 +59,7 @@ def move_player(direction, input_map): # Move the player
 
     if new_col == 6 and new_row == 7:
         player_location = {"row":0, "col": 0}
-        gameloop(minimap_2)
+        gameloop(maps.minimap_2)
         return
     
     if 0 <= new_row < len(input_map) and 0 <=new_col < len(input_map[0]):
@@ -102,4 +80,4 @@ def gameloop(input_map):
         else:
             move_player(command, input_map)
 
-gameloop(minimap)
+gameloop(maps.minimap)
