@@ -15,3 +15,18 @@ minimap_2 = [
     [None, "Yard", None, None, None],
     [None, None, None, None, None],
 ]
+
+minimap_3 = {
+    "maps":
+        [
+            [None, None, None, None]
+            [None, None, None, None]
+            [None, None, None, None]
+            [None, None, None, None]
+            [None, None, None, None] 
+        ],
+    "exit":
+    
+}
+
+test_map = {"maps":[[None, None], [None, None]], "exits": {"mapcoord":(0,1), "destination_map": minimap_3, "exitcoord": (9,8)}}

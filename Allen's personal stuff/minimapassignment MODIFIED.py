@@ -1,9 +1,13 @@
 from tabulate import tabulate
-import maps
+import mapkeys
+
 
 default_player_location = {"row": 0, "col": 0}
 player_location = {"row":0, "col":1}
 
+def load_map():
+    for _ in mapkeys.world:
+        print(mapkeys.world["minimap"]["data"][""])
 
 def longest_map_name(input_map):
     return len(
@@ -13,6 +17,8 @@ def longest_map_name(input_map):
             default=""
         )
     )
+
+
 
 
 def format_map(rows, columns, input_map):
@@ -58,7 +64,7 @@ def move_player(direction, input_map): # Move the player
             new_col += 1
 
     if new_col == 6 and new_row == 7:
-        player_location = {"row":0, "col": 0}
+        player_location = default_player_location
         gameloop(maps.minimap_2)
         return
     
@@ -80,4 +86,7 @@ def gameloop(input_map):
         else:
             move_player(command, input_map)
 
-gameloop(maps.minimap)
+# gameloop(maps.minimap)
+
+if __name__ == "__main__":
+    load_map()
