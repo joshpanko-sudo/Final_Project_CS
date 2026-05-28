@@ -1,10 +1,20 @@
 import random
-
+from backpack_system_2 import Backpack
+from main import Send_Backpack
 wild_pokemon = ['Pikachu', 'Charizard', 'Arceus', 'Greninja']
+
 random_item = random.choice(wild_pokemon)
+my_backpack = Backpack(capacity=5)
+
+my_backpack.show_inventory()
+#print(f"You encountered a wild Pikachu!")
 
 
-print(f"You encountered a wild Pikachu!")
+
+
+    #self.items.append({"name": item_name, "amount": item_amount})
+
+
 
 
 power_data = {
@@ -34,7 +44,10 @@ power_data = {
     }
 }
 
-               
+def print_attacks():
+    for i in range(len(list(power_data.keys()))):
+        item = list(power_data.keys())[i]
+        print("- ", item,"- ", power_data[item]["strength"], ", Power: ", power_data[item]["power"])
               
 class Power:
     def __init__(self, power_type):
@@ -48,8 +61,6 @@ class Power:
     
     def stare(self):
         return f"projects a {self.description}"
-    
-
 
 class Care_Bear:
     def __init__(self, name):
@@ -74,12 +85,15 @@ class Care_Bear:
     def heal(self, healing):
         if not self.life:
             print(f"{self.name} is no longer with us, you can't heal the dead")
+
         else:
             self.health += healing
             print(f"{self.name} is healed. Current health: {self.health}")
+
             if self.health >= 50:
                 self.health = 50
                 print(f"{self.name} is at full health.")
+                
     def get_string(self):
         print(self.power)
 
@@ -124,8 +138,8 @@ class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
 
         
 
-Pikachu = Belly_Badge_Evil_Bear("Pikachu", "thundershock")
-Charizard = Belly_Badge_Care_Bear("Charizard", "star")
+Pikachu = Belly_Badge_Evil_Bear("Small Troll", "thundershock")
+Charizard = Belly_Badge_Care_Bear("You", "star")
 Stun = False
 maxhealcooldown = 3
 healcooldown = 0
@@ -158,6 +172,8 @@ while True:
             print(f"{Charizard.name} is stunned!")
             Stun = False
         else:
+            print("Your attacks:")
+            print_attacks()
             attack_ = input("What attack do you use? ")
             if (attack_ == "heal"):
                 Charizard.heal(5)

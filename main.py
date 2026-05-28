@@ -3,9 +3,16 @@ Main Script for StoneKnight
 Created by Josh and Allen
 Version 1.0
 """
-from backpack_system import Backpack
+from backpack_system_2 import Backpack
 
 
+
+class Send_Backpack():
+    def __init__(self):
+       self.attacks_ = []
+
+    def add(attack):
+       self.attacks_.append({"name": item_name, "amount": item_amount})
 
 
 import time
@@ -28,7 +35,7 @@ def slow_print(text, delay=0.1):
     print()  # Final newline after the text is finished
 
 
-my_backpack = Backpack(300, capacity=5)
+my_backpack = Backpack(capacity=5)
 
 
 name = input("Choose your name: ")
@@ -40,9 +47,11 @@ slow_print("*A monster approaches you*", delay=0.05)
 
 
 from combat_system import Belly_Badge_Care_Bear
+my_backpack.add_item("Wooden Sword", 1)
+
+
 
 slow_print("*Wow that was a close one*", delay=0.05)
 slow_print("*Villager: Wow, I have never seen that before!*", delay=0.05)
 slow_print("*Villager: Here you are, here is your very own wooden sword*", delay=0.05)
-my_backpack.add_item("Wooden Sword", 1.0)
 my_backpack.show_inventory()
