@@ -17,15 +17,25 @@ minimap_2 = [
 ]
 
 minimap_3 = {
+    "default_player": {"row":1, "col":0},
+
     "maps":
         [
-            [None, None, None, None]
-            [None, None, None, None]
-            [None, None, None, None]
-            [None, None, None, None]
-            [None, None, None, None] 
+            [None, None, None, None],
+            ["Garden", "Path", "Path", None],
+            [None, None, "Base", None],
+            [None, None, "Path", "Path"],
+            [None, None, None, "Market"],
         ],
-    "exit":
+    
+    "exit": 
+        {
+            "exit1": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
+            "exit2": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
+            "exit3": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
+        }
+        
+        
     
 }
 

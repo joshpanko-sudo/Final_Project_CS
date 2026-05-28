@@ -1,13 +1,17 @@
 from tabulate import tabulate
-import mapkeys
+import maps
 
 
 default_player_location = {"row": 0, "col": 0}
 player_location = {"row":0, "col":1}
 
-def load_map():
-    for _ in mapkeys.world:
-        print(mapkeys.world["minimap"]["data"][""])
+def load_map(input_map):
+    global player_location
+    print(maps.minimap_3)
+    ahahamap = maps.minimap_3["maps"]
+    player_location = maps.minimap_3["default_player"]
+    gameloop(ahahamap)
+    
 
 def longest_map_name(input_map):
     return len(
@@ -89,4 +93,4 @@ def gameloop(input_map):
 # gameloop(maps.minimap)
 
 if __name__ == "__main__":
-    load_map()
+    load_map(maps.minimap_3)
