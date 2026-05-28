@@ -17,7 +17,7 @@ minimap_2 = [
 ]
 
 minimap_3 = {
-    "default_player": {"row":1, "col":0},
+    "default_player_location": {"row":1, "col":0},
 
     "maps":
         [
@@ -31,8 +31,8 @@ minimap_3 = {
     "exit": 
         {
             "exit1": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
-            "exit2": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
-            "exit3": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
+            "exit2": {"mapcoord": (4,6),"destination_map": minimap_2,"exitcoord": (9,8)},
+            "exit3": {"mapcoord": (8,3),"destination_map": minimap_2,"exitcoord": (9,8)},
         }
         
         

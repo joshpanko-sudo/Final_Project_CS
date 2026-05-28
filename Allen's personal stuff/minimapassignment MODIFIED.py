@@ -7,10 +7,9 @@ player_location = {"row":0, "col":1}
 
 def load_map(input_map):
     global player_location
-    print(maps.minimap_3)
-    ahahamap = maps.minimap_3["maps"]
-    player_location = maps.minimap_3["default_player"]
-    gameloop(ahahamap)
+    player_location = input_map["default_player_location"]
+    check_teleport(input_map)
+    # gameloop(input_map["maps"])
     
 
 def longest_map_name(input_map):
@@ -52,6 +51,16 @@ def update_map(input_map):
     print("\n" + "=" * 30)
     print(tabulate(cooridnate_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True)) # Print out the map
 
+
+def check_teleport(input_map):
+    # print(list(input_map["exit"].keys()))
+    # print(list(input_map["exit"].items()))
+    # if player_location == for _ in range (input_map["exit"][])
+    for exit_names, exit_coords in (list(input_map["exit"].items())):
+        print(exit_names)
+        print(exit_coords["mapcoord"])
+        print("\n")
+      
 
 def move_player(direction, input_map): # Move the player
     global player_location
