@@ -2,13 +2,13 @@ from tabulate import tabulate
 import maps
 
 
-default_player_location = {"row": 0, "col": 0}
-player_location = {"row":0, "col":1}
+default_main_player_location = {"row": 0, "col": 0}
+player_location = {"row":1, "col":0}
 
-def load_map(input_map):
-    global player_location
-    player_location = input_map["default_player_location"]
-    check_teleport(input_map)
+# def load_map(input_map):
+#     global player_location
+#     player_location = input_map["default_player_location"]
+#     check_teleport(input_map)
     # gameloop(input_map["maps"])
     
 
@@ -52,15 +52,30 @@ def update_map(input_map):
     print(tabulate(cooridnate_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True)) # Print out the map
 
 
-def check_teleport(input_map):
+def check_teleport(input_map, row, col):
+    global player_location
     # print(list(input_map["exit"].keys()))
     # print(list(input_map["exit"].items()))
     # if player_location == for _ in range (input_map["exit"][])
-    for exit_names, exit_coords in (list(input_map["exit"].items())):
-        print(exit_names)
-        print(exit_coords["mapcoord"])
-        print("\n")
-      
+    # for teleport_name, teleport_data in (input_map["teleport"].items()):
+    #     print(f"Teleport Name: {teleport_name}")
+    #     print(f"Start Coordinate: {teleport_data["start_coord"][1]}")
+    #     print(f"End Coordinate: {teleport_data["end_coord"]}")
+    #     print(tabulate(teleport_data["target_map"], tablefmt="fancy_grid"))
+    #     print("\n")
+    '''
+    _ is called teleport_name if needed in future
+    '''
+    for _, teleport_data in (input_map["teleport"].items()):
+        if row ==  teleport_data["start_coord"][0] and col == teleport_data["start_coord"][1]:
+            player_location["row"] = teleport_data["end_coord"][0]
+            player_location["col"] = teleport_data["end_coord"][1]
+            gameloop(input_map)
+            return
+
+    
+
+
 
 def move_player(direction, input_map): # Move the player
     global player_location
@@ -76,10 +91,12 @@ def move_player(direction, input_map): # Move the player
         case "d":
             new_col += 1
 
-    if new_col == 6 and new_row == 7:
-        player_location = default_player_location
-        gameloop(maps.minimap_2)
+    if check_teleport(input_map, new_row, new_col):
         return
+    # if new_col == 6 and new_row == 7:
+    #     # player_location = default_player_location
+    #     gameloop(maps.minimap_2)
+    #     return
     
     if 0 <= new_row < len(input_map) and 0 <=new_col < len(input_map[0]):
         if input_map[new_row][new_col] is not None:
@@ -93,7 +110,7 @@ def gameloop(input_map):
     while True:
         update_map(input_map)
         print(player_location)
-        print(f"Current location: {input_map[player_location["row"]][player_location["col"]]}")
+        print(f"Current location: {input_map[player_location['row']][player_location['col']]}")
         while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d"}:
             print("Wrong Move")
         else:
@@ -102,4 +119,4 @@ def gameloop(input_map):
 # gameloop(maps.minimap)
 
 if __name__ == "__main__":
-    load_map(maps.minimap_3)
+    gameloop(maps.minimap_3["maps"])

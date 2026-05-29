@@ -28,11 +28,11 @@ minimap_3 = {
             [None, None, None, "Market"],
         ],
     
-    "exit": 
+    "teleport": 
         {
-            "exit1": {"mapcoord": (0,1),"destination_map": minimap_2,"exitcoord": (9,8)},
-            "exit2": {"mapcoord": (4,6),"destination_map": minimap_2,"exitcoord": (9,8)},
-            "exit3": {"mapcoord": (8,3),"destination_map": minimap_2,"exitcoord": (9,8)},
+            "minimap_3 ~> minimap_2": {"start_coord": (4,4),"target_map": minimap_2,"end_coord": (3,1)},
+            "minimap_3 ~> minimap": {"start_coord": (3,1),"target_map": minimap,"end_coord": (0,1)},
+            # "exit3": {"start_coord": (8,3),"target_map": minimap_2,"end_coord": (9,8)},
         }
         
         
