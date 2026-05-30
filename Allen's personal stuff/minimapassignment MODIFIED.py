@@ -91,8 +91,8 @@ def move_player(direction, input_map): # Move the player
         case "d":
             new_col += 1
 
-    if check_teleport(input_map, new_row, new_col):
-        return
+    check_teleport(input_map, new_row, new_col)
+        # return
     # if new_col == 6 and new_row == 7:
     #     # player_location = default_player_location
     #     gameloop(maps.minimap_2)
