@@ -44,15 +44,15 @@ class Backpack:
 
 
 # --- Example Usage ---
-my_backpack = Backpack(100, capacity=5)
+#my_backpack = Backpack(100, capacity=5)
 
-my_backpack.add_item("Healing Potion", 0.5)
-my_backpack.add_item("Iron Sword", 3.0)
-my_backpack.show_inventory()
+#my_backpack.add_item("Healing Potion", 0.5)
+#my_backpack.add_item("Iron Sword", 3.0)
+#my_backpack.show_inventory()
 
-my_backpack.remove_item("Healing Potion")
-my_backpack.show_inventory()
+#my_backpack.remove_item("Healing Potion")
+#my_backpack.show_inventory()
 
-my_backpack.removeGems(50)
+#my_backpack.removeGems(50)
 
-my_backpack.show_inventory()
+#my_backpack.show_inventory()
