@@ -2,7 +2,7 @@ from tabulate import tabulate
 import maps
 
 # Global tracking of the player position
-player_location = {"row": 1, "col": 0}
+player_location = {"row": 0, "col": 0}
 
 
 def longest_map_name(grid):
@@ -55,8 +55,11 @@ def check_teleport(map_config, row, col):
             next_map_config = teleport_data["target_map"]() 
             
             # Update player's new landing coordinates
+     
             player_location["row"] = teleport_data["end_coord"][0]
             player_location["col"] = teleport_data["end_coord"][1]
+
+            
             
             # Start the game loop with the newly fetched map configuration
             gameloop(next_map_config)
@@ -98,6 +101,9 @@ def gameloop(map_config):
     """
     global player_location
     grid = map_config["maps"]
+
+    
+    
     
     while True:
         update_map(grid)
@@ -112,4 +118,4 @@ def gameloop(map_config):
 
 if __name__ == "__main__":
     # Start the game by passing the entire dictionary configuration
-    gameloop(maps.minimap_3)
+    gameloop(maps.minimap)
