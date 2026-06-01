@@ -1,27 +1,26 @@
 # The name of the Project / Repository
-
-Impact - RPG map and text game with some UI elements maybe.
+The Impact Of The Knight
 
 
 
 # General Concept
-An RPG game where you can use wasd to move.
-Multiple maps supported. 
-NPC's, storylines, etc.
-Inventory system...
+Game type: RPG
+- Will have map system, combat system, trading system
+- Use storylines, npc characters
+- Inventory system
 
 
 # Story Line 
-Following a inaccurate warp attempt, your airship has crashed onto a planet you do not know about. It seems to be a fantasy world, with many different creatures amd other things. Your goal is to explore the world and see if you can fix up your airship.
+Researchers have managed to create warp technology, and you are selected as a researcher to warp in. You emerge in a advanced world that is under attack by a robot reveloution. You vessel is damaged, and you will need to repair it. You blend into this world as a "knight" (Hired by the united government to fight the robots). You defend your base while also finding parts to fix your vessel.
 
 
 
 # Theme
-Fantasy world, kingdoms etc...
+Science fiction world, advanced technology, loss, pain, robots, romance
 
 
 # Target user
-Made for teenagers-adult who like fantasy and adventure 
+Made for teenagers-adult who like science fiction and adventure
 
 # List Team Members e.g., individual, pair, or group (max 3)
 Josh and Allen
