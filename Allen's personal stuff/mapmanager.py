@@ -30,13 +30,13 @@ class mapManager():
     def load_map(self, input_map:dict) -> bool:
         
         active_map = input_map["maps"]
-        print(active_map)
+        print(tabulate(active_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True))
         
 
 
+mm = mapManager()
 
-
-mapManager.load_map(maps.minimap_3)
+mm.load_map(maps.minimap_3)
 
     
 
