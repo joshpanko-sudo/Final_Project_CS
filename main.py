@@ -3,11 +3,58 @@ Main Script for StoneKnight
 Created by Josh and Allen
 Version 1.0
 """
-from backpack_system import Backpack
 
 import time
 import sys
 import random
+
+class Backpack:
+    def __init__(self, gems, capacity=10):
+        self.capacity = capacity
+        self.items = []
+        self.gems = gems 
+        
+    def add_item(self, item_name, weight):
+        if len(self.items) >= self.capacity:
+            print("Backpack is full!")
+        else:
+            self.items.append({"name": item_name, "weight": weight})
+            print(f"Added {item_name} to your backpack.")
+
+    def remove_item(self, item_name):
+        for item in self.items:
+            if item["name"].lower() == item_name.lower():
+                self.items.remove(item)
+                print(f"Removed {item_name} from your backpack.")
+                return
+        print(f"{item_name} not found in backpack.")
+
+    def checkGems(self):
+        return self.gems
+    
+    def removeGems(self, remove):
+        self.gems -= remove
+
+
+
+    
+
+
+
+    def get_total_weight(self):
+        return sum(item["weight"] for item in self.items)
+
+    def show_inventory(self):
+        print("\n------BACKPACK INVENTORY------")
+        if not self.items:
+            print("Your backpack is empty.")
+        else:
+            for index, item in enumerate(self.items, 1):
+                print(f"{index}. {item['name']} ({item['weight']}kg)")
+            
+            print(f"{self.checkGems()} Gems")
+            print(f"Total Weight: {self.get_total_weight()}kg")
+        print("----------------------------------\n")
 
 
 
@@ -45,40 +92,44 @@ power_data["iron_tail"] = {
     "stun": True
 }
 
-
-
-
 def figure_out_attacks(character):
     power_data.clear()
 
     if(character == "Troll with club"):
         power_data["club swing"] = {
-            "strength": 50,
+            "strength": 30,
             "power": "slams ground with a club!",
             "description": "massive club",
             "stun": True } 
         
     if(character == "Player"):
+        if any(d.get('name') == 'Wooden Sword' for d in my_backpack.items):
+            power_data["Sword"] = {
+            "strength": 60,
+            "power": "Slash!",
+            "description": "uses your fists",
+            "stun": False } 
+        print(my_backpack.items)
+
+
+            
         power_data["punch"] = {
-            "strength": 50,
+            "strength": 30,
             "power": "puches!",
             "description": "uses your fists",
             "stun": False } 
+        power_data["kick"] = {
+            "strength": 20,
+            "power": "kicks!",
+            "description": "uses your feet!",
+            "stun": False } 
+
     if(character == "Pikachu"):
         power_data["punch"] = {
-            "strength": 50,
+            "strength": 25,
             "power": "puches!",
             "description": "uses your fists",
             "stun": False } 
-
-
-
-
-
-
-
-
-
 
 class Power:
     def __init__(self, power_type):
@@ -93,9 +144,9 @@ class Power:
 
 
 class Care_Bear:
-    def __init__(self, name):
+    def __init__(self, name, health):
         self.name = name
-        self.health = 40
+        self.health = health
         self.life = True
         
     def __str__(self):
@@ -130,9 +181,10 @@ class Care_Bear:
 
     
 class Belly_Badge_Care_Bear(Care_Bear):
-    def __init__(self, name, power):
-        Care_Bear.__init__(self, name)
+    def __init__(self, name, power, health):
+        Care_Bear.__init__(self, name, health)
         self.power = Power(power)
+        self.health = health
         #print("self power:",self.power.strength)
         
     def help_(self):
@@ -154,9 +206,10 @@ class Belly_Badge_Care_Bear(Care_Bear):
         
 
 class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
-    def __init__(self, name, power):
-        Care_Bear.__init__(self, name)
+    def __init__(self, name, power, health):
+        Care_Bear.__init__(self, name, health)
         self.power = Power(power)
+        self.health = health
     def inflict_damage(self, hero, used_power):
         self.power.strength = power_data[used_power]["strength"]
 
@@ -189,14 +242,16 @@ def slow_print(text, delay=0.1):
 my_backpack = Backpack(300, capacity=5)
 
 name = input("Choose your name: ")
-slow_print("Mom: The village is under attack!!", delay=0.025)
-slow_print("Mom: You must save the village!!", delay=0.05)
-slow_print("*You walk out of your house*", delay=0.05)
-slow_print("*You see monsters everwhere*", delay=0.05)
-slow_print("*A monster approaches you*", delay=0.05)
 
-Pikachu = Belly_Badge_Evil_Bear("Pikachu", "thundershock")
-Charizard = Belly_Badge_Care_Bear(name, "star")
+def start():
+    slow_print("Mom: The village is under attack!!", delay=0.025)
+    slow_print("Mom: You must save the village!!", delay=0.05)
+    slow_print("*You walk out of your house*", delay=0.05)
+    slow_print("*You see monsters everwhere*", delay=0.05)
+    slow_print("*A monster approaches you*", delay=0.05)
+
+Pikachu = Belly_Badge_Evil_Bear("Pikachu", "thundershock", 20)
+Charizard = Belly_Badge_Care_Bear(name, "star", 50)
 Stun = False
 maxhealcooldown = 3
 healcooldown = 0
@@ -270,8 +325,8 @@ my_backpack.show_inventory()
 time.sleep(2)  
 
 slow_print("Oh no here come another monster!!", delay=0.05)
-Pikachu = Belly_Badge_Evil_Bear("Troll with club", "thundershock")
-Charizard = Belly_Badge_Care_Bear(name, "star")
+Pikachu = Belly_Badge_Evil_Bear("Troll with club", "thundershock", 50)
+Charizard = Belly_Badge_Care_Bear(name, "star", 50)
 Stun = False
 maxhealcooldown = 3
 healcooldown = 0
