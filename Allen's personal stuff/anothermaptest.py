@@ -68,6 +68,8 @@ def check_teleport(map_config, row, col):
     return False # No teleport occurred
 
 
+def enter_map():
+
 def move_player(direction, map_config):
     global player_location
     grid = map_config["maps"]
@@ -83,6 +85,9 @@ def move_player(direction, map_config):
             new_row += 1
         case "d":
             new_col += 1
+        case "e":
+            pass
+            enter_map()
 
     # 1. Check if the player stepped into a portal first
     if check_teleport(map_config, new_row, new_col):
@@ -110,7 +115,7 @@ def gameloop(map_config):
         print(player_location)
         print(f"Current location: {grid[player_location['row']][player_location['col']]}")
         
-        while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d"}:
+        while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d", "e"}:
             print("Wrong Move")
         else:
             move_player(command, map_config)
