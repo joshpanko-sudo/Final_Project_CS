@@ -11,6 +11,8 @@ but I want to favor reliablilty and redundancy
 
 
 '''
+ 
+import maps
 
 try:
     from tabulate import tabulate
@@ -19,4 +21,22 @@ except ImportError as e:
     quit()
 
 class mapManager():
-    pass
+    def __init__(self) -> None:
+        self.active_map = None
+        self.active_coordinate_grid = None
+        self.player_location = None
+
+    
+    def load_map(self, input_map:dict) -> bool:
+        
+        active_map = input_map["maps"]
+        print(active_map)
+        
+
+
+
+
+mapManager.load_map(maps.minimap_3)
+
+    
+
