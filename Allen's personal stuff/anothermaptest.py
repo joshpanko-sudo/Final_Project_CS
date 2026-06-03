@@ -105,7 +105,6 @@ def gameloop(map_config):
     """
     Accepts the FULL map dictionary configuration, not just the grid layout.
     """
-    global player_location
     grid = map_config["maps"]
 
     
