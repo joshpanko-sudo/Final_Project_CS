@@ -1,10 +1,11 @@
 file_name = "whichassignmentisthis"
-
+full_text = None
 coding_hours = None
 pushup_minutes = None
 Flying_hours = None
 Secondary_tests = None
 Officer_name = None
+
 
 
 
@@ -23,15 +24,23 @@ def get_data():
     
 
 def load_ticket(ticket_name):
+    global full_text
     with open(ticket_name, "r") as file:
         full_text = file.read()
     
     full_text = full_text.replace("_HOURS_", coding_hours)
     full_text = full_text.replace("_MINUTES_", pushup_minutes)
-    full_text = full_text.replace("_SECONDARYHOURS", Flying_hours)
-    full_text = full_text.replace("_TESTS", Secondary_tests)
+    full_text = full_text.replace("_SECONDARYHOURS_", Flying_hours)
+    full_text = full_text.replace("_TESTS_", Secondary_tests)
     full_text = full_text.replace("_D_P_E_U_D_T_Y_", Officer_name)
     print(full_text)
+    ticket_name = input("Ticket Name: ")
+    create_ticket(ticket_name)
+
+
+def create_ticket(ticket_name):
+    with open(ticket_name + ".txt", "w") as _:
+        _.write(full_text)
     
 
         
