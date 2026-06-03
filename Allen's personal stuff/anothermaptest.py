@@ -69,6 +69,7 @@ def check_teleport(map_config, row, col):
 
 
 def enter_map():
+    pass
 
 def move_player(direction, map_config):
     global player_location
