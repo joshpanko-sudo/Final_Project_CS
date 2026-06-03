@@ -8,57 +8,6 @@ import time
 import sys
 import random
 
-class Backpack:
-    def __init__(self, gems, capacity=10):
-        self.capacity = capacity
-        self.items = []
-        self.gems = gems 
-        
-    def add_item(self, item_name, weight):
-        if len(self.items) >= self.capacity:
-            print("Backpack is full!")
-        else:
-            self.items.append({"name": item_name, "weight": weight})
-            print(f"Added {item_name} to your backpack.")
-
-    def remove_item(self, item_name):
-        for item in self.items:
-            if item["name"].lower() == item_name.lower():
-                self.items.remove(item)
-                print(f"Removed {item_name} from your backpack.")
-                return
-        print(f"{item_name} not found in backpack.")
-
-    def checkGems(self):
-        return self.gems
-    
-    def removeGems(self, remove):
-        self.gems -= remove
-
-
-
-    
-
-
-
-    def get_total_weight(self):
-        return sum(item["weight"] for item in self.items)
-
-    def show_inventory(self):
-        print("\n------BACKPACK INVENTORY------")
-        if not self.items:
-            print("Your backpack is empty.")
-        else:
-            for index, item in enumerate(self.items, 1):
-                print(f"{index}. {item['name']} ({item['weight']}kg)")
-            
-            print(f"{self.checkGems()} Gems")
-            print(f"Total Weight: {self.get_total_weight()}kg")
-        print("----------------------------------\n")
-
-
-
-
 power_data = {
     "thundershock": {
         "strength": 10,
@@ -111,8 +60,6 @@ def figure_out_attacks(character):
             "stun": False } 
         print(my_backpack.items)
 
-
-            
         power_data["punch"] = {
             "strength": 30,
             "power": "puches!",
@@ -141,9 +88,7 @@ class Power:
     def stare(self):
         return f"projects a {self.description}"
     
-
-
-class Care_Bear:
+class Character:
     def __init__(self, name, health):
         self.name = name
         self.health = health
@@ -180,9 +125,9 @@ class Care_Bear:
         return(self.power)
 
     
-class Belly_Badge_Care_Bear(Care_Bear):
+class Belly_Badge_Care_Bear(Character):
     def __init__(self, name, power, health):
-        Care_Bear.__init__(self, name, health)
+        Character.__init__(self, name, health)
         self.power = Power(power)
         self.health = health
         #print("self power:",self.power.strength)
@@ -204,10 +149,18 @@ class Belly_Badge_Care_Bear(Care_Bear):
         #print(f"{self.name} strikes a powerful blow. strength: {attack}")
         enemy.take_damage(attack)
         
+def slow_print(text, delay=0.1):
+    for char in text:
+        # Use sys.stdout.write to print without adding a newline automatically
+        sys.stdout.write(char)
+        # Flush ensures the character appears immediately on the screen
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()  # Final newline after the text is finished
 
 class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
     def __init__(self, name, power, health):
-        Care_Bear.__init__(self, name, health)
+        Character.__init__(self, name, health)
         self.power = Power(power)
         self.health = health
     def inflict_damage(self, hero, used_power):
@@ -222,39 +175,7 @@ class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
 
         hero.take_damage(attack)
 
-        
-
-print("-----------------------------------------")
-print("           STONE KNIGHT                  ")
-print("         Created By Josh and Allen       ")
-print("-----------------------------------------")
-
-
-def slow_print(text, delay=0.1):
-    for char in text:
-        # Use sys.stdout.write to print without adding a newline automatically
-        sys.stdout.write(char)
-        # Flush ensures the character appears immediately on the screen
-        sys.stdout.flush()
-        time.sleep(delay)
-    print()  # Final newline after the text is finished
-
-my_backpack = Backpack(300, capacity=5)
-
-name = input("Choose your name: ")
-
-def start():
-    slow_print("Mom: The village is under attack!!", delay=0.025)
-    slow_print("Mom: You must save the village!!", delay=0.05)
-    slow_print("*You walk out of your house*", delay=0.05)
-    slow_print("*You see monsters everwhere*", delay=0.05)
-    slow_print("*A monster approaches you*", delay=0.05)
-
-Pikachu = Belly_Badge_Evil_Bear("Pikachu", "thundershock", 20)
-Charizard = Belly_Badge_Care_Bear(name, "star", 50)
-Stun = False
-maxhealcooldown = 3
-healcooldown = 0
+    
 def start_battle():
     global Stun, maxhealcooldown, healcooldown
     while True:
@@ -315,21 +236,5 @@ def start_battle():
         print(f"{Pikachu.name} defeated you.")
         time.sleep(1)  
 
-start_battle()
-
-slow_print("*Wow that was a close one*", delay=0.05)
-slow_print("*Villager: Wow, I have never seen that before!*", delay=0.05)
-slow_print("*Villager: Here you are, here is your very own wooden sword*", delay=0.05)
-my_backpack.add_item("Wooden Sword", 1.0)
-my_backpack.show_inventory()
-time.sleep(2)  
-
-slow_print("Oh no here come another monster!!", delay=0.05)
-Pikachu = Belly_Badge_Evil_Bear("Troll with club", "thundershock", 50)
-Charizard = Belly_Badge_Care_Bear(name, "star", 50)
-Stun = False
-maxhealcooldown = 3
-healcooldown = 0
-start_battle()
 
 

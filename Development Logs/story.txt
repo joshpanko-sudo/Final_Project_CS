@@ -1,0 +1,4 @@
+Ideas for the game
+- spider robots
+- humanoid robots
+- drones
