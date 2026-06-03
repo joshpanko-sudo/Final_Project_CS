@@ -26,9 +26,10 @@ except ImportError as e:
 
 
 class MapManager():
-    player_location = {"row": 0, "col": 0}
+
     def __init__(self) -> None:
         pass
+        self.player_location = {"row": 0, "col": 0}
 
   
     
@@ -78,7 +79,7 @@ class MapManager():
         # MapManager.player_location
         self.update_map(input_map)
         print(MapManager.player_location)
-        print(f"Current location: {input_map[player_location['row']][player_location['col']]}")
+        print(f"Current location: {input_map[self.player_location['row']][self.player_location['col']]}")
         while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d"}:
             print("Wrong Move")
         else:
