@@ -17,6 +17,25 @@ def slow_print(text, delay=0.1):
     print()  
 
 
-slow_print("You arrive home from studying at the highest science techology university", delay=0.125)
-slow_print("You see that you got mail. You open up your mail box", 0.125)
-slow_print("You have been selected as a researcher to try time travel!", 0.125)
+slow_print("You arrive home from studying at the highest science techology university", delay=0.0225)
+slow_print("You see that you got mail. You open up your mail box", 0.0225)
+slow_print("You have been selected as a researcher to try time travel!", 0.0225)
+
+slow_print("The science team decided to fly you out first class.", 0.0225)
+slow_print("You finally arrive and meet the leader, Jim Kalper")
+slow_print("Jim: Welcome to the team!!", 0.0225)
+slow_print("Jim: We are going to start testing tomorrow!", 0.0225)
+slow_print("Jim: You should take some rest now..", 0.0225)
+
+slow_print("The next day.....", 0.0625)
+slow_print("Jim: Everything on?!?!", 0.0525)
+slow_print("Mike: Red switch on!!", 0.0225)
+slow_print("Lakrry: Green switch on!!", 0.0225)
+slow_print("Loon: Black is blinking?????", 0.0225)
+slow_print("Jim: Shut it down!!!!", 0.0225)
+slow_print("Lakrry: ITS TO LATE, ITS FULL POWER!!", 0.0225)
+print("BLASTTTT!!!!!!!!")
+slow_print("You appear in a strange new word", 0.0225)
+slow_print("It looks like your world but......", 0.0225)
+slow_print("Robots are taking over!!!", 0.0225)
+slow_print("There is massive spide", 0.0225)
