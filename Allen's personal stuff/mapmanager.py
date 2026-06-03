@@ -18,7 +18,13 @@ except ImportError as e:
     print(f"Warning: MapManager could not load tabulate. {e}. Perhaps you have not installed it?")
     quit()
 
-import maps
+try:
+    import maps
+except ImportError as e:
+    print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
+    quit()
+
+
 class MapManager():
     player_location = {"row": 0, "col": 0}
     def __init__(self) -> None:
