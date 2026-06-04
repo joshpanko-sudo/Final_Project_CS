@@ -44,7 +44,7 @@ power_data["iron_tail"] = {
 def figure_out_attacks(character):
     power_data.clear()
 
-    if(character == "Troll with club"):
+    if(character == "Spider Droid"):
         power_data["club swing"] = {
             "strength": 30,
             "power": "slams ground with a club!",
@@ -52,13 +52,13 @@ def figure_out_attacks(character):
             "stun": True } 
         
     if(character == "Player"):
-        if any(d.get('name') == 'Wooden Sword' for d in my_backpack.items):
-            power_data["Sword"] = {
-            "strength": 60,
-            "power": "Slash!",
-            "description": "uses your fists",
-            "stun": False } 
-        print(my_backpack.items)
+#        if any(d.get('name') == 'Wooden Sword' for d in my_backpack.items):
+#            power_data["Sword"] = {
+#            "strength": 60,
+#            "power": "Slash!",
+#            "description": "uses your fists",
+#            "stun": False } 
+#        print(my_backpack.items)
 
         power_data["punch"] = {
             "strength": 30,
@@ -126,10 +126,13 @@ class Character:
 
     
 class Belly_Badge_Care_Bear(Character):
-    def __init__(self, name, power, health):
+    def __init__(self, name, health):
         Character.__init__(self, name, health)
-        self.power = Power(power)
+        self.power = 2
         self.health = health
+        self.power = 2
+
+
         #print("self power:",self.power.strength)
         
     def help_(self):
@@ -138,12 +141,16 @@ class Belly_Badge_Care_Bear(Character):
         
         
     def get_strength(self):
-        return(self.power.strength)
+        self.power = power_data[used_power]
+
+
+
         
     def inflict_damage(self, enemy, used_power):
-        self.power.strength = power_data[used_power]["strength"]
+        self.power = power_data[used_power]["strength"]
+
         #print("self.power:", self.power.strength)
-        attack = random.randint(self.power.strength-5,self.power.strength+5)
+        attack = random.randint(self.power-5,self.power+5)
         print(f"{self.name}",power_data[used_power]["power"], f"strength: {attack}")
         time.sleep(1)          
         #print(f"{self.name} strikes a powerful blow. strength: {attack}")
@@ -159,14 +166,18 @@ def slow_print(text, delay=0.1):
     print()  # Final newline after the text is finished
 
 class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
-    def __init__(self, name, power, health):
+    def __init__(self, name, health):
         Character.__init__(self, name, health)
-        self.power = Power(power)
+        self.power = 2
         self.health = health
-    def inflict_damage(self, hero, used_power):
-        self.power.strength = power_data[used_power]["strength"]
+        self.power = 0 
 
-        attack = random.randint(self.power.strength-5,self.power.strength+2)
+    def power(self):
+        return self
+    def inflict_damage(self, hero, used_power):
+        self.power = power_data[used_power]["strength"]
+
+        attack = random.randint(self.power-5,self.power+2)
         if attack < 0:
             attack = 0        
         
@@ -176,8 +187,7 @@ class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
         hero.take_damage(attack)
 
     
-def start_battle():
-    global Stun, maxhealcooldown, healcooldown
+def start_battle(Pikachu, Charizard, Stun, maxhealcooldown, healcooldown):
     while True:
         if Pikachu.life:
             if Stun:
