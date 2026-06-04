@@ -9,6 +9,18 @@ class Backpack:
         else:
             self.items.append({"name": item_name, "amount": item_amount})
             print(f"Added {item_name} amount: {item_amount} to your backpack.")
+    def see_item(self, target_name):
+        for item in self.items:
+            if item.get("name") == target_name:
+                print("The Item is in the backpack!")
+                return True
+                break 
+            else:
+                print("The Item is in the backpack!")
+                return False
+
+
+
 
     def add_amount(self, target_name, value_to_add):
         for item in self.items:
@@ -32,12 +44,12 @@ class Backpack:
             
         print("----------------------------------\n")
 
-my_backpack = Backpack(capacity=5)
+#my_backpack = Backpack(capacity=5)
 
-my_backpack.add_item("Healing Potion", 2)
-my_backpack.add_item("Iron Sword", 1)
+#my_backpack.add_item("Healing Potion", 2)
+#my_backpack.add_item("Iron Sword", 1)
 
 #my_backpack.remove_item("Healing Potion")
-my_backpack.add_amount("Iron Sword", 3)
-my_backpack.remove_amount("Iron Sword", 2)
-my_backpack.show_inventory()
+#my_backpack.add_amount("Iron Sword", 3)
+#my_backpack.remove_amount("Iron Sword", 2)
+#my_backpack.show_inventory()

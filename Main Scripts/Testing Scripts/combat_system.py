@@ -1,6 +1,6 @@
 import random
 from backpack_system_2 import Backpack
-from main import Send_Backpack
+#from main import Send_Backpack
 wild_pokemon = ['Pikachu', 'Charizard', 'Arceus', 'Greninja']
 
 random_item = random.choice(wild_pokemon)
