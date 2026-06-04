@@ -71,6 +71,7 @@ class MapManager():
         # player_tile = f"[{check_tile}]" #Puts brackets around player occupied tile
             player_tile = f"\033[7m{check_tile}\033[0m" # Invert the tile to represent player
         else:
+            
             player_tile = f"{check_tile}" #Player is not on tile, no modifications
         return f"{player_tile}" # Return tiles
     
@@ -86,15 +87,16 @@ class MapManager():
         print("\n" + "=" * 30)
         print(tabulate(cooridnate_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True)) # Print out the map
 
+
     def check_teleport(self, row, col):
         '''
         _ is called teleport_name if needed in future
         '''
-        for _, teleport_data in (self.loaded_map_data["teleport"].items()):
-            if row ==  teleport_data["start_coord"][0] and col == teleport_data["start_coord"][1]:
-                self.active_map = teleport_data["target_map"]
+        for _, teleport_data in self.loaded_map_data.get("teleport", {}).items():
+            if row == teleport_data["start_coord"][0] and col == teleport_data["start_coord"][1]:
                 self.player_location["row"] = teleport_data["end_coord"][0]
                 self.player_location["col"] = teleport_data["end_coord"][1]
+                self.load_map(teleport_data["target_map"]())
                 return True
             return False
 
