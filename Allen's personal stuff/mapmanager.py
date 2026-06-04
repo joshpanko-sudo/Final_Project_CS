@@ -5,7 +5,7 @@ Red highlight = error
 Green highlight = working
 Blue highlight = action
 Error guide: Warning: MapManager could not {Error Here}
-
+# GIVE JOSH THE AKIRA CODE
 Yes, you could combine some aspects of this code, 
 but I want to favor reliablilty and redundancy
 
