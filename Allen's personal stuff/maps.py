@@ -66,4 +66,7 @@ minimap_3 = {
 
 
 
+
+
+
 # test_map = {"maps":[[None, None], [None, None]], "exits": {"mapcoord":(0,1), "destination_map": minimap_3, "exitcoord": (9,8)}}

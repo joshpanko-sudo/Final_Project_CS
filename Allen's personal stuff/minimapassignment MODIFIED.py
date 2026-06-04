@@ -119,4 +119,4 @@ def gameloop(input_map):
 # gameloop(maps.minimap)
 
 if __name__ == "__main__":
-    gameloop(maps.minimap_3["maps"])
+    gameloop(maps.minimap["maps"])
