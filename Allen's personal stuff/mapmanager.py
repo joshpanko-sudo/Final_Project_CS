@@ -55,7 +55,7 @@ class MapManager():
         '''
         cooridnate_map = []
         for rows in range(len(input_map)): #Loop through tows of the input map
-        cooridnate_map.append([format_map(rows, columns, input_map) for columns in range(len(input_map[0]))]) #Loop through columns of input map
+            cooridnate_map.append([format_map(rows, columns, input_map) for columns in range(len(input_map[0]))]) #Loop through columns of input map
 
     
     def check_teleport(self, map_data, row, col):

@@ -98,7 +98,7 @@ class MapManager():
                 self.player_location["col"] = teleport_data["end_coord"][1]
                 self.load_map(teleport_data["target_map"]())
                 return True
-            return False
+        return False
 
     def move_player(self, command): # Move the player
         '''
@@ -139,7 +139,7 @@ class MapManager():
             
 
 mm = MapManager()
-mm.load_map(maps.minimap)
+mm.load_map(maps.minimap_4)
 # mm.update_map()
 
 while True:
