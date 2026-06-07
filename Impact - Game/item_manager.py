@@ -18,6 +18,12 @@ except ImportError as e:
     print(f"Warning: ItemManager could not load tabulate. {e}. Perhaps you have not installed it?")
     quit()
 
+try:
+    import questionary
+except ImportError as e:
+    print(f"Warning: ItemManager could not load questionary. {e}. Perhaps you have not installed it?")
+    quit()
+
 class ItemManager():
     def __init__(self, inventory_name:str) -> None:
         '''
@@ -107,7 +113,18 @@ class ItemManager():
         print("----------------------------------\n")
         
     def gameloopItemManager(self):
-        
+        command = questionary.select(f"{self.inventory_name} menu:",choices=[f"View {self.inventory_name}", "Find item"]).ask()
+        if command == f"View {self.inventory_name}":
+            self.see_inventory()
+        else: 
+            match command:
+                case "Find item":
+                    self.see_item(questionary.text("Item to find: ").ask())
+                case _:
+                    print("Warning: ItemManager has encountered a fatal error")
+                    quit()
+                        
+
 
 backpack = ItemManager("Allen's Inventory")
 backpack.set_capacity(4)
@@ -116,7 +133,8 @@ backpack.add_item("Apple", 20, 5)
 backpack.add_item("Banana", 20, 64)
 backpack.see_item("Apple")
 backpack.see_item("jirvnkjr4vgnk")
-backpack.see_inventory()
+while True:
+    backpack.gameloopItemManager()
 
 
 # inventory = [
