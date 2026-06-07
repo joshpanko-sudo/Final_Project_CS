@@ -104,13 +104,13 @@ class ItemManager():
         '''
         See the full contents of the inventory
         '''
-        print(f"\n------{self.inventory_name}------")
+        print(f"\n{self.inventory_name.center(40, '-')}")
         if not self.items:
             print(f"{self.inventory_name} is empty.")
         else:
             print(f"\nInventory capacity: {self.item_capacity}")
             print(tabulate(self.items, headers=self.custom_headers, tablefmt="fancy_grid"))
-        print("----------------------------------\n")
+        print("-" * 40)
         
     def gameloopItemManager(self):
         command = questionary.select(f"{self.inventory_name} menu:",choices=[f"View {self.inventory_name}", "Find item"]).ask()

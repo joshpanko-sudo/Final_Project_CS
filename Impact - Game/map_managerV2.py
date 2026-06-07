@@ -20,6 +20,12 @@ except ImportError as e:
     quit()
 
 try:
+    import questionary
+except ImportError as e:
+    print(f"Warning: MapManager could not load questionary. {e}. Perhaps you have not installed it?")
+    quit()
+
+try:
     import maps
 except ImportError as e:
     print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
@@ -100,6 +106,17 @@ class MapManager():
                 return True
         return False
 
+
+    def enter_check_teleport(self):
+        for _, teleport_data in self.loaded_map_data.get("enter_teleport", {}).items():
+            if self.player_location["row"] == teleport_data["start_coord"][0] and self.player_location["col"] == teleport_data["start_coord"][1]:
+                self.player_location["row"] = teleport_data["end_coord"][0]
+                self.player_location["col"] = teleport_data["end_coord"][1]
+                self.load_map(teleport_data["target_map"]())
+                return True
+        return False
+    
+
     def move_player(self, command): # Move the player
         '''
         Function to make player move
@@ -115,6 +132,19 @@ class MapManager():
                 new_row += 1
             case "d":
                 new_col += 1
+            case "e":
+                for _, teleport_data in self.loaded_map_data.get("enter_teleport", {}).items():
+                    if self.player_location["row"] == teleport_data["start_coord"][0] and self.player_location["col"] == teleport_data["start_coord"][1]:
+                        move = questionary.select(f"Enter {self.loaded_map_data["location_name"]}",choices=["Yes", "No"]).ask()
+                        match move:
+                            case "Yes":
+                                self.enter_check_teleport()
+                            case "No":
+                                return
+                        
+                            case _:
+                                print("Warning: MapManager cannot enter location. Fatal error")
+                                quit()
 
         if self.check_teleport(new_row, new_col):
             return
@@ -132,14 +162,14 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
-        while (command := input("W, A, S, D: ").strip().lower()) not in {"w", "a", "s", "d"}:
+        while (command := input("W, A, S, D, E: ").strip().lower()) not in {"w", "a", "s", "d", "e"}:
                 print("Wrong Move")
         else:
                 self.move_player(command)
             
 
 mm = MapManager()
-mm.load_map(maps.minimap_4)
+mm.load_map(maps.minimap_3)
 # mm.update_map()
 
 while True:

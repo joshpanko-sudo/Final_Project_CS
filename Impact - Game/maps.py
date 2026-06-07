@@ -64,7 +64,7 @@ minimap_3 = {
             # "minimap_3 ~> minimap": {"start_coord": (3,1),"target_map": minimap,"end_coord": (0,1)},
             # "exit3": {"start_coord": (8,3),"target_map": minimap_2,"end_coord": (9,8)},
         },
-    "location_name": "Third",
+    "location_name": "House",
 
     "enter_teleport":
     {
