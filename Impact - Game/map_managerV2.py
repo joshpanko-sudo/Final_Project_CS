@@ -125,7 +125,7 @@ class MapManager():
                 self.player_location["col"] = new_col
 
 
-    def gameloop(self):
+    def gameloopMapManager(self):
         '''
         Update map, do things... etc
         '''
@@ -143,6 +143,6 @@ mm.load_map(maps.minimap_4)
 # mm.update_map()
 
 while True:
-    mm.gameloop()
+    mm.gameloopMapManager()
 
 
