@@ -62,7 +62,7 @@ except ImportError:
 
 try:
     from map_managerV2 import MapManager as MM
-    from 
+    from item_manager import ItemManager as IM
 except ImportError:
     game_warnings("Game File Error")
     safe_mode()
