@@ -47,6 +47,8 @@ minimap_2 =  {
 
 
 minimap_3 = {
+    "location_name": "House",
+
     "default_player_location": {"row":1, "col":0},
 
     "maps":
@@ -61,14 +63,49 @@ minimap_3 = {
     "teleport": 
         {
             "minimap_3 ~> minimap": {"start_coord": (1,-1),"target_map": lambda: minimap,"end_coord": (0,1)},
-            # "minimap_3 ~> minimap": {"start_coord": (3,1),"target_map": minimap,"end_coord": (0,1)},
-            # "exit3": {"start_coord": (8,3),"target_map": minimap_2,"end_coord": (9,8)},
         },
-    "location_name": "House",
+   
 
     "enter_teleport":
     {
         "House ~> Basement": {"start_coord": (2,2),"target_map": lambda: basement,"end_coord": (0,0)},
+    },
+
+    "ladder_teleport":
+    {
+        "Market ~> Second market floor": {"start_coord": (4,3),"target_map": lambda: market_second_floor,"end_coord": (4,3)},
+        "Market ~> Market Basement": {"start_coord": (4,3),"target_map": lambda: basement,"end_coord": (4,3)},
+    }
+}
+
+market_second_floor = {
+    "location_name": "House",
+
+    "default_player_location": {"row":1, "col":0},
+
+    "maps":
+        [
+            [None, None, None, None],
+            ["Garden", "Path", "Path", None],
+            [None, None, "Path", None],
+            [None, None, "Path", "Path"],
+            [None, None, None, "Market Floor 2"],
+        ],
+    
+    "teleport": 
+        {
+        
+        },
+    
+
+    "enter_teleport":
+    {
+    
+    },
+
+    "ladder_teleport":
+    {
+        "Market ~> Second market floor": {"start_coord": (4,3),"target_map": lambda: minimap_3,"end_coord": (4,3)},
     }
 }
 
@@ -81,7 +118,7 @@ basement = {
             [None, None, None, None],
             [None, None, None, None],
             [None, None, None, None],
-            [None, None, None, None],
+            [None, None, None, "Market Basement"],
         ],
     
     "teleport": 
@@ -92,7 +129,12 @@ basement = {
 
     "enter_teleport":
     {
-        "Basement ~> House": {"start_coord": (0,0),"target_map": lambda: minimap_3,"end_coord": (2,2)},
+       
+    },
+
+    "ladder_teleport":
+    {
+        "Market ~> Second market floor": {"start_coord": (4,3),"target_map": lambda: minimap_3,"end_coord": (4,3)},
     }
 }
 

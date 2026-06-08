@@ -110,11 +110,37 @@ class MapManager():
     def enter_check_teleport(self):
         for _, teleport_data in self.loaded_map_data.get("enter_teleport", {}).items():
             if self.player_location["row"] == teleport_data["start_coord"][0] and self.player_location["col"] == teleport_data["start_coord"][1]:
-                self.player_location["row"] = teleport_data["end_coord"][0]
-                self.player_location["col"] = teleport_data["end_coord"][1]
-                self.load_map(teleport_data["target_map"]())
+                move = questionary.select(f'Enter {self.loaded_map_data["location_name"]}',choices=["Yes", "No"]).ask()
+                match move:
+                    case "Yes":
+                        self.player_location["row"] = teleport_data["end_coord"][0]
+                        self.player_location["col"] = teleport_data["end_coord"][1]
+                        self.load_map(teleport_data["target_map"]())
+                        return
+                    case "No":
+                        return
+                    case _:
+                        print("Warning: MapManager cannot enter location. Fatal error")
+                        quit()
                 return True
         return False
+    
+    
+    def ladder_check_teleport(self):
+            ladders = self.loaded_map_data.get("ladder_teleport", {})
+            choices = [name for name, data in ladders.items() 
+                    if self.player_location["row"] == data["start_coord"][0] and self.player_location["col"] == data["start_coord"][1]]
+            if not choices:
+                return False
+            move = questionary.select(f'Go {self.loaded_map_data["location_name"]}', choices=["Stay"] + choices).ask()
+            if move != "Stay" and move is not None:
+                teleport_choice = ladders[move]
+                self.player_location["row"] = teleport_choice["end_coord"][0]
+                self.player_location["col"] = teleport_choice["end_coord"][1]
+                self.load_map(teleport_choice["target_map"]()) 
+                return True
+                
+            return False
     
 
     def move_player(self, command): # Move the player
@@ -133,18 +159,10 @@ class MapManager():
             case "d":
                 new_col += 1
             case "e":
-                for _, teleport_data in self.loaded_map_data.get("enter_teleport", {}).items():
-                    if self.player_location["row"] == teleport_data["start_coord"][0] and self.player_location["col"] == teleport_data["start_coord"][1]:
-                        move = questionary.select(f"Enter {self.loaded_map_data["location_name"]}",choices=["Yes", "No"]).ask()
-                        match move:
-                            case "Yes":
-                                self.enter_check_teleport()
-                            case "No":
-                                return
-                        
-                            case _:
-                                print("Warning: MapManager cannot enter location. Fatal error")
-                                quit()
+                self.enter_check_teleport()
+            case "f":
+                self.ladder_check_teleport()
+
 
         if self.check_teleport(new_row, new_col):
             return
@@ -162,7 +180,7 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
-        while (command := input("W, A, S, D, E: ").strip().lower()) not in {"w", "a", "s", "d", "e"}:
+        while (command := input("W, A, S, D, E, F: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f"}:
                 print("Wrong Move")
         else:
                 self.move_player(command)
@@ -172,7 +190,10 @@ mm = MapManager()
 mm.load_map(maps.minimap_3)
 # mm.update_map()
 
+# print(list(maps.minimap_3["ladder_teleport"].keys())[0])
 while True:
+
     mm.gameloopMapManager()
+
 
 
