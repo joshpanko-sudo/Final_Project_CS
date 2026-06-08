@@ -31,6 +31,8 @@ except ImportError as e:
     print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
     quit()
 
+
+
 class MapManager():
     def __init__(self) -> None:
         '''
@@ -41,7 +43,7 @@ class MapManager():
         self.loaded_map_data = None
         self.active_map = None
         self.longest_map_name = None
-    #map_data is going to be the input dict for the map stuff You will see
+        #map_data is going to be the input dict for the map stuff You will see
 
     def load_map(self, map_data):
         '''
@@ -66,11 +68,9 @@ class MapManager():
         '''
         Applies the player location highlight and the white square for non accessible tiles
         '''
-
-        check_tile = self.active_map[rows][columns] # Return the state of the tile (None, player is on, or location)
-        
+        # Return the state of the tile (None, player is on, or location)
+        check_tile = self.active_map[rows][columns] 
         player_highlight = (rows == self.player_location["row"] and columns == self.player_location["col"]) #Check if player is occupying tile
-        
         if check_tile is None: # Empty tile, no location on it
             return "█" * self.longest_map_name # White square blocked off
         if player_highlight: #If is_player is true, highlight the tile and add brackets to represent player is there
@@ -81,7 +81,6 @@ class MapManager():
             player_tile = f"{check_tile}" #Player is not on tile, no modifications
         return f"{player_tile}" # Return tiles
     
-
     def update_map(self):
         '''
         Updates the map after modifications or the player moving
@@ -93,6 +92,14 @@ class MapManager():
         print("\n" + "=" * 30)
         print(tabulate(cooridnate_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True)) # Print out the map
 
+    def teleport_player(self, teleport_data):
+        '''
+        Global funciton to teleport player
+        '''
+        self.player_location["row"] = teleport_data["end_coord"][0]
+        self.player_location["col"] = teleport_data["end_coord"][1]
+        self.load_map(teleport_data["target_map"]())
+        return
 
     def check_teleport(self, row, col):
         '''
@@ -100,12 +107,9 @@ class MapManager():
         '''
         for _, teleport_data in self.loaded_map_data.get("teleport", {}).items():
             if row == teleport_data["start_coord"][0] and col == teleport_data["start_coord"][1]:
-                self.player_location["row"] = teleport_data["end_coord"][0]
-                self.player_location["col"] = teleport_data["end_coord"][1]
-                self.load_map(teleport_data["target_map"]())
+                self.teleport_player(teleport_data)
                 return True
         return False
-
 
     def enter_check_teleport(self):
         for _, teleport_data in self.loaded_map_data.get("enter_teleport", {}).items():
@@ -113,9 +117,7 @@ class MapManager():
                 move = questionary.select(f'Enter {self.loaded_map_data["location_name"]}',choices=["Yes", "No"]).ask()
                 match move:
                     case "Yes":
-                        self.player_location["row"] = teleport_data["end_coord"][0]
-                        self.player_location["col"] = teleport_data["end_coord"][1]
-                        self.load_map(teleport_data["target_map"]())
+                        self.teleport_player(teleport_data)
                         return
                     case "No":
                         return
@@ -125,8 +127,10 @@ class MapManager():
                 return True
         return False
     
-    
     def ladder_check_teleport(self):
+            '''
+            Go up or down with teleport
+            '''
             ladders = self.loaded_map_data.get("ladder_teleport", {})
             choices = [name for name, data in ladders.items() 
                     if self.player_location["row"] == data["start_coord"][0] and self.player_location["col"] == data["start_coord"][1]]
@@ -134,14 +138,11 @@ class MapManager():
                 return False
             move = questionary.select(f'Go {self.loaded_map_data["location_name"]}', choices=["Stay"] + choices).ask()
             if move != "Stay" and move is not None:
-                teleport_choice = ladders[move]
-                self.player_location["row"] = teleport_choice["end_coord"][0]
-                self.player_location["col"] = teleport_choice["end_coord"][1]
-                self.load_map(teleport_choice["target_map"]()) 
+                teleport_data = ladders[move]
+                self.teleport_player(teleport_data)
                 return True
                 
             return False
-    
 
     def move_player(self, command): # Move the player
         '''
@@ -162,16 +163,12 @@ class MapManager():
                 self.enter_check_teleport()
             case "f":
                 self.ladder_check_teleport()
-
-
         if self.check_teleport(new_row, new_col):
             return
-        
         if 0 <= new_row < len(self.active_map) and 0 <=new_col < len(self.active_map[0]):
             if self.active_map[new_row][new_col] is not None:
                 self.player_location["row"] = new_row
                 self.player_location["col"] = new_col
-
 
     def gameloopMapManager(self):
         '''
@@ -186,13 +183,13 @@ class MapManager():
                 self.move_player(command)
             
 
+
 mm = MapManager()
 mm.load_map(maps.minimap_3)
 # mm.update_map()
 
 # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
 while True:
-
     mm.gameloopMapManager()
 
 
