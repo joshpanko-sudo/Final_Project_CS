@@ -26,7 +26,7 @@ except ImportError as e:
     quit()
 
 try:
-    import maps
+    import game_maps
 except ImportError as e:
     print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
     quit()
@@ -51,6 +51,8 @@ class MapManager():
         '''
         self.loaded_map_data = map_data
         self.active_map = map_data["maps"]
+        self.player_location = map_data["default_player_location"]
+        self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else print("No tutorial data for this level")
         self.find_longest_map_name()
         # print(self.loaded_map_data)
         # print(tabulate(self.active_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True))
@@ -163,6 +165,11 @@ class MapManager():
                 self.enter_check_teleport()
             case "f":
                 self.ladder_check_teleport()
+            case "?":
+                print(self.tutorial_data)
+            case _:
+                print("Warning: MapManager cannot move player. Fatal Error")
+                quit()
         if self.check_teleport(new_row, new_col):
             return
         if 0 <= new_row < len(self.active_map) and 0 <=new_col < len(self.active_map[0]):
@@ -177,7 +184,7 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
-        while (command := input("W, A, S, D, E, F: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f"}:
+        while (command := input("W, A, S, D, E, F, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?"}:
                 print("Wrong Move")
         else:
                 self.move_player(command)
@@ -185,7 +192,7 @@ class MapManager():
 
 
 mm = MapManager()
-mm.load_map(maps.minimap_3)
+mm.load_map(game_maps.tutorial_spawn)
 # mm.update_map()
 
 # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
