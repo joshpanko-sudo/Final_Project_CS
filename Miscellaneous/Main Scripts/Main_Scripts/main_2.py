@@ -77,6 +77,12 @@ def figure_out_attacks(character):
             "power": "puches!",
             "description": "uses your fists",
             "stun": False } 
+    if(character == "Helper Robot"):
+        power_data["Zap"] = {
+            "strength": 500,
+            "power": "ZAPS",
+            "description": "uses your fists",
+            "stun": False } 
 
 class Power:
     def __init__(self, power_type):
@@ -125,7 +131,7 @@ class Character:
         return(self.power)
 
     
-class Belly_Badge_Care_Bear(Character):
+class Player(Character):
     def __init__(self, name, health):
         Character.__init__(self, name, health)
         self.power = 2
@@ -165,7 +171,7 @@ def slow_print(text, delay=0.1):
         time.sleep(delay)
     print()  # Final newline after the text is finished
 
-class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
+class Enemy(Player):
     def __init__(self, name, health):
         Character.__init__(self, name, health)
         self.power = 2
