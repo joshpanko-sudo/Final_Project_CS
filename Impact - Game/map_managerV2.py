@@ -146,6 +146,15 @@ class MapManager():
                 
             return False
 
+    def continue_game(self):
+        game_continue = questionary.select("Continue?", choices=["Yes"]).ask()
+        match game_continue:
+            case "Yes":
+                return
+            case _:
+                print("Warning: MapManager cannot continue game. Fatal Error")
+                quit()
+
     def move_player(self, command): # Move the player
         '''
         Function to make player move
@@ -167,6 +176,8 @@ class MapManager():
                 self.ladder_check_teleport()
             case "?":
                 print(self.tutorial_data)
+                self.continue_game()
+             
             case _:
                 print("Warning: MapManager cannot move player. Fatal Error")
                 quit()
@@ -188,6 +199,7 @@ class MapManager():
                 print("Wrong Move")
         else:
                 self.move_player(command)
+       
             
 
 

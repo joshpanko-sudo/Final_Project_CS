@@ -7,13 +7,13 @@ tutorial_spawn = {
 
     "maps":
         [
-            [None, None, None, None, None, None, None],
-            [None, None, None, None, None, None, None],
-            [None, None, None, None, None, None, None],
-            [None, None, None, "Spawn", None, None, None],
-            [None, None, None, None, None, None, None],
-            [None, None, None, None, None, None, None],
-            [None, None, None, None, None, None, None],
+            [None, None, "Path", "Path", "Path", None, None],
+            [None, "Path", "Path", "Path", "Path", "Path", None],
+            ["Path", "Path", "Path", "Path", "Path", "Path", "Path"],
+            ["Path", "Path", "Path", "Spawn", "Path", "Path", "Path"],
+            ["Path", "Path", "Path", "Path", "Path", "Path", "Path"],
+            [None, "Path", "Path", "Path", "Path", "Path", None],
+            [None, None, "Path", "Path", "Path", None, None],
         ],
     
     "teleport": 
