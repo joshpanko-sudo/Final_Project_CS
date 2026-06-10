@@ -32,7 +32,7 @@ except ImportError as e:
     quit()
 
 try:
-    import game_maps
+    from slow_print import slow_print as SP
 except ImportError as e:
     print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
     quit()
@@ -181,7 +181,7 @@ class MapManager():
             case "f":
                 self.ladder_check_teleport()
             case "?":
-                print(self.tutorial_data)
+                SP(self.tutorial_data)
                 self.continue_game()
              
             case _:
