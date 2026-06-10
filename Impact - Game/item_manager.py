@@ -24,6 +24,37 @@ except ImportError as e:
     print(f"Warning: ItemManager could not load questionary. {e}. Perhaps you have not installed it?")
     quit()
 
+
+class CraftManager():
+    def __init__(self) -> None:
+        '''
+        Intialize the class
+        '''
+        self.recipes = {}
+    
+    def addCraftingRecipe():
+        self.recipes["golden apple"] = {
+            "Apple": 1,
+            "Gold": "8"} 
+    def ShowCraftingRecipe():
+        # Loop through every recipe item and its ingredients in the dictionary
+        for recipe_name, ingredients in self.recipes.items():
+            
+            # 1. Format the main item name (the key)
+            display_name = recipe_name.capitalize()
+            
+            # 2. Format each ingredient into 'Name, Count'
+            components = [f"{item}, {count}" for item, count in ingredients.items()]
+            
+            # 3. Join all ingredients together with ' + '
+            ingredients_string = " + ".join(components)
+            
+            # 4. Print the final combined line
+            print(f"{display_name} = {ingredients_string}")
+
+
+
+
 class ItemManager():
     def __init__(self, inventory_name:str) -> None:
         '''
@@ -116,7 +147,7 @@ class ItemManager():
         print("-" * 40)
         
     def gameloopItemManager(self):
-        command = questionary.select(f"{self.inventory_name} menu:",choices=[f"View {self.inventory_name}", "Find item", "Remove item"]).ask()
+        command = questionary.select(f"{self.inventory_name} menu:",choices=[f"View {self.inventory_name}", "Find item", "Remove item", "Craft item"]).ask()
         if command == f"View {self.inventory_name}":
             self.see_inventory()
         else: 
@@ -135,20 +166,23 @@ class ItemManager():
                         case _:
                             print("Warning: ItemManager cannot remove chosen item from inventory")
                             quit()
+                case "Craft item":
+                    craft.ShowCraftingRecipe()
                 case _:
                     print("Warning: ItemManager has encountered a fatal error")
                     quit()
             
                         
-class CraftManager():
+
+
 
 backpack = ItemManager("Allen's Inventory")
+craft = CraftManager()
 backpack.set_capacity(4)
 # backpack.add_item("Banana", 10)
 backpack.add_item("Apple", 20, 5)
-backpack.add_item("Banana", 20, 64)
+backpack.add_item("Gold", 8, 1)
 backpack.see_item("Apple")
-backpack.see_item("jirvnkjr4vgnk")
 while True:
     backpack.gameloopItemManager()
 
