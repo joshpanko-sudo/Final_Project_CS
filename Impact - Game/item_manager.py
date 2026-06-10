@@ -69,21 +69,24 @@ class ItemManager():
             print(f"Items: {item_amount}x {item_name} has been added to {self.inventory_name}") # Summary of items added
             item_amount -= amount_to_add
     
-    def remove_item(self, item_name:str, item_amount:int):
+    def remove_item(self, item_name:str, amount_to_remove):
         '''
         Remove items from the inventory
         '''
+        item_amount = int(amount_to_remove)
         for i in range(len(self.items) - 1, -1, -1): #Start -1, stop -1, step -1
             item = self.items[i]
             if item["name"] == item_name:
+                
                 if item["amount"] <= item_amount:
                     item_amount -= item["amount"] #Item stack is less than requested item removal
                     self.items.pop(i) #Remove stack
+                    
                 else:
                     item["amount"] -= item_amount 
                     item_amount = 0 #Everything removed
                     break #Leave loop
-        print(f"Removed {item_amount}x {item_name} from {self.inventory_name}")
+        print(f"Removed {int(amount_to_remove) - item_amount}x {item_name} from {self.inventory_name}")
         if item_amount > 0:
             print(f"Could not remove {item_amount}x {item_name} from {self.inventory_name}.")
 
@@ -113,16 +116,29 @@ class ItemManager():
         print("-" * 40)
         
     def gameloopItemManager(self):
-        command = questionary.select(f"{self.inventory_name} menu:",choices=[f"View {self.inventory_name}", "Find item"]).ask()
+        command = questionary.select(f"{self.inventory_name} menu:",choices=[f"View {self.inventory_name}", "Find item", "Remove item"]).ask()
         if command == f"View {self.inventory_name}":
             self.see_inventory()
         else: 
             match command:
                 case "Find item":
                     self.see_item(questionary.text("Item to find: ").ask())
+                case "Remove item":
+                    item_to_remove = questionary.text("Item to remove: ").ask()
+                    amount_to_remove = questionary.text("Amount to remove: ").ask()
+                    confirm = questionary.select(f"Remove {amount_to_remove} of {item_to_remove}?", choices=["Yes", "No"]).ask()
+                    match confirm:
+                        case "Yes":
+                            self.remove_item(item_to_remove, amount_to_remove)
+                        case "No":
+                            return
+                        case _:
+                            print("Warning: ItemManager cannot remove chosen item from inventory")
+                            quit()
                 case _:
                     print("Warning: ItemManager has encountered a fatal error")
                     quit()
+            
                         
 
 

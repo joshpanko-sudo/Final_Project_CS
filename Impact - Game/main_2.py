@@ -116,6 +116,8 @@ class Character:
         else:
             print(f"{self.name} took damaged. Current health: {self.health}")
             time.sleep(1)  
+
+            
     def heal(self, healing):
         if not self.life:
             print(f"{self.name} is no longer with us, you can't heal the dead")
