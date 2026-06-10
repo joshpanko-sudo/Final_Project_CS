@@ -60,7 +60,8 @@ class MapManager():
         self.player_location = map_data["default_player_location"]
         self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else print("No tutorial data for this level")
         self.actual_tutorial = map_data["actual_tutorial"] if map_data.get("actual_tutorial") is not None else print("")
-        print(self.actual_tutorial)
+        SP(self.actual_tutorial)
+        self.continue_game()
         self.find_longest_map_name()
         # print(self.loaded_map_data)
         # print(tabulate(self.active_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True))

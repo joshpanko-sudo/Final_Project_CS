@@ -3,7 +3,7 @@ tutorial_spawn = {
 
     "tutorial": "Move around with W, A, S, D, and use F, and E to go to other areas. If you need help, type ?",
 
-    "actual_tutorial": "Welcome to Impact. As you can see, you are in the middle of a large map. Try to use WASD to move around the map. "
+    "actual_tutorial": "Welcome to Impact. As you can see, you are in the middle of a large map. Try to use WASD to move around the map. Once you are aquited with moving, move to the lower half of the map to begin!",
 
     "default_player_location": {"row":3, "col":3},
 
