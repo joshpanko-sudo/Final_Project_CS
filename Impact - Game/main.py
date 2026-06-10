@@ -48,12 +48,7 @@ def safe_mode():
                 game_warnings("Invalid Input")
 
 try:
-    import questionary
     from tabulate import tabulate
-    from colorama import Fore, Style, init
-    # import json
-    # import bcrypt
-    # from pathlib import Path
 except ImportError:
     game_warnings("Import Error")
     safe_mode()
