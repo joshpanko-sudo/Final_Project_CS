@@ -31,6 +31,12 @@ except ImportError as e:
     print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
     quit()
 
+try:
+    import game_maps
+except ImportError as e:
+    print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
+    quit()
+
 
 
 class MapManager():
