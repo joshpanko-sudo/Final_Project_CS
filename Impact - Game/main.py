@@ -77,7 +77,8 @@ def startup():
 def main():
     startup()
     
-
+def story():
+    
 
 
 
