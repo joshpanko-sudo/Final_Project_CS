@@ -140,7 +140,7 @@ class ItemManager():
                     quit()
             
                         
-
+class CraftManager():
 
 backpack = ItemManager("Allen's Inventory")
 backpack.set_capacity(4)

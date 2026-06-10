@@ -1,7 +1,9 @@
 tutorial_spawn = {
     "location_name": "Tutorial Spawn",
 
-    "tutorial": "Welcome to the game. Here, you are at a tutorial level. Move around with W, A, S, D, and use F, and E to go to other areas. If you need help, type ?",
+    "tutorial": "Move around with W, A, S, D, and use F, and E to go to other areas. If you need help, type ?",
+
+    "actual_tutorial": "Welcome to Impact. As you can see, you are in the middle of a large map. Try to use WASD to move around the map. "
 
     "default_player_location": {"row":3, "col":3},
 
