@@ -1,9 +1,37 @@
+'''
+Rigid means that data must be there and exist
+Soft means the data is optional and does not need to exist
+
+map_name = {
+    Rigid "location_name":"Name your location
+    Soft "tutorial": "Put help data here, acessed with (?)"
+    Soft "actual_tutorial": "Place tutorial of information data here. Will be displayed everytime. Cannot be turned off."
+    Rigid "default_player_location": {"row": 0, "col": 0} Place default player spawn location here
+    Rigid "maps": Place map data here
+        [
+        [None, None],
+        [None, None],
+        ]
+
+    All teleport systems use this system:  "Teleport Name": {"start_coord": (0,0),"target_map": lambda: Place map to teleport to here,"end_coord": (0,0)},
+    Rigid "teleport": Place teleport data here. Player will automatically teleport upon matching the coordinates
+
+    
+
+
+}
+
+
+
+'''
+
+
 tutorial_spawn = {
     "location_name": "Tutorial Spawn",
 
     "tutorial": "Move around with W, A, S, D, and use F, and E to go to other areas. If you need help, type ?",
 
-    "actual_tutorial": "Welcome to Impact. As you can see, you are in the middle of a large map. Try to use WASD to move around the map. Once you are aquited with moving, move to the lower half of the map to begin!",
+    # "actual_tutorial": "Welcome to Impact. As you can see, you are in the middle of a large map. Try to use WASD to move around the map. Once you are aquited with moving, move to the lower half of the map to begin!",
 
     "default_player_location": {"row":3, "col":3},
 
@@ -20,9 +48,10 @@ tutorial_spawn = {
     
     "teleport": 
         {
-            # "minimap_3 ~> minimap": {"start_coord": (1,-1),"target_map": lambda: minimap,"end_coord": (0,1)},
+            "tutorial_spawn to tutorial_level_1": {"start_coord": (7,2),"target_map": lambda: tutorial_level,"end_coord": (0,0)},
+            "tutorial_spawn to tutorial_level_2": {"start_coord": (7,3),"target_map": lambda: tutorial_level,"end_coord": (0,1)},
+            "tutorial_spawn to tutorial_level_3": {"start_coord": (7,4),"target_map": lambda: tutorial_level,"end_coord": (0,2)},
         },
-   
 
     "enter_teleport":
         {
@@ -42,26 +71,33 @@ tutorial_level = {
 
     "maps":
         [
-            [None, "Viewing Platform", None],
-            ["Spawn", "Path", None],
-            [None, "House", None],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
+            ["Path", "Path", "Path"],
         ],
     
     "teleport": 
         {
-            # "minimap_3 ~> minimap": {"start_coord": (1,-1),"target_map": lambda: minimap,"end_coord": (0,1)},
+            "tutorial_level to tutorial_spawn_1": {"start_coord": (-1,0),"target_map": lambda: tutorial_spawn,"end_coord": (6,2)},
+            "tutorial_level to tutorial_spawn_2": {"start_coord": (-1,1),"target_map": lambda: tutorial_spawn,"end_coord": (6,3)},
+            "tutorial_level to tutorial_spawn_3": {"start_coord": (-1,2),"target_map": lambda: tutorial_spawn,"end_coord": (6,4)},
         },
    
 
     "enter_teleport":
         {
-            "Tutorial Level to Tutorial House": {"start_coord": (2,1),"target_map": lambda: basement,"end_coord": (0,0)},
+            # "Tutorial Level to Tutorial House": {"start_coord": (2,1),"target_map": lambda: basement,"end_coord": (0,0)},
         },
 
     "ladder_teleport":
         {
-            # "Market ~> Second market floor": {"start_coord": (4,3),"target_map": lambda: market_second_floor,"end_coord": (4,3)},
-            # "Market ~> Market Basement": {"start_coord": (4,3),"target_map": lambda: basement,"end_coord": (4,3)},
+
         }
 }
 
