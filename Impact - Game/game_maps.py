@@ -26,18 +26,17 @@ tutorial_spawn = {
 
     "enter_teleport":
         {
-            "Tutorial Level to Tutorial House": {"start_coord": (2,1),"target_map": lambda: basement,"end_coord": (0,0)},
+        
         },
 
     "ladder_teleport":
         {
-            # "Market ~> Second market floor": {"start_coord": (4,3),"target_map": lambda: market_second_floor,"end_coord": (4,3)},
-            # "Market ~> Market Basement": {"start_coord": (4,3),"target_map": lambda: basement,"end_coord": (4,3)},
+
         }
 }
 
 tutorial_level = {
-    "location_name": "Tutorial Level",
+    "location_name": "Tutorial One",
 
     "default_player_location": {"row":1, "col":0},
 
