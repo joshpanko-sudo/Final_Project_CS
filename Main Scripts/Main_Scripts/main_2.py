@@ -41,7 +41,7 @@ power_data["iron_tail"] = {
     "stun": True
 }
 
-def figure_out_attacks(character):
+def figure_out_attacks(character): # This 
     power_data.clear()
 
     if(character == "Spider Droid"):
@@ -52,6 +52,14 @@ def figure_out_attacks(character):
             "stun": True } 
         
     if(character == "Player"):
+#        if any(d.get('name') == 'Wooden Sword' for d in my_backpack.items):
+#            power_data["Sword"] = {
+#            "strength": 60,
+#            "power": "Slash!",
+#            "description": "uses your fists",
+#            "stun": False } 
+#        print(my_backpack.items)
+
         power_data["punch"] = {
             "strength": 30,
             "power": "puches!",
@@ -61,19 +69,12 @@ def figure_out_attacks(character):
             "strength": 20,
             "power": "kicks!",
             "description": "uses your feet!",
-            "stun": True } 
-        
+            "stun": False } 
 
     if(character == "Pikachu"):
         power_data["punch"] = {
             "strength": 25,
             "power": "puches!",
-            "description": "uses your fists",
-            "stun": False } 
-    if(character == "Helper Robot"):
-        power_data["Zap"] = {
-            "strength": 500,
-            "power": "ZAPS",
             "description": "uses your fists",
             "stun": False } 
 
@@ -109,8 +110,6 @@ class Character:
         else:
             print(f"{self.name} took damaged. Current health: {self.health}")
             time.sleep(1)  
-
-            
     def heal(self, healing):
         if not self.life:
             print(f"{self.name} is no longer with us, you can't heal the dead")
@@ -126,7 +125,7 @@ class Character:
         return(self.power)
 
     
-class Player(Character):
+class Belly_Badge_Care_Bear(Character):
     def __init__(self, name, health):
         Character.__init__(self, name, health)
         self.power = 2
@@ -166,7 +165,7 @@ def slow_print(text, delay=0.1):
         time.sleep(delay)
     print()  # Final newline after the text is finished
 
-class Enemy(Player):
+class Belly_Badge_Evil_Bear(Belly_Badge_Care_Bear):
     def __init__(self, name, health):
         Character.__init__(self, name, health)
         self.power = 2

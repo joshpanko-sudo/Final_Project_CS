@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-from inventory import Backpack
-from main_2 import Power, Belly_Badge_Care_Bear, Belly_Badge_Evil_Bear, start_battle
-from main_2 import start_battle
-# import random
-from slow_print import slow_print as SP
-
-
-
-print("-----------------------------------------")
-print("             IMPACT GAME                 ")
-print("         Created By Josh and Allen       ")
-print("-----------------------------------------")
-=======
 game_name = "Impact"
 
 # extensions_loaded = True
@@ -84,7 +70,6 @@ def startup():
     print("-----------------------------------------")
 
   
->>>>>>> 7646d9bd81cecc9471a56588b26eda45374f3041
 
 
 

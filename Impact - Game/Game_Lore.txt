@@ -1,0 +1,57 @@
+June 5, 2090
+6:00PM, the sun is setting
+You arrive home from studying at the highest science techology university
+You see that you got mail. You open up your mail box
+You have been selected as a researcher to try time travel!
+The science team decided to fly you out first class.
+You finally arrive and meet the leader, Jim Kalper
+Jim: Welcome to the team!!
+Jim: We are going to start testing tomorrow!
+Jim: You should take some rest now..
+The next day.....
+Jim: Everything on?!?!
+Mike: Red switch on!!
+Lakrry: Green switch on!!
+Loon: Black is blinking?????
+Jim: Shut it down!!!!
+Lakrry: ITS TO LATE, ITS FULL POWER!!
+BLASTTTT!!!!!!!!
+You appear in a strange new word
+It looks like your world but......
+Robots are taking over!!!
+You: There is massive spider robots everywhere
+A Spider Droid is going to attack you...
+Helper: Hey there!
+Helper: You are going to enter your first battle
+Helper: Your current health is displayed after each attack
+Helper: Your attacks are displayed in a list
+Helper: Great job defeating your first enemy!
+Helper: As you find more weponds, you ll be able to do more attacks!
+Massive spider robot approaches...
+Helper: Hang on here! I ll take care of this guy! =D
+Massive Spider Droid Stabs Helper robot! strength: 50
+Helper Robot is deciding which attack....
+Helper Robot ZAPS! strength: 500
+Massive Spider Droid was defeated.
+Helper: Wow that guy was easy!
+Who are.... you?
+Helper: I m just here to help!
+You: Ohhhhhhh..... okay I ll see you then!
+Helper: I m always here to help! Bye!
+-------Helper Robot Flies Away---------
+------------------------------
+If you want to turn this text back into code later, I can help you:
+
+* Automatically wrap each line back into slow_print() functions.
+* Fix any spelling mistakes (like "weponds", "word", or "TO LATE") in the dialogue.
+* Write out the next scene of the story.
+
+How would you like to proceed with your game development?
+
+Helper robot is the final boss of the game
+
+He shows helpfulness but he just wants to keep testing you
+
+In the end he gets tired of you but he doesn't realize how strong you are
+
+After each 
