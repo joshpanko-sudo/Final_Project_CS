@@ -51,17 +51,19 @@ class MapManager():
         self.longest_map_name = None
         #map_data is going to be the input dict for the map stuff You will see
 
-    def load_map(self, map_data):
+    def load_map(self, map_data, default_player = False):
         '''
         Load a map form maps.py
         '''
         self.loaded_map_data = map_data
         self.active_map = map_data["maps"]
-        self.player_location = map_data["default_player_location"]
-        self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else print("No tutorial data for this level")
-        self.actual_tutorial = map_data["actual_tutorial"] if map_data.get("actual_tutorial") is not None else print("")
-        SP(self.actual_tutorial)
-        self.continue_game()
+        if default_player:
+            self.player_location = map_data["default_player_location"]
+        self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else False
+        self.actual_tutorial = map_data["actual_tutorial"] if map_data.get("actual_tutorial") is not None else False
+        if self.actual_tutorial:
+            SP(self.actual_tutorial)
+            self.continue_game()
         self.find_longest_map_name()
         # print(self.loaded_map_data)
         # print(tabulate(self.active_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True))
@@ -109,7 +111,7 @@ class MapManager():
         '''
         self.player_location["row"] = teleport_data["end_coord"][0]
         self.player_location["col"] = teleport_data["end_coord"][1]
-        self.load_map(teleport_data["target_map"]())
+        self.load_map(teleport_data["target_map"](), False)
         return
 
     def check_teleport(self, row, col):
@@ -184,8 +186,11 @@ class MapManager():
             case "f":
                 self.ladder_check_teleport()
             case "?":
-                SP(self.tutorial_data)
-                self.continue_game()
+                if self.tutorial_data:
+                    SP(self.tutorial_data)
+                    self.continue_game()
+                else:
+                    pass
              
             case _:
                 print("Warning: MapManager cannot move player. Fatal Error")
@@ -213,7 +218,7 @@ class MapManager():
 
 
 mm = MapManager()
-mm.load_map(game_maps.tutorial_spawn)
+mm.load_map(game_maps.tutorial_spawn, True)
 # mm.update_map()
 
 # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
