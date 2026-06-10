@@ -124,7 +124,8 @@ start_battle(Enemy, Player)
 def main():
     startup()
     
-
+def story():
+    
 
 
 
