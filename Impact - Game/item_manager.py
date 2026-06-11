@@ -24,19 +24,24 @@ except ImportError as e:
     print(f"Warning: ItemManager could not load questionary. {e}. Perhaps you have not installed it?")
     quit()
 
-
 class CraftManager():
-    def __init__(self) -> None:
+    def __init__(self):  # 1. Renamed to standard initializer
         '''
-        Intialize the class
+        Initialize the class
         '''
         self.recipes = {}
+        self.list_recipes = {}
+        # Automatically add your recipe when the game starts
+        self.addCraftingRecipe() 
     
-    def addCraftingRecipe():
+    def addCraftingRecipe(self):  # 2. Added self here
         self.recipes["golden apple"] = {
             "Apple": 1,
             "Gold": "8"} 
-    def ShowCraftingRecipe():
+        self.recipes["golden sword"] = {
+            "stick": 1,
+            "Gold": "8"}
+    def ShowCraftingRecipe(self):  # 3. Restored single definition with self
         # Loop through every recipe item and its ingredients in the dictionary
         for recipe_name, ingredients in self.recipes.items():
             
@@ -51,7 +56,7 @@ class CraftManager():
             
             # 4. Print the final combined line
             print(f"{display_name} = {ingredients_string}")
-
+            self.list_recipes.append(display_name, ingredients_string)
 
 
 
@@ -167,7 +172,9 @@ class ItemManager():
                             print("Warning: ItemManager cannot remove chosen item from inventory")
                             quit()
                 case "Craft item":
+                    print("Current recipes avaiable:")
                     craft.ShowCraftingRecipe()
+                    confirm = questionary.select(f"Remove {amount_to_remove} of {item_to_remove}?", choices=["Yes", "No"]).ask()
                 case _:
                     print("Warning: ItemManager has encountered a fatal error")
                     quit()
