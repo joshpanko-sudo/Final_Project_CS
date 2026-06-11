@@ -41,3 +41,25 @@ def battle_1():
     Stun = False
     maxhealcooldown = 3
     healcooldown = 0
+    game_intro_2()
+
+
+def game_intro_2():
+    start_battle(Enemy1, Player1,  Stun, maxhealcooldown, healcooldown)
+    SP("Helper: Great job defeating your first enemy!", 0.0625)
+    SP("Helper: As you find more weponds, you'll be able to do more attacks!", 0.0625)
+    SP("Massive spider robot approaches...", 0.0625)
+    SP("Helper: Hang on here! I'll take care of this guy! =D", 0.0625)
+    print("--------------------------------------------------------------")
+    SP("Massive Spider Droid Stabs Helper robot! strength: 50",  0.0625)
+    SP("Helper Robot is deciding which attack....",  0.0625)
+    SP("Helper Robot ZAPS! strength: 500",  0.0625)
+    SP("Massive Spider Droid was defeated.",  0.0625)
+    print("--------------------------------------------------------------")
+
+    SP("Helper: Wow that guy was easy!", 0.0625)
+    SP("Who are.... you?", 0.0625)
+    SP("Helper: I'm just here to help!", 0.0625)
+    SP("You: Ohhhhhhh..... okay I'll see you then!", 0.0625)
+    SP("Helper: I'm always here to help! Bye!", 0.0625)
+    SP("-------Helper Robot Flies Away---------", 0.0625)
