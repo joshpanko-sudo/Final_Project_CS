@@ -24,8 +24,11 @@ except ImportError as e:
     print(f"Warning: SlowPrint could not load time. {e}. Perhaps you have not installed it?")
     quit()
 
-class slow_print():
-    def __init__(self, text:str, delay:float = 0.1) -> None:
+class slow_print_system():
+    def __init__(self) -> None:
+        pass
+
+    def slow_print(self, text:str, delay:float = 0.1):
         for char in text:
             sys.stdout.write(char)
             sys.stdout.flush()
@@ -33,34 +36,31 @@ class slow_print():
         print()
 
 
-
-
-import time
-from slow_print import slow_print as SP
-
-class Character:
-    def __init__(self, name, delay=0.75):
+class character_say():
+    def __init__(self, name, delay = 0.75):
         self.name = name
         self.delay = delay
 
-    def say(self, text, delimiter="|"):
-        print(f"{self.name}:")
-        
-        # Split the text into individual lines/chunks
-        chunks = text.split(delimiter)
-        
-        # Automatically loop through and print each chunk with a delay
-        for chunk in chunks:
-            cleaned_chunk = chunk.strip()
-            if cleaned_chunk: # Ensures we don't print empty whitespace lines
+    def say(self, text, special_character = "|<><>|"):
+        print(f"{self.name}")
+
+        text_chunks = text.split(special_character)
+
+        for chunk in text_chunks:
+            purged_chunk = chunk.strip()
+            if purged_chunk:
                 time.sleep(self.delay)
-                SP(cleaned_chunk, 0.125)
+                slow_print_system.slow_print(purged_chunk, 0.125)
                 
-        print("[End of script]")
+
+
+
+
+
 
 # --- How to use it ---
 
-akira = Character("Akira")
+akira = character_say("Akira")
 
 akira.say("""
 You finally arrived.|

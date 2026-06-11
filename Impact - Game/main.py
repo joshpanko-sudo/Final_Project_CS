@@ -8,7 +8,9 @@
 import game_maps
 from map_managerV2 import MapManager
 MM = MapManager()
-from slow_print import slow_print as SP
+from slow_print import slow_print_system
+SP = slow_print_system()
+from slow_print import character_say as CS
 
 print("-----------------------------------------")
 print("             IMPACT GAME                 ")
@@ -16,7 +18,7 @@ print("         Created By Josh and Allen       ")
 print("-----------------------------------------")
 
 
-SP("June 5, 2090", 0.0625)
+SP.slow_print("June 5, 2090", 0.0625)
 SP("6:00PM, the sun is setting", 0.0625)
 
 SP("You arrive home from studying at the highest science techology university",0.0625 )
