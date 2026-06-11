@@ -7,6 +7,7 @@ Version 1.0
 import time
 import sys
 import random
+from characterAttacks import figure_out_attacks_
 
 power_data = {
     "thundershock": {
@@ -33,6 +34,7 @@ power_data = {
         "description": "yellow star",
         "stun": False
     }
+
 }
 power_data["iron_tail"] = {
     "strength": 50,
@@ -42,40 +44,8 @@ power_data["iron_tail"] = {
 }
 
 def figure_out_attacks(character):
-    power_data.clear()
+    figure_out_attacks_(character)
 
-    if(character == "Spider Droid"):
-        power_data["club swing"] = {
-            "strength": 30,
-            "power": "slams ground with a club!",
-            "description": "massive club",
-            "stun": True } 
-        
-    if(character == "Player"):
-        power_data["punch"] = {
-            "strength": 30,
-            "power": "puches!",
-            "description": "uses your fists",
-            "stun": False } 
-        power_data["kick"] = {
-            "strength": 20,
-            "power": "kicks!",
-            "description": "uses your feet!",
-            "stun": True } 
-        
-
-    if(character == "Pikachu"):
-        power_data["punch"] = {
-            "strength": 25,
-            "power": "puches!",
-            "description": "uses your fists",
-            "stun": False } 
-    if(character == "Helper Robot"):
-        power_data["Zap"] = {
-            "strength": 500,
-            "power": "ZAPS",
-            "description": "uses your fists",
-            "stun": False } 
 
 class Power:
     def __init__(self, power_type):
