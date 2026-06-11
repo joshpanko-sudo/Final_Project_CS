@@ -16,13 +16,8 @@ print("-----------------------------------------")
 
 
 
-print("--------------------------------------------------------------")
 
-Enemy1 = Enemy("Spider Droid", 20)
-Player1 = Player("You", 50)
-Stun = False
-maxhealcooldown = 3
-healcooldown = 0
+
 
 start_battle(Enemy1, Player1,  Stun, maxhealcooldown, healcooldown)
 SP("Helper: Great job defeating your first enemy!", 0.0625)
