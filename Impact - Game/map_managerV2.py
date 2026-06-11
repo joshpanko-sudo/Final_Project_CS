@@ -51,7 +51,7 @@ class MapManager():
         self.longest_map_name = None
         #map_data is going to be the input dict for the map stuff You will see
 
-    def load_map(self, map_data, default_player = False):
+    def load_map(self, map_data, default_player:bool = False):
         '''
         Load a map form maps.py
         '''
