@@ -185,6 +185,8 @@ class MapManager():
                 self.enter_check_teleport()
             case "f":
                 self.ladder_check_teleport()
+            case "q":
+                pass # Make interaction here
             case "?":
                 if self.tutorial_data:
                     SP(self.tutorial_data)
@@ -209,7 +211,7 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
-        while (command := input("W, A, S, D, E, F, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?"}:
+        while (command := input("W, A, S, D, E, F, Q, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?", "q"}:
                 print("Wrong Move")
         else:
                 self.move_player(command)
@@ -217,13 +219,13 @@ class MapManager():
             
 
 
-mm = MapManager()
-mm.load_map(game_maps.tutorial_spawn, True)
+# mm = MapManager()
+# mm.load_map(game_maps.tutorial_spawn, True)
 # mm.update_map()
 
 # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
-while True:
-    mm.gameloopMapManager()
+# while True:
+    # mm.gameloopMapManager()
 
 
 
