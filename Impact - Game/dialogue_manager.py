@@ -48,11 +48,11 @@ class character_say():
     A more advanced systen for printing out character dialogue. You can specify character name and what they should say
     The printing system uses the slow print above and lines print out with a delay that defaults to 0.75
     '''
-    def __init__(self, name, delay = 0.75):
+    def __init__(self, name:str, delay:float = 0.75):
         self.name = name # Character name
         self.delay = delay # Line print delay
 
-    def say(self, text, special_character = "|<><>|"): # Special character that allows for one long string to be broken up and print out seperatly as lines
+    def say(self, text:str, special_character = "|<><>|"): # Special character that allows for one long string to be broken up and print out seperatly as lines
         print(f"{self.name}")
 
         text_chunks = text.split(special_character) # Splits the string
@@ -74,7 +74,7 @@ class character_say():
 # akira = character_say("Akira")
 
 # akira.say("""
-# You finally arrived.|
+# You finally arrived.|<><>|
 # I've been waiting for you.|
 # ...Did you miss me?
 # """)

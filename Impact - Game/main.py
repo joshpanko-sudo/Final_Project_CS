@@ -53,38 +53,34 @@ try:
 except ImportError:
         game_warnings("Import Error")
         safe_mode()
+print(f"Loading {game_name}".center(20, "-"))
+try:
+    from map_managerV2 import MapManager
+    MM = MapManager()
+except ImportError:
+    game_warnings("Game File Error")
+    safe_mode()
 
-
-def load_game_files():
-    print(f"Loading {game_name}".center(20, "-"))
-    try:
-        from map_managerV2 import MapManager as MM
-        from dialogue_manager import character_say
-        CS = character_say()
-        # from item_manager import ItemManager as IM
-    except ImportError:
-        game_warnings("Game File Error")
-        safe_mode()
-    startup()
 
 def print_credits():
-    print("\n-----------------------------------------")
-    print("|            IMPACT GAME                |")
-    print("|        Created By Josh and Allen      |")
-    print("|        Created By Josh and Allen      |")
-    print("|        Created By Josh and Allen      |")
-    print("-----------------------------------------\n")
+    '''
+    Print the credits for the game
+    '''
+    print("System design: Allen\n" \
+    "Game Design: Josh")
+    MM.continue_game()
+    startup()
+
 
 def startup():
     print("\n-----------------------------------------")
     print("|            IMPACT GAME                |")
     print("|        Created By Josh and Allen      |")
     print("-----------------------------------------\n")
-
     option = questionary.select("Main Menu", choices=["Start Game", "Quit", "Credits"]).ask()
     match option:
         case "Start Game":
-            pass
+            start_story()
         case "Quit":
             quit()
         case "Credits":
@@ -97,11 +93,12 @@ def startup():
 
 
 def main():
-    load_game_files()
+    startup()
 
     
-def story():
-    pass
+def start_story():
+    
+    
 
 
 
