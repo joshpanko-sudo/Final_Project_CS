@@ -32,9 +32,9 @@ except ImportError as e:
     quit()
 
 try:
-    from slow_print import slow_print as SP
+    from dialogue_manager import slow_print_system as SP
 except ImportError as e:
-    print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
+    print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
     quit()
 
 
@@ -223,9 +223,9 @@ class MapManager():
 # mm.load_map(game_maps.tutorial_spawn, True)
 # mm.update_map()
 
-# print(list(maps.minimap_3["ladder_teleport"].keys())[0])
+# # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
 # while True:
-    # mm.gameloopMapManager()
+#     mm.gameloopMapManager()
 
 
 

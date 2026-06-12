@@ -1,6 +1,6 @@
 '''
 Legend:
-- Name: SlowPrint
+- Name: DialogueManager
 
 Highlight Codes:
 - Red: Error
@@ -8,20 +8,20 @@ Highlight Codes:
 - Blue: Action being done
 
 Error template:
-- Warning: SlowPrint could not {Error Here}. {e}. Please {Possible Solution Here}
+- Warning: DialogueManager could not {Error Here}. {e}. Please {Possible Solution Here}
 
 
 '''
 try:
     import sys
 except ImportError as e:
-    print(f"Warning: SlowPrint could not load sys. {e}. Perhaps you have not installed it?")
+    print(f"Warning: DialogueManager could not load sys. {e}. Perhaps you have not installed it?")
     quit()
 
 try:
     import time
 except ImportError as e:
-    print(f"Warning: SlowPrint could not load time. {e}. Perhaps you have not installed it?")
+    print(f"Warning: DialogueManager could not load time. {e}. Perhaps you have not installed it?")
     quit()
 
 class slow_print_system():
