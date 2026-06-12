@@ -55,12 +55,12 @@ class character_say():
     def say(self, text, special_character = "|<><>|"): # Special character that allows for one long string to be broken up and print out seperatly as lines
         print(f"{self.name}")
 
-        text_chunks = text.split(special_character)
+        text_chunks = text.split(special_character) # Splits the string
 
         for chunk in text_chunks:
             purged_chunk = chunk.strip()
             if purged_chunk:
-                time.sleep(self.delay)
+                time.sleep(self.delay) # Delay the print
                 slow_print_system.slow_print(purged_chunk, 0.125)
                 
 
@@ -69,12 +69,12 @@ class character_say():
 
 
 
-# --- How to use it ---
 
-akira = character_say("Akira")
 
-akira.say("""
-You finally arrived.|
-I've been waiting for you.|
-...Did you miss me?
-""")
+# akira = character_say("Akira")
+
+# akira.say("""
+# You finally arrived.|
+# I've been waiting for you.|
+# ...Did you miss me?
+# """)
