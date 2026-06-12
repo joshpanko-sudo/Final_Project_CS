@@ -1,6 +1,6 @@
 from dialogue_manager import character_say
 Narrator = character_say("Narrator")
-
+ 
 Narrator.say("""
 Narrator: The date is June 5, 2030. You arrive home after a long day of research.|<><>|
 Narrator: You open your phone and see a message from the Research Academy of Tai.|<><>|
