@@ -16,7 +16,7 @@ def game_warnings(warning: str):
 
         case "Import Error":
             print("Warning: main.py has failed to load extensions, please reinstall extensions\n")
-            print("Required Extensions: Questionary, Tabulate, Colorama, JSON, Bcrypt, Pathlib\n")
+            print("Required Extensions: Questionary, Tabulate, \n")
     
         case "Game File Error":
             print("Warning: main.py has failed to load game files, please repair game files")
