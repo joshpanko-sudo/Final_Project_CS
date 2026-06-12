@@ -26,9 +26,16 @@ except ImportError as e:
 
 class slow_print_system():
     def __init__(self) -> None:
+        '''
+        Initilze the class
+        '''
         pass
 
     def slow_print(self, text:str, delay:float = 0.1):
+        '''
+        Takes in a text string and can print out lines for dialogue
+        Delay can be adjusted or defualts to 0.
+        '''
         for char in text:
             sys.stdout.write(char)
             sys.stdout.flush()
@@ -37,11 +44,15 @@ class slow_print_system():
 
 
 class character_say():
+    '''
+    A more advanced systen for printing out character dialogue. You can specify character name and what they should say
+    The printing system uses the slow print above and lines print out with a delay that defaults to 0.75
+    '''
     def __init__(self, name, delay = 0.75):
-        self.name = name
-        self.delay = delay
+        self.name = name # Character name
+        self.delay = delay # Line print delay
 
-    def say(self, text, special_character = "|<><>|"):
+    def say(self, text, special_character = "|<><>|"): # Special character that allows for one long string to be broken up and print out seperatly as lines
         print(f"{self.name}")
 
         text_chunks = text.split(special_character)
