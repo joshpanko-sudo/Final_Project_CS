@@ -24,6 +24,37 @@ map_name = {
 
 
 '''
+battle_1 = {
+    "location_name": "Battle 1!",
+
+    "tutorial": "Move around with W, A, S, D, and use F, and E to go to other areas. If you need help, type ?",
+
+    "actual_tutorial": "The spider robot is ahead of you! Move the player with WASD to the spide bot, and press Q to start the battle!",
+
+    "default_player_location": {"row":1, "col":0},
+
+    "maps":
+        [
+            ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "Path"],
+            ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "----Spider Robot----"],
+            ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "Path"],
+        ],
+
+    "teleport":
+    {
+
+    }
+
+    "enter_teleport":
+
+}
+
+
+
+
+
+
+
 
 
 tutorial_spawn = {

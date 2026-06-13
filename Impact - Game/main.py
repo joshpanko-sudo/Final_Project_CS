@@ -53,7 +53,7 @@ try:
 except ImportError:
         game_warnings("Import Error")
         safe_mode()
-print(f"Loading {game_name}".center(20, "-"))
+print(f"Importing files for {game_name}".center(20, "-"))
 try:
     from map_managerV2 import MapManager
     MM = MapManager()

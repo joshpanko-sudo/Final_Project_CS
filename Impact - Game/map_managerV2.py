@@ -166,6 +166,9 @@ class MapManager():
                 print("Warning: MapManager cannot continue game. Fatal Error")
                 quit()
 
+    def battle(self):
+        
+
     def move_player(self, command): # Move the player
         '''
         Function to make player move
@@ -186,7 +189,7 @@ class MapManager():
             case "f":
                 self.ladder_check_teleport()
             case "q":
-                pass # Make interaction here
+                start
             case "?":
                 if self.tutorial_data:
                     SP(self.tutorial_data)

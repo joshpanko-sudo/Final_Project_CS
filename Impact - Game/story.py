@@ -1,32 +1,56 @@
 from dialogue_manager import character_say
-Narrator = character_say("Narrator")
- 
+
+Narrator = character_say("--Narrator--")
 Narrator.say("""
 Narrator: The date is June 5, 2030. You arrive home after a long day of research.|<><>|
 Narrator: You open your phone and see a message from the Research Academy of Tai.|<><>|
 Narrator: You read the message and realize you have been selected for a warp technology experiment.|<><>|
-Narrator: Thus, you 
-             
-             The date is June 5, 2090. You arrive home after a long day of research. As a scientist at the Tai research academy, you have been invited 
-
-
-
-
+Narrator: Thus, you pack your items and fall fast asleep.|<><>|
+Narrator: The next day, you fly out to the Research Academny Of Tai in first class and you meet with the leader, Jim Kalper.|<><>|
+\n
 """)
 
+Jim = character_say("--Jim--")
+Jim.say("""
+Jim: Welcome to the team! We shall start the test tomorrow.
+Jim: You should take some rest now..
+\n
+""")
 
-# SP.slow_print("June 5, 2090", 0.0625)
-# SP("6:00PM, the sun is setting", 0.0625)
+Narrator.say("""
+Narrator: The next day...
+\n
+""")
 
-# SP("You arrive home from studying at the highest science techology university",0.0625 )
-# SP("You see that you got mail. You open up your mail box", 0.0625)
-# SP("You have been selected as a researcher to try time travel!", 0.0625)
+Jim.say("""
+Jim: Is everything green?
+\n
+""")
 
-# SP("The science team decided to fly you out first class.", 0.0625)
-# SP("You finally arrive and meet the leader, Jim Kalper", 0.0625)
-# SP("Jim: Welcome to the team!!", 0.0625)
-# SP("Jim: We are going to start testing tomorrow!", 0.0625)
-# SP("Jim: You should take some rest now..", 0.0625)
+Mike = character_say("--Mike--")
+Mike.say("""
+Mike: Everything is go!
+Mike: Powering up the warp gate!
+Mike: Pressure within chamber is rising.
+Mike: Pressure is rising above normal limits.
+Mike: !!!!OH NOOOOOOOO!!!
+""")
+
+Narrator.say("""
+Narrator: BOOOOOOOMMMMM!!!!!!!
+Narrator: Thus, the antimatter reactor detonated,resulting in a dimension rift.
+Narrator: You wake up outside, you look around and see trees. It feels very comforting.
+Narrator: Your calm experience is suddenly shaken by the sound of massive feet walking towards you.
+Narrator: You see a massive spider robot rushing towards you, its to mounted gun charging ot fire.
+
+""")
+Enemy1 = Enemy("Spider Droid", 20)
+Player1 = Player("You", 50)
+Stun = False
+maxhealcooldown = 3
+healcooldown = 0
+
+start_battle(Enemy1, Player1,  Stun, maxhealcooldown, healcooldown)
 
 # SP("The next day.....")
 # SP("Jim: Everything on?!?!", 0.0625)

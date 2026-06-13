@@ -7,7 +7,7 @@ Version 1.0
 import time
 import sys
 import random
-from characterAttacks import figure_out_attacks_
+from character_attacks_database import figure_out_attacks_
 
 power_data = {
     "thundershock": {
