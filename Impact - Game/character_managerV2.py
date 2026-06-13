@@ -35,12 +35,6 @@ except ImportError as e:
     print(f"Warning: CharacterManager could not load random. {e}. Perhaps you have not installed it?")
     quit()
 
-try:
-    from map_managerV2 import MapManager
-    MM = MapManager()
-except ImportError as e:
-    print(f"Warning: CharacterManager could not load MapManager. {e}. Perhaps you have not installed it?")
-    quit()
 
 try:
     from character_attacks_database import figure_out_attacks_
@@ -121,7 +115,7 @@ class Player(CharacterManager):
             attack_info = power_data_list[used_power]
             base_strength = attack_info["strength"]
             attack_damage = random.randint(max(0, base_strength - 5), base_strength + 5)
-            print(f"{self.name} {attack_info["power"]} | Damage dealt: {attack_damage}")
+            print(f"{self.name} {attack_info['power']} | Damage dealt: {attack_damage}")
             time.sleep(1.5)
             target.take_damage(attack_damage, damaged_by=self.name)
         else:
@@ -164,6 +158,10 @@ class CharacterBattle():
         print("\n" + tabulate(status_data, headers=["STAT", "PLAYER", "ENEMY"], tablefmt="fancy_grid") + "\n")
 
 
+    def _local_continue(self):
+        questionary.select("Press enter to continue...", choices=["Continue"]).ask()
+
+
     def gameloopCharacterBattle(self):
         time.sleep(1)
         while self.p1.alive and self.e1.alive:
@@ -177,7 +175,7 @@ class CharacterBattle():
             ).ask()
             if action == "Check Stats":
                 self.display_battle_status()
-                MM.continue_game()
+                self._local_continue()
             else:
                 self.p1.inflict_damage(self.e1, action)
             if not self.e1.alive:

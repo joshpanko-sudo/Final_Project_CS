@@ -26,13 +26,19 @@ except ImportError as e:
     quit()
 
 try:
-    import game_maps
+    import time
 except ImportError as e:
-    print(f"Warning: MapManager could not load maps.py. {e}. Make sure maps.py is within the same directory.")
+    print(f"Warning: MapManager could not load time. {e}. Make sure time is loaded.")
     quit()
 
 try:
-    from dialogue_manager import slow_print_system as SP
+    import game_maps
+except ImportError as e:
+    print(f"Warning: MapManager could not load game_maps.py. {e}. Make sure game_maps.py is within the same directory.")
+    quit()
+
+try:
+    from dialogue_manager import character_say as SP
 except ImportError as e:
     print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
     quit()
@@ -62,7 +68,7 @@ class MapManager():
         self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else False
         self.actual_tutorial = map_data["actual_tutorial"] if map_data.get("actual_tutorial") is not None else False
         if self.actual_tutorial:
-            SP(self.actual_tutorial)
+            SP("", self.actual_tutorial)
             self.continue_game()
         self.find_longest_map_name()
         # print(self.loaded_map_data)
@@ -162,7 +168,40 @@ class MapManager():
             return False
 
     def battle_check(self):
-        enemy_dict = self.loaded_map_data.
+        enemy_dict = self.loaded_map_data.get("enemies", {})
+        current_player_location = (self.player_location["row"], self.player_location["col"])
+
+        if current_player_location in enemy_dict:
+            enemy_info = enemy_dict[current_player_location]
+            print(f"An enemy has been detected. {enemy_info['name']}")
+            time.sleep(1)
+            try:
+                from character_managerV2 import Player, Enemy, CharacterBattle
+                player = Player("Player", character_health=150)
+                player.description("A scientist who has been warped")
+                enemy = Enemy(
+                    character_name = enemy_info["name"],
+                    character_health=enemy_info["health"],
+                    max_character_health=enemy_info.get("max_health", 100)
+                )
+                enemy.description(enemy_info.get("description", "Hostile robot"))
+                battle = CharacterBattle(player, enemy)
+                battle.gameloopCharacterBattle()
+                if not enemy.alive:
+                    print(f"{enemy_info['name']} has been cleared")
+                    del enemy_dict[current_player_location]
+                    self.continue_game()
+                else:
+                    print(f"\033[91m[Error] You were defeated or fled from battle.\033[0m")
+                    quit()
+                return True
+            except ImportError as e:
+                print(f"Warning: MapManager could not initiate battle. {e}. Please ensure character_managerV2 file exists.")
+                quit()
+        else:
+            print("There are no enemies here to fight.")
+            time.sleep(1)
+        return False
 
 
     def continue_game(self):
@@ -195,7 +234,7 @@ class MapManager():
             case "f":
                 self.ladder_check_teleport()
             case "q":
-                
+                self.battle_check()
             case "?":
                 if self.tutorial_data:
                     SP(self.tutorial_data)
@@ -224,17 +263,18 @@ class MapManager():
                 print("Wrong Move")
         else:
                 self.move_player(command)
+                
        
             
 
 
-# mm = MapManager()
-# mm.load_map(game_maps.tutorial_spawn, True)
-# mm.update_map()
+mm = MapManager()
+mm.load_map(game_maps.battle_1, True)
+mm.update_map()
 
 # # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
-# while True:
-#     mm.gameloopMapManager()
+while True:
+    mm.gameloopMapManager()
 
 
 

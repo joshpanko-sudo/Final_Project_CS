@@ -36,7 +36,7 @@ battle_1 = {
     "maps":
         [
             ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "Path"],
-            ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "----Spider Robot----"],
+            ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "Path"],
             ["Path", "Path", "Path", "Path", "Path", "Path", "Path", "Path"],
         ],
 
