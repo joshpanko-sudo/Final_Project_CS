@@ -52,11 +52,38 @@ class CharacterManager:
         self.alive = True # Character is alive and not defeated
         self.character_description = "" # Info about character
 
+
     def __str__(self):
+        '''
+        Retuns the character's name
+        '''
         return f"Character: {self.name}"
     
+
     def description(self, character_description: str, print_description: bool = False):
         self.character_description = character_description or "No description yet"
         if print_description:
             print(self.character_description)
         return None
+    
+
+    def take_damage(self, amount_of_damage:float, damaged_by:str = "Unknown"):
+        # Take health away from temporary if that exists
+        if self.temporary_max_health > 0:
+            if amount_of_damage <= self.temporary_max_health:
+                self.temporary_max_health -= amount_of_damage
+                amount_of_damage = 0
+            else:
+                # Damage is larger than temporary health, take away all temp and subtract that from damage
+                amount_of_damage -= self.temporary_max_health
+                self.temporary_max_health = 0
+        if self.health > 0:
+            self.health -= amount_of_damage
+        if self.health <= 0:
+            self.health = 0
+            self.alive = False
+            print(f"{self.name} was defeated") if damaged_by == "Unknown" else print(f"{self.name} was defeated by {damaged_by}.")
+            time.sleep(1)
+        else:
+            print(f"{self.name} took damage. Current health {self.health}") if damaged_by == "Unknown" else print(f"{self.name} took damage from {damaged_by}. Current health: {self.health}")
+            time.sleep(1)
