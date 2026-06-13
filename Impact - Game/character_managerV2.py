@@ -112,3 +112,30 @@ class Player(CharacterManager):
             base_strength = attack_info["strength"]
             attack_damage = random.randint(max(0, base_strength - 5), base_strength + 5)
             print(f"{self.name} {attack_info["power"]} | Damage dealt: {attack_damage}")
+            time.sleep(1.5)
+            target.take_damage(attack_damage, damaged_by=self.name)
+        else:
+            print(f"Warning: {self.name} does not know how to use {used_power}")
+
+class Enemy(CharacterManager):
+    def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
+        super().__init__(character_name, character_health, max_character_health)
+        self.power = 2
+
+    def inflict_damage(self, target: CharacterManager, used_power: str):
+        figure_out_attacks_(self.name)
+        if used_power in power_data_list:
+            attack_info = power_data_list[used_power]
+            base_strength = attack_info["strength"]
+            attack_damage = random.randint(max(0, base_strength - 5), base_strength + 2)
+            print(f"{self.name} {attack_info["power"]} | Damage dealt: {attack_damage}")
+            time.sleep(1.5)
+            target.take_damage(attack_damage, damaged_by=self.name)
+        else:
+            print(f"Warning: {self.name} does not know how to use {used_power}")
+
+
+class CharacterBattle():
+    def __init__(self, p1: Player, e1: Enemy) -> None:
+        pass
+def print_battle(p1: Player)
