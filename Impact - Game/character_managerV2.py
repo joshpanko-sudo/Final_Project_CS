@@ -107,10 +107,12 @@ class CharacterManager:
         else:
             self.health = total_health
 
+
 class Player(CharacterManager):
     def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
         super().__init__(character_name, character_health, max_character_health)
         self.power = 2
+
 
     def inflict_damage(self, target: CharacterManager, used_power: str):
         figure_out_attacks_(self.name)
@@ -124,10 +126,12 @@ class Player(CharacterManager):
         else:
             print(f"Warning: {self.name} does not know how to use {used_power}")
 
+
 class Enemy(CharacterManager):
     def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
         super().__init__(character_name, character_health, max_character_health)
         self.power = 2
+
 
     def inflict_damage(self, target: CharacterManager, used_power: str):
         figure_out_attacks_(self.name)
@@ -142,12 +146,11 @@ class Enemy(CharacterManager):
             print(f"Warning: {self.name} does not know how to use {used_power}")
 
 
-
-
 class CharacterBattle():
     def __init__(self, p1: Player, e1: Enemy) -> None:
         self.p1 = p1
         self.e1 = e1
+
 
     def display_battle_status(self):
         status_data = [
@@ -158,6 +161,7 @@ class CharacterBattle():
             ["INFO", self.p1.character_description, self.e1.character_description],
         ]
         print("\n" + tabulate(status_data, headers=["STAT", "PLAYER", "ENEMY"], tablefmt="fancy_grid") + "\n")
+
 
     def gameloopCharacterBattle(self):
         time.sleep(1)
@@ -176,6 +180,16 @@ class CharacterBattle():
                 self.p1.inflict_damage(self.e1, action)
             if not self.e1.alive:
                 break
+            print(f"{self.e1.name}'s turn")
+            time.sleep(1)
+            figure_out_attacks_(self.e1.name)
+            enemy_choices = list(power_data_list.keys())
+            if enemy_choices:
+                enemy_action = random.choice(enemy_choices)
+                self.e1.inflict_damage(self.p1, enemy_action)
+            else:
+                print(f"Warning: CharacterBattle could not fetch moves for {self.e1.name}")
+            time.sleep(1)
 
-            print()
+
 
