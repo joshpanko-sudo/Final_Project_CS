@@ -97,6 +97,7 @@ def main():
 
     
 def start_story():
+    pass
     
     
 
