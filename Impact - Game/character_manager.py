@@ -24,6 +24,12 @@ except ImportError as e:
     print(f"Warning: Characteranager could not load time. {e}. Perhaps you have not installed it?")
     quit()
 
+try:
+    from character_attacks_database import figure_out_attacks_
+except ImportError as e:
+    print(f"Warning: CharacterManager could not load character_attacks_database.pt\y. {e}. Perhaps you have not installed it?")
+    quit()
+
 
 
 class CharacterManager():
@@ -82,13 +88,24 @@ class CharacterManager():
         if not self.alive:
             print(f"{self.name} is no longer alive and cannot be healed.")
             return
-        totel_health = self.health + healing_amount
-        if totel_health > self.max_health:
+        total_health = self.health + healing_amount
+        if total_health > self.max_health:
             overflow = total_health - self.max_health
             self.temporary_max_health += overflow
             self.health = self.max_health
         else:
             self.health = total_health
+
+
+class Player(CharacterManager):
+    def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
+        super().__init__(character_name, character_health, max_character_health)
+        self.power = 2
+        
+
+    def inflict_damage(self, target:str, power:int):
+        pass
+        
 
 
         
