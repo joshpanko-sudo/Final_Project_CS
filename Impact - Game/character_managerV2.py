@@ -36,6 +36,13 @@ except ImportError as e:
     quit()
 
 try:
+    from map_managerV2 import MapManager
+    MM = MapManager()
+except ImportError as e:
+    print(f"Warning: CharacterManager could not load MapManager. {e}. Perhaps you have not installed it?")
+    quit()
+
+try:
     from character_attacks_database import figure_out_attacks_
     from character_attacks_database import power_data_list
 except ImportError as e:
@@ -135,7 +142,40 @@ class Enemy(CharacterManager):
             print(f"Warning: {self.name} does not know how to use {used_power}")
 
 
+
+
 class CharacterBattle():
     def __init__(self, p1: Player, e1: Enemy) -> None:
-        pass
-def print_battle(p1: Player)
+        self.p1 = p1
+        self.e1 = e1
+
+    def display_battle_status(self):
+        status_data = [
+            ["NAME", self.p1.name, self.e1.name],
+            ["HEALTH", f"{self.p1.health} / {self.p1.max_health}",f"{self.e1.health}/{self.e1.max_health}"],
+            ["SHIELD (TEMP HP)", self.p1.temporary_max_health, self.e1.temporary_max_health],
+            ["STATUS", "Alive" if self.p1.alive else "Defeated", "Alive" if self.e1.alive else "Defeated"],
+            ["INFO", self.p1.character_description, self.e1.character_description],
+        ]
+        print("\n" + tabulate(status_data, headers=["STAT", "PLAYER", "ENEMY"], tablefmt="fancy_grid") + "\n")
+
+    def gameloopCharacterBattle(self):
+        time.sleep(1)
+        while self.p1.alive and self.e1.alive:
+            self.display_battle_status()
+            figure_out_attacks_(self.p1.name)
+            choices = list(power_data_list.keys()) + ["Check Stats"]
+            action = questionary.select(
+                f"Pick action for {self.p1.name}:",
+                choices=choices
+            ).ask()
+            if action == "Check Stats":
+                self.display_battle_status()
+                MM.continue_game()
+            else:
+                self.p1.inflict_damage(self.e1, action)
+            if not self.e1.alive:
+                break
+
+            print()
+
