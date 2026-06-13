@@ -86,6 +86,9 @@ class MapManager():
         player_highlight = (rows == self.player_location["row"] and columns == self.player_location["col"]) #Check if player is occupying tile
         if check_tile is None: # Empty tile, no location on it
             return "█" * self.longest_map_name # White square blocked off
+        enemy_dict = self.loaded_map_data.get("enemies", {})
+        if (rows, columns) in enemy_dict and not player_highlight:
+            return f"\033[91m[{check_tile[0]}!]\033[0m"
         if player_highlight: #If is_player is true, highlight the tile and add brackets to represent player is there
         # player_tile = f"[{check_tile}]" #Puts brackets around player occupied tile
             player_tile = f"\033[7m{check_tile}\033[0m" # Invert the tile to represent player
@@ -93,7 +96,8 @@ class MapManager():
             
             player_tile = f"{check_tile}" #Player is not on tile, no modifications
         return f"{player_tile}" # Return tiles
-    
+
+
     def update_map(self):
         '''
         Updates the map after modifications or the player moving
@@ -157,6 +161,10 @@ class MapManager():
                 
             return False
 
+    def battle_check(self):
+        enemy_dict = self.loaded_map_data.
+
+
     def continue_game(self):
         game_continue = questionary.select("Continue?", choices=["Yes"]).ask()
         match game_continue:
@@ -166,8 +174,6 @@ class MapManager():
                 print("Warning: MapManager cannot continue game. Fatal Error")
                 quit()
 
-    def battle(self):
-        
 
     def move_player(self, command): # Move the player
         '''
@@ -189,7 +195,7 @@ class MapManager():
             case "f":
                 self.ladder_check_teleport()
             case "q":
-                start
+                
             case "?":
                 if self.tutorial_data:
                     SP(self.tutorial_data)

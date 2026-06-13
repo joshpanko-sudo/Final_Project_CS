@@ -49,6 +49,7 @@ except ImportError as e:
     print(f"Warning: CharacterManager could not load character_attacks_database.py. {e}. Perhaps you have not installed it?")
     quit()
 
+
 class CharacterManager:
     # Defaults the max character health to 100
     def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
@@ -166,6 +167,7 @@ class CharacterBattle():
     def gameloopCharacterBattle(self):
         time.sleep(1)
         while self.p1.alive and self.e1.alive:
+            print("\033[2J\033[H")
             self.display_battle_status()
             figure_out_attacks_(self.p1.name)
             choices = list(power_data_list.keys()) + ["Check Stats"]
@@ -190,6 +192,25 @@ class CharacterBattle():
             else:
                 print(f"Warning: CharacterBattle could not fetch moves for {self.e1.name}")
             time.sleep(1)
+
+        print("Battle has ended.")
+        if self.p1.alive:
+            print(f"{self.p1.name} has won the battle")
+        else:
+            print(f"{self.p1.name} has lost the battle to {self.e1.name}")
+
+
+if __name__ == "__main__":
+    # Setup Entities
+    hero = Player("Player", character_health=100)
+    hero.description("The legendary chosen warrior.")
+    
+    villain = Enemy("Spider Droid", character_health=80)
+    villain.description("An engineered mechanical nightmare.")
+
+    # Match Start
+    battle = CharacterBattle(hero, villain)
+    battle.gameloopCharacterBattle()
 
 
 

@@ -43,11 +43,32 @@ battle_1 = {
     "teleport":
     {
 
-    }
+    },
 
     "enter_teleport":
+    {
+
+    },
+
+    "enemies": {
+        (1, 7): {
+            "name": "Spider Droid",
+            "health": 80,
+            "max_health": 100,
+            "description": "An engineered mechanical nightmare."
+        },
+        (0, 4): {
+            "name": "Helper Robot",
+            "health": 50,
+            "max_health": 50,
+            "description": "A malfunctioning maintenance unit."
+        }
+    },
+
 
 }
+
+
 
 
 
