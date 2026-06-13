@@ -100,4 +100,12 @@ class CharacterManager:
         else:
             self.health = total_health
 
+class Player(CharacterManager):
+    def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
+        super().__init__(character_name, character_health, max_character_health)
+        self.power = 2
+
+    def inflict_damage(self, target: CharacterManager, used_power: str):
+        figure_out_attacks_(self.name)
+        if used_power in power_data_list:
             
