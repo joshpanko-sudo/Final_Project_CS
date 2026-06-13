@@ -235,12 +235,12 @@ class MapManager():
                 self.ladder_check_teleport()
             case "q":
                 self.battle_check()
+                return
             case "?":
                 if self.tutorial_data:
                     SP(self.tutorial_data)
                     self.continue_game()
-                else:
-                    pass
+                return
              
             case _:
                 print("Warning: MapManager cannot move player. Fatal Error")
