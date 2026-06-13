@@ -56,20 +56,6 @@ class character_say():
             purged_chunk = chunk.strip()
             if purged_chunk:
                 time.sleep(self.delay) # Delay the print
-                slow_print_system.slow_print(purged_chunk, 0.125)
-                
+                slow_print_system.slow_print(purged_chunk, 0)
 
-
-
-
-
-
-
-
-# akira = character_say("Akira")
-
-# akira.say("""
-# You finally arrived.|<><>|
-# I've been waiting for you.|
-# ...Did you miss me?
-# """)
+# Akira...

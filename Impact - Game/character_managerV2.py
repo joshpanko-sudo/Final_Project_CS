@@ -106,7 +106,7 @@ class CharacterManager:
 class Player(CharacterManager):
     def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
         super().__init__(character_name, character_health, max_character_health)
-        self.power = 2
+        self.power = 5
 
 
     def inflict_damage(self, target: CharacterManager, used_power: str):
@@ -160,6 +160,7 @@ class CharacterBattle():
 
     def _local_continue(self):
         questionary.select("Press enter to continue...", choices=["Continue"]).ask()
+        return
 
 
     def gameloopCharacterBattle(self):
@@ -168,18 +169,20 @@ class CharacterBattle():
             print("\033[2J\033[H")
             self.display_battle_status()
             figure_out_attacks_(self.p1.name)
-            choices = list(power_data_list.keys()) + ["Check Stats"]
-            action = questionary.select(
-                f"Pick action for {self.p1.name}:",
-                choices=choices
-            ).ask()
-            if action == "Check Stats":
-                self.display_battle_status()
-                self._local_continue()
-            else:
-                self.p1.inflict_damage(self.e1, action)
+            while True:
+                choices = list(power_data_list.keys()) + ["Check Stats"]
+                action = questionary.select(
+                    f"Pick action for {self.p1.name}:",
+                    choices=choices
+                ).ask()
+                if action == "Check Stats":
+                    self.display_battle_status()
+                    self._local_continue()
+                else:
+                    self.p1.inflict_damage(self.e1, action)
+                    break
             if not self.e1.alive:
-                break
+                    break
             print(f"{self.e1.name}'s turn")
             time.sleep(1)
             figure_out_attacks_(self.e1.name)
@@ -198,17 +201,17 @@ class CharacterBattle():
             print(f"{self.p1.name} has lost the battle to {self.e1.name}")
 
 
-if __name__ == "__main__":
-    # Setup Entities
-    hero = Player("Player", character_health=100)
-    hero.description("The legendary chosen warrior.")
+# if __name__ == "__main__":
+#     # Setup Entities
+#     hero = Player("Player", character_health=100)
+#     hero.description("The legendary chosen warrior.")
     
-    villain = Enemy("Spider Droid", character_health=80)
-    villain.description("An engineered mechanical nightmare.")
+#     villain = Enemy("Spider Droid", character_health=80)
+#     villain.description("An engineered mechanical nightmare.")
 
-    # Match Start
-    battle = CharacterBattle(hero, villain)
-    battle.gameloopCharacterBattle()
+#     # Match Start
+#     battle = CharacterBattle(hero, villain)
+#     battle.gameloopCharacterBattle()
 
 
 
