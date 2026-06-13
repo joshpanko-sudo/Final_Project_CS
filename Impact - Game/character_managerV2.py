@@ -87,3 +87,17 @@ class CharacterManager:
         else:
             print(f"{self.name} took damage. Current health {self.health}") if damaged_by == "Unknown" else print(f"{self.name} took damage from {damaged_by}. Current health: {self.health}")
             time.sleep(1)
+
+    def heal(self, healing_amount:float, healing_item: str = "Unknown"):
+        if not self.alive:
+            print(f"{self.name} is no longer alive and cannot be healed.")
+            return
+        total_health = self.health + healing_amount
+        if total_health > self.max_health:
+            overflow_health = total_health - self.max_health
+            self.temporary_max_health += overflow_health
+            self.health = self.max_health
+        else:
+            self.health = total_health
+
+            
