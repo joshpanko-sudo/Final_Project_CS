@@ -49,7 +49,7 @@ def safe_mode():
 
 
 try:
-        import questionary
+    import questionary
 except ImportError:
         game_warnings("Import Error")
         safe_mode()
