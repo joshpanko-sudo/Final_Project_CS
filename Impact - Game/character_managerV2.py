@@ -108,4 +108,7 @@ class Player(CharacterManager):
     def inflict_damage(self, target: CharacterManager, used_power: str):
         figure_out_attacks_(self.name)
         if used_power in power_data_list:
-            
+            attack_info = power_data_list[used_power]
+            base_strength = attack_info["strength"]
+            attack_damage = random.randint(max(0, base_strength - 5), base_strength + 5)
+            print(f"{self.name} {attack_info["power"]} | Damage dealt: {attack_damage}")
