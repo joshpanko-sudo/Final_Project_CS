@@ -64,14 +64,14 @@ battle_1 = {
     "enemies": {
         (1, 7): {
             "name": "Spider Droid",
-            "health": 80,
+            "health": 40,
             "max_health": 100,
             "description": "A spider like robot."
         },
         (0, 4): {
             "name": "Spider Droid",
-            "health": 60,
-            "max_health": 70,
+            "health": 40,
+            "max_health": 80,
             "description": "A spider like robot."
         }
     },
@@ -189,19 +189,19 @@ tutorial_level = {
       "enemies": {
         (6, 2): {
             "name": "Spider Droid",
-            "health": 80,
+            "health": 20,
             "max_health": 100,
             "description": "A spider like robot."
         },
         (8, 2): {
             "name": "Spider Droid",
-            "health": 60,
+            "health": 30,
             "max_health": 70,
             "description": "A spider like robot."
         },
           (7, 1): {
             "name": "Spider Droid",
-            "health": 60,
+            "health": 40,
             "max_health": 70,
             "description": "A spider like robot."
         }
