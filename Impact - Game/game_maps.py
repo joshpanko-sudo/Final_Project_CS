@@ -150,19 +150,50 @@ tutorial_level = {
     "ladder_teleport":
         {
 
+        },
+    
+    "items": {
+        (7, 2): {
+            "name": "Warp key",
+            "amount": 1,
+            "max_stack": 1,
+            "exit_on_pickup": True
         }
+    },
+
+      "enemies": {
+        (6, 2): {
+            "name": "Spider Droid",
+            "health": 80,
+            "max_health": 100,
+            "description": "A spider like robot."
+        },
+        (8, 2): {
+            "name": "Spider Droid",
+            "health": 60,
+            "max_health": 70,
+            "description": "A spider like robot."
+        },
+          (7, 1): {
+            "name": "Spider Droid",
+            "health": 60,
+            "max_health": 70,
+            "description": "A spider like robot."
+        }
+    },
+
 }
 
 tutorial_House = {
     "location_name": "Tutorial House",
 
-    "default_player_location": {"row":1, "col":0},
+    "default_player_location": {"row":0, "col":1},
 
     "maps":
         [
-            [None, "Viewing Platform", None],
             [None, "Path", None],
-            [None, "House", None],
+            [None, "Path", None],
+            [None, "Path", None],
         ],
     
     "teleport": 
@@ -173,12 +204,23 @@ tutorial_House = {
 
     "enter_teleport":
         {
-            "Tutorial Level to Tutorial House": {"start_coord": (2,1),"target_map": lambda: basement,"end_coord": (0,0)},
+            # "Tutorial Level to Tutorial House": {"start_coord": (2,1),"target_map": lambda: basement,"end_coord": (0,0)},
         },
 
     "ladder_teleport":
         {
             # "Market ~> Second market floor": {"start_coord": (4,3),"target_map": lambda: market_second_floor,"end_coord": (4,3)},
             # "Market ~> Market Basement": {"start_coord": (4,3),"target_map": lambda: basement,"end_coord": (4,3)},
+        },
+
+    "enemies": {
+        (2, 1): {
+            "name": "Helper Robot",
+            "health": 150,
+            "max_health": 150,
+            "description": "The final boss."
         }
+    }
+    
+
 }

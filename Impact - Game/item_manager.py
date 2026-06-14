@@ -183,15 +183,15 @@ class ItemManager():
 
 
 
-backpack = ItemManager("Allen's Inventory")
-craft = CraftManager()
-backpack.set_capacity(4)
-# backpack.add_item("Banana", 10)
-backpack.add_item("Apple", 20, 5)
-backpack.add_item("Gold", 8, 1)
-backpack.see_item("Apple")
-while True:
-    backpack.gameloopItemManager()
+# backpack = ItemManager("Allen's Inventory")
+# craft = CraftManager()
+# backpack.set_capacity(4)
+# # backpack.add_item("Banana", 10)
+# backpack.add_item("Apple", 20, 5)
+# backpack.add_item("Gold", 8, 1)
+# backpack.see_item("Apple")
+# while True:
+#     backpack.gameloopItemManager()
 
 
 # inventory = [

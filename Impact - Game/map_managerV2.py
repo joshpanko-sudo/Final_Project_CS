@@ -44,6 +44,14 @@ except ImportError as e:
     print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
     quit()
 
+try:
+    from item_manager import ItemManager
+    IM = ItemManager("Player Inventory")
+    IM.set_capacity(5)
+except ImportError as e:
+    print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
+    quit()
+
 
 
 class MapManager():
@@ -96,6 +104,9 @@ class MapManager():
         enemy_dict = self.loaded_map_data.get("enemies", {})
         if (rows, columns) in enemy_dict and not player_highlight:
             return f"\033[91m[{check_tile[0]}!]\033[0m"
+        item_dict = self.loaded_map_data.get("items", {})
+        if (rows, columns) in item_dict and not player_highlight:
+            return f"\033[94m[{check_tile[0]}?]\033[0m"
         if player_highlight: #If is_player is true, highlight the tile and add brackets to represent player is there
         # player_tile = f"[{check_tile}]" #Puts brackets around player occupied tile
             player_tile = f"\033[7m{check_tile}\033[0m" # Invert the tile to represent player
@@ -198,7 +209,7 @@ class MapManager():
                     self.continue_game()
                 else:
                     print(f"\033[91m[Error] You were defeated or fled from battle.\033[0m")
-                    quit()
+                    # quit()
                 return True
             except ImportError as e:
                 print(f"Warning: MapManager could not initiate battle. {e}. Please ensure character_managerV2 file exists.")
@@ -208,6 +219,30 @@ class MapManager():
             time.sleep(1)
         return False
 
+    def item_check(self):
+        item_dict = self.loaded_map_data.get("items", {})
+        current_player_location = (self.player_location["row"], self.player_location["col"])
+        if current_player_location in item_dict:
+            item_info = item_dict[current_player_location]
+            print(f"\033[94m[Action] You found something on the ground: {item_info['name']}!\033[0m")
+            time.sleep(1)
+            try:
+                IM.add_item(
+                    item_name=item_info["name"], 
+                    item_amount=item_info["amount"], 
+                    max_stack=item_info["max_stack"]
+                )
+                del item_dict[current_player_location]
+                if item_info.get("exit_on_pickup", False):
+                    print(f"\033[92m[Working] Objective complete! Leaving location...\033[0m")
+                    time.sleep(1.5)
+                    return "EXIT_KEY_FOUND"
+                self.continue_game()
+                return True
+            except Exception as e:
+                print(f"\033[91mWarning: MapManager could not add item. {e}. Please ensure inventory system is installed.\033[0m")
+                quit()
+        return False
 
     def continue_game(self):
         game_continue = questionary.select("Continue?", choices=["Yes"]).ask()
@@ -242,6 +277,9 @@ class MapManager():
                 status = self.battle_check()
                 if status == "CLEARED":
                     return "CLEARED"
+            case "r":
+                IM.see_inventory()
+                self.continue_game()
 
                 return
             case "?":
@@ -259,6 +297,7 @@ class MapManager():
             if self.active_map[new_row][new_col] is not None:
                 self.player_location["row"] = new_row
                 self.player_location["col"] = new_col
+                return self.item_check()
 
     def gameloopMapManager(self):
         '''
@@ -267,11 +306,11 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
-        enemy_dict = self.loaded_map_data.get("enemies", {})
-        if not enemy_dict: 
-            print("\033[92m[Map Cleared!]\033[0m")
+        enemy_dict = self.loaded_map_data.get("enemies", None)
+        if enemy_dict is not None and not enemy_dict: 
+            print("\033[92m[Map Cleared!]\033[0m All enemies have been cleared.")
             return False
-        while (command := input("W, A, S, D, E, F, Q, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?", "q"}:
+        while (command := input("W, A, S, D, E, F, Q, R, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?", "q", "r"}:
                 print("Wrong Move")
         else:
             result = self.move_player(command)
