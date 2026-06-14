@@ -385,16 +385,16 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: \
-        {self.active_map[self.player_location['row']][
-            self.player_location['col']]}")
+{self.active_map[self.player_location['row']][
+self.player_location['col']]}")
         enemy_dict = self.loaded_map_data.get("enemies", None)
         if enemy_dict is not None and not enemy_dict: 
             print("\033[92m[Map Cleared!]\033[0m All\
              enemies have been cleared.")
             return False
         while (command := input("W, A, S, D, E, F, Q, \
-        R, ?: ").strip().lower()) not in {"w", "a", "s", "\
-        d", "e", "f", "?", "q", "r"}:
+R, ?: ").strip().lower()) not in {"w", "a", "s", "\
+d", "e", "f", "?", "q", "r"}:
                 print("Wrong Move")
         else:
             result = self.move_player(command)

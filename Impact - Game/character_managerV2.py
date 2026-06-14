@@ -130,10 +130,10 @@ class CharacterManager:
         else:
             if damaged_by == "Unknown":
                 print(f"{self.name} took damage. \
-                Current health {self.health}") 
+Current health {self.health}") 
             else: 
                 print(f"{self.name} took damage \
-                from {damaged_by}. Current health: {self.health}")
+from {damaged_by}. Current health: {self.health}")
             time.sleep(1)
 
 
@@ -174,7 +174,7 @@ class Player(CharacterManager):
             attack_damage = random.randint(max(0, base_strength - 5), 
                                            base_strength + 5)
             print(f"{self.name} {attack_info['power']} | \
-            Damage dealt: {attack_damage}")
+Damage dealt: {attack_damage}")
             time.sleep(1.5)
             target.take_damage(attack_damage, damaged_by=self.name)
         else:
@@ -201,12 +201,12 @@ class Enemy(CharacterManager):
             attack_damage = random.randint(max(0, base_strength - 5), 
                                            base_strength + 2)
             print(f"{self.name} {attack_info["power"]} | \
-            Damage dealt: {attack_damage}")
+Damage dealt: {attack_damage}")
             time.sleep(1.5)
             target.take_damage(attack_damage, damaged_by=self.name)
         else:
             print(f"Warning: {self.name} does not know how to use \
-            {used_power}")
+{used_power}")
 
 
 class CharacterBattle():
