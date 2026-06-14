@@ -1,7 +1,20 @@
+# -----------------------------------------------------------------------------
+# Created By: Josh Panko
+# Created Date: 05/25/2026
+# Version 2 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+A system to find the power moves of characters and do things with it.
+"""
+# -----------------------------------------------------------------------------
+
 power_data_list = {}
 
 
 def figure_out_attacks_(character: str):
+    """
+    Input the character, gives out the moves and actions of said character.
+    """
     power_data_list.clear()
 
     if (character == "Spider Droid"):

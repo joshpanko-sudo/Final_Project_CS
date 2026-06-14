@@ -1,3 +1,12 @@
+# -----------------------------------------------------------------------------
+# Created By: Allen Feng & Josh Panko
+# Created Date: 05/25/2026
+# Version 2.0 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+Dialogue printing system
+"""
+# -----------------------------------------------------------------------------
 '''
 Legend:
 - Name: DialogueManager
@@ -8,22 +17,23 @@ Highlight Codes:
 - Blue: Action being done
 
 Error template:
-- Warning: DialogueManager could not {Error Here}. {e}. Please {Possible Solution Here}
+- Warning: DialogueManager could not {Error Here}. {e}. Please 
+{Possible Solution Here}
 
 
 '''
 try:
     import sys
 except ImportError as e:
-    print(
-        f"Warning: DialogueManager could not load sys. {e}. Perhaps you have not installed it?")
+    print(f"Warning: DialogueManager could not load sys. {e}. Perhaps you\
+    have not installed it?")
     quit()
 
 try:
     import time
 except ImportError as e:
-    print(
-        f"Warning: DialogueManager could not load time. {e}. Perhaps you have not installed it?")
+    print(f"Warning: DialogueManager could not load time. {e}. \
+    Perhaps you have not installed it?")
     quit()
 
 
@@ -43,21 +53,24 @@ class slow_print_system():
 
 class character_say():
     '''
-    A more advanced systen for printing out character dialogue. You can specify character name and what they should say
-    The printing system uses the slow print above and lines print out with a delay that defaults to 0.75
+    A more advanced systen for printing out character dialogue. 
+    You can specify character name and what they should say
+    The printing system uses the slow print above and lines print 
+    out with a delay that defaults to 0.75
     '''
 
     def __init__(self, name: str, delay=0.75):
         self.name = name  # Character name
         self.delay = delay  # Line print delay
 
-    # Special character that allows for one long string to be broken up and
+
+    # Special character that allows for one long string to be 
+    # broken up and
     # print out seperatly as lines
     def say(self, text: str, special_character="|<><>|"):
         print(f"{self.name}")
-
-        text_chunks = text.split(special_character)  # Splits the string
-
+        # Splits the string
+        text_chunks = text.split(special_character)  
         for chunk in text_chunks:
             purged_chunk = chunk.strip()
             if purged_chunk:

@@ -1,3 +1,13 @@
+# -----------------------------------------------------------------------------
+# Created By: Allen Feng
+# Created Date: 05/20/2026
+# Version 2.8 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+A manager to create characters and use them for things.
+"""
+# -----------------------------------------------------------------------------
+
 """
 Legend:
 - Name: CharacterManager
@@ -8,31 +18,36 @@ Highlight Codes:
 - Blue: Action being done
 
 Error template:
-- Warning: CharacterManager could not {Error Here}. {e}. Please {Possible Solution Here}
+- Warning: CharacterManager could not {Error Here}. {e}. Please
+{Possible Solution Here}
 """
 
 try:
     from tabulate import tabulate
 except ImportError as e:
-    print(f"Warning: CharacterManager could not load tabulate. {e}. Perhaps you have not installed it?")
+    print(f"Warning: CharacterManager could not load tabulate. {e}. \
+Perhaps you have not installed it?")
     quit()
 
 try:
     import questionary
 except ImportError as e:
-    print(f"Warning: CharacterManager could not load questionary. {e}. Please run 'pip install questionary'.")
+    print(f"Warning: CharacterManager could not load questionary. {e}. \
+Please run 'pip install questionary'.")
     quit()
 
 try:
     import time
 except ImportError as e:
-    print(f"Warning: CharacterManager could not load time. {e}. Perhaps you have not installed it?")
+    print(f"Warning: CharacterManager could not load time. {e}. \
+Perhaps you have not installed it?")
     quit()
 
 try:
     import random
 except ImportError as e:
-    print(f"Warning: CharacterManager could not load random. {e}. Perhaps you have not installed it?")
+    print(f"Warning: CharacterManager could not load random. {e}. \
+Perhaps you have not installed it?")
     quit()
 
 
@@ -40,22 +55,31 @@ try:
     from character_attacks_database import figure_out_attacks_
     from character_attacks_database import power_data_list
 except ImportError as e:
-    print(f"Warning: CharacterManager could not load character_attacks_database.py. {e}. Perhaps you have not installed it?")
+    print(f"Warning: CharacterManager could not load \
+character_attacks_database.py. {e}. Perhaps you have not \
+installed it?")
     quit()
 
 
 class CharacterManager:
     # Defaults the max character health to 100
-    def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
+    def __init__(self, character_name: str, character_health: float, 
+        max_character_health: float = 100) -> None:
         """
         Start the class
         """
-        self.name = character_name # The name of the character
-        self.health = character_health # Current character health (Does not have to be max)
-        self.max_health = max_character_health # Value cannot change, maximum health a character can have
-        self.temporary_max_health = 0 # Allows the character health to go above the max
-        self.alive = True # Character is alive and not defeated
-        self.character_description = "" # Info about character
+        # The name of the character
+        self.name = character_name 
+        # Current character health (Does not have to be max)
+        self.health = character_health 
+        # Value cannot change, maximum health a character can have
+        self.max_health = max_character_health 
+        # Allows the character health to go above the max
+        self.temporary_max_health = 0 
+        # Character is alive and not defeated
+        self.alive = True 
+        # Info about character
+        self.character_description = "" 
 
 
     def __str__(self):
@@ -65,11 +89,14 @@ class CharacterManager:
         return f"Character: {self.name}"
     
 
-    def description(self, character_description: str, print_description: bool = False):
+    def description(self, character_description: str, 
+                    print_description: bool = False):
         """
         Player description
         """
-        self.character_description = character_description or "No description yet"
+        self.character_description = (
+            character_description or "No description yet"
+        )
         if print_description:
             print(self.character_description)
         return None
@@ -85,7 +112,8 @@ class CharacterManager:
                 self.temporary_max_health -= amount_of_damage
                 amount_of_damage = 0
             else:
-                # Damage is larger than temporary health, take away all temp and subtract that from damage
+                # Damage is larger than temporary health, take away all
+                # temp and subtract that from damage
                 amount_of_damage -= self.temporary_max_health
                 self.temporary_max_health = 0
         if self.health > 0:
@@ -93,10 +121,19 @@ class CharacterManager:
         if self.health <= 0:
             self.health = 0
             self.alive = False
-            print(f"{self.name} was defeated") if damaged_by == "Unknown" else print(f"{self.name} was defeated by {damaged_by}.")
+            print(f"{self.name} was defeated") 
+            if damaged_by == "Unknown":
+                print(f"{self.name} was defeated") 
+            else: 
+                print(f"{self.name} was defeated by {damaged_by}.")
             time.sleep(1)
         else:
-            print(f"{self.name} took damage. Current health {self.health}") if damaged_by == "Unknown" else print(f"{self.name} took damage from {damaged_by}. Current health: {self.health}")
+            if damaged_by == "Unknown":
+                print(f"{self.name} took damage. \
+                Current health {self.health}") 
+            else: 
+                print(f"{self.name} took damage \
+                from {damaged_by}. Current health: {self.health}")
             time.sleep(1)
 
 
@@ -117,7 +154,8 @@ class CharacterManager:
 
 
 class Player(CharacterManager):
-    def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
+    def __init__(self, character_name: str, character_health: float, 
+                 max_character_health: float = 100) -> None:
         """
         Start the class
         """
@@ -133,17 +171,22 @@ class Player(CharacterManager):
         if used_power in power_data_list:
             attack_info = power_data_list[used_power]
             base_strength = attack_info["strength"]
-            attack_damage = random.randint(max(0, base_strength - 5), base_strength + 5)
-            print(f"{self.name} {attack_info['power']} | Damage dealt: {attack_damage}")
+            attack_damage = random.randint(max(0, base_strength - 5), 
+                                           base_strength + 5)
+            print(f"{self.name} {attack_info['power']} | \
+            Damage dealt: {attack_damage}")
             time.sleep(1.5)
             target.take_damage(attack_damage, damaged_by=self.name)
         else:
-            print(f"Warning: {self.name} does not know how to use {used_power}")
+            print(f"Warning: {self.name} does not know how to use \
+            {used_power}")
 
 
 class Enemy(CharacterManager):
-    def __init__(self, character_name: str, character_health: float, max_character_health: float = 100) -> None:
-        super().__init__(character_name, character_health, max_character_health)
+    def __init__(self, character_name: str, character_health: float, 
+                 max_character_health: float = 100) -> None:
+        super().__init__(character_name, character_health, 
+                         max_character_health)
         self.power = 2
 
 
@@ -155,12 +198,15 @@ class Enemy(CharacterManager):
         if used_power in power_data_list:
             attack_info = power_data_list[used_power]
             base_strength = attack_info["strength"]
-            attack_damage = random.randint(max(0, base_strength - 5), base_strength + 2)
-            print(f"{self.name} {attack_info["power"]} | Damage dealt: {attack_damage}")
+            attack_damage = random.randint(max(0, base_strength - 5), 
+                                           base_strength + 2)
+            print(f"{self.name} {attack_info["power"]} | \
+            Damage dealt: {attack_damage}")
             time.sleep(1.5)
             target.take_damage(attack_damage, damaged_by=self.name)
         else:
-            print(f"Warning: {self.name} does not know how to use {used_power}")
+            print(f"Warning: {self.name} does not know how to use \
+            {used_power}")
 
 
 class CharacterBattle():
@@ -175,19 +221,26 @@ class CharacterBattle():
         """
         status_data = [
             ["NAME", self.p1.name, self.e1.name],
-            ["HEALTH", f"{self.p1.health} / {self.p1.max_health}",f"{self.e1.health}/{self.e1.max_health}"],
-            ["SHIELD (TEMP HP)", self.p1.temporary_max_health, self.e1.temporary_max_health],
-            ["STATUS", "Alive" if self.p1.alive else "Defeated", "Alive" if self.e1.alive else "Defeated"],
-            ["INFO", self.p1.character_description, self.e1.character_description],
+            ["HEALTH", f"{self.p1.health} / {self.p1.max_health}",
+             f"{self.e1.health}/{self.e1.max_health}"],
+            ["SHIELD (TEMP HP)", self.p1.temporary_max_health, 
+             self.e1.temporary_max_health],
+            ["STATUS", "Alive" if self.p1.alive else "Defeated", 
+             "Alive" if self.e1.alive else "Defeated"],
+            ["INFO", self.p1.character_description, 
+             self.e1.character_description],
         ]
-        print("\n" + tabulate(status_data, headers=["STAT", "PLAYER", "ENEMY"], tablefmt="fancy_grid") + "\n")
+        print("\n" + tabulate(status_data, 
+                              headers=["STAT", "PLAYER", "ENEMY"], 
+                              tablefmt="fancy_grid") + "\n")
 
 
     def _local_continue(self):
         """
         Preveents circular importing
         """
-        questionary.select("Press enter to continue...", choices=["Continue"]).ask()
+        questionary.select("Press enter to continue...", 
+                           choices=["Continue"]).ask()
         return
 
 
@@ -222,7 +275,8 @@ class CharacterBattle():
                 enemy_action = random.choice(enemy_choices)
                 self.e1.inflict_damage(self.p1, enemy_action)
             else:
-                print(f"Warning: CharacterBattle could not fetch moves for {self.e1.name}")
+                print(f"Warning: CharacterBattle could not fetch \
+                moves for {self.e1.name}")
             time.sleep(1)
 
         print("Battle has ended.")

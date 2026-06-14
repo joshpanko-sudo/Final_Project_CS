@@ -31,12 +31,12 @@ def game_warnings(warning: str):
         case "Invalid Input":
             print("Invalid Input Detected")
         case "Import Error":
-            print(
-                "Warning: main.py has failed to load extensions, please reinstall extensions\n")
+            print("Warning: main.py has failed to load extensions, please \
+            reinstall extensions\n")
             print("Required Extensions: Questionary, Tabulate, \n")
         case "Game File Error":
-            print(
-                "Warning: main.py has failed to load game files, please repair game files")
+            print("Warning: main.py has failed to load game files, please \
+            repair game files")
         case "Fatal Error":
             print("Warning: main.py has encountered a fatal error")
             quit()
@@ -49,11 +49,9 @@ def safe_mode():
     """
     A safe mode
     """
-    while (
-            choice := input(
-                f"{game_name}, has started in safe mode. Select an option: 1: Quit, 2: Repair, 3: Instructions: ")).strip() not in {
-        "1",
-            "2"}:
+    while (choice := input(f"{game_name}, has started in safe mode. \
+    Select an option: 1: Quit, 2: Repair, 3:\
+     Instructions: ")).strip() not in {"1","2"}:
         game_warnings("Invalid Input")
     else:
         match choice:
@@ -65,8 +63,10 @@ def safe_mode():
                 # not reinstall extensions though.
             case "3":
                 print(
-                    "Instructions: Download a IDE of choice (Prefer VS Code)\nInstall extensions and dependancies"
-                    "\nMake sure that all game files are installed and are in correct locations.")
+                    "Instructions: Download a IDE of choice \
+                    (Prefer VS Code)\nInstall extensions and dependancies"
+                    "\nMake sure that all game files are installed and are \
+                    in correct locations.")
                 safe_mode()
             case _:
                 game_warnings("Invalid Input")

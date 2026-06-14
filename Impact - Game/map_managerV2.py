@@ -1,3 +1,12 @@
+# -----------------------------------------------------------------------------
+# Created By: Allen Feng
+# Created Date: 06/01/2026
+# Version 2.9 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+Map system. Universal. Too much pain to code. Nothing else to write.
+"""
+# -----------------------------------------------------------------------------
 '''
 Legend:
 - Name: MapManager
@@ -8,40 +17,44 @@ Highlight Codes:
 - Blue: Action being done
 
 Error template:
-- Warning: MapManager could not {Error Here}. {e}. Please {Possible Solution Here}
-
-
+- Warning: MapManager could not {Error Here}. {e}. Please 
+{Possible Solution Here}
 '''
 
 try:
     from tabulate import tabulate
 except ImportError as e:
-    print(f"Warning: MapManager could not load tabulate. {e}. Perhaps you have not installed it?")
+    print(f"Warning: MapManager could not load tabulate. {e}. \
+    Perhaps you have not installed it?")
     quit()
 
 try:
     import questionary
 except ImportError as e:
-    print(f"Warning: MapManager could not load questionary. {e}. Perhaps you have not installed it?")
+    print(f"Warning: MapManager could not load questionary. {e}. \
+    Perhaps you have not installed it?")
     quit()
 
 try:
     import time
 except ImportError as e:
-    print(f"Warning: MapManager could not load time. {e}. Make sure time is loaded.")
+    print(f"Warning: MapManager could not load time. {e}. \
+    Make sure time is loaded.")
     quit()
 
 try:
     import game_maps
 except ImportError as e:
-    print(f"Warning: MapManager could not load game_maps.py. {e}. Make sure game_maps.py is within the same directory.")
+    print(f"Warning: MapManager could not load game_maps.py. {e}. \
+    Make sure game_maps.py is within the same directory.")
     quit()
 
 try:
     from dialogue_manager import character_say
     SP = character_say("")
 except ImportError as e:
-    print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
+    print(f"Warning: MapManager could not load DialogueManager. {e}. \
+    Make sure dialogue_manager.py is within the same directory.")
     quit()
 
 try:
@@ -49,7 +62,8 @@ try:
     IM = ItemManager("Player Inventory")
     IM.set_capacity(5)
 except ImportError as e:
-    print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
+    print(f"Warning: MapManager could not load DialogueManager. {e}. \
+    Make sure dialogue_manager.py is within the same directory.")
     quit()
 
 
@@ -66,6 +80,7 @@ class MapManager():
         self.longest_map_name = None
         #map_data is going to be the input dict for the map stuff You will see
 
+
     def load_map(self, map_data, default_player:bool = False):
         '''
         Load a map form maps.py
@@ -74,31 +89,44 @@ class MapManager():
         self.active_map = map_data["maps"]
         if default_player:
             self.player_location = map_data["default_player_location"]
-        self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else False
-        self.actual_tutorial = map_data["actual_tutorial"] if map_data.get("actual_tutorial") is not None else False
+        
+        self.tutorial_data = (
+            map_data["tutorial"]
+              if map_data.get("tutorial") is not None else False)
+        self.actual_tutorial = (
+            map_data["actual_tutorial"] 
+            if map_data.get("actual_tutorial") is not None else False)
         if self.actual_tutorial:
             SP.say(self.actual_tutorial)
             self.continue_game()
         self.find_longest_map_name()
         # print(self.loaded_map_data)
-        # print(tabulate(self.active_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True))
+        # print(tabulate(self.active_map, tablefmt="fancy_grid", 
+        # stralign="center", disable_numparse=True))
+
 
     def find_longest_map_name(self):
         '''
-        Finds the longest string name within the active map in order to make colums equal sized
+        Finds the longest string name within the active map 
+        in order to make colums equal sized
         '''
-        self.longest_map_name = (len(max((column for row in self.active_map for column in row if column is not None),key=len,default="")))
+        self.longest_map_name = (
+            len(max((column for row in self.active_map for column in row 
+                     if column is not None),key=len,default="")))
         # print(self.longest_map_name)
         return self.longest_map_name
        
 
     def format_map(self, rows, columns):
         '''
-        Applies the player location highlight and the white square for non accessible tiles
+        Applies the player location highlight and the white square for 
+        non accessible tiles
         '''
         # Return the state of the tile (None, player is on, or location)
         check_tile = self.active_map[rows][columns] 
-        player_highlight = (rows == self.player_location["row"] and columns == self.player_location["col"]) #Check if player is occupying tile
+        player_highlight = (
+            rows == self.player_location["row"] and columns == (
+            self.player_location["col"])) #Check if player is occupying tile
         if check_tile is None: # Empty tile, no location on it
             return "█" * self.longest_map_name # White square blocked off
         enemy_dict = self.loaded_map_data.get("enemies", {})
@@ -107,12 +135,16 @@ class MapManager():
         item_dict = self.loaded_map_data.get("items", {})
         if (rows, columns) in item_dict and not player_highlight:
             return f"\033[94m[{check_tile[0]}?]\033[0m"
-        if player_highlight: #If is_player is true, highlight the tile and add brackets to represent player is there
-        # player_tile = f"[{check_tile}]" #Puts brackets around player occupied tile
-            player_tile = f"\033[7m{check_tile}\033[0m" # Invert the tile to represent player
+        #If is_player is true, highlight the tile and add 
+        # brackets to represent player is there
+        if player_highlight: 
+        # player_tile = f"[{check_tile}]" #Puts brackets around 
+        # player occupied tile
+            # Invert the tile to represent player
+            player_tile = f"\033[7m{check_tile}\033[0m" 
         else:
-            
-            player_tile = f"{check_tile}" #Player is not on tile, no modifications
+            #Player is not on tile, no modifications
+            player_tile = f"{check_tile}" 
         return f"{player_tile}" # Return tiles
 
 
@@ -121,11 +153,18 @@ class MapManager():
         Updates the map after modifications or the player moving
         '''
         cooridnate_map = []
-        for rows in range(len(self.active_map)): #Loop through tows of the input map
-            cooridnate_map.append([self.format_map(rows, columns) for columns in range(len(self.active_map[0]))]) #Loop through columns of input map
+        #Loop through tows of the input map
+        for rows in range(len(self.active_map)): 
+            cooridnate_map.append([self.format_map(rows, columns)
+                                    for columns in 
+                                    #Loop through columns of input map
+                                    range(len(self.active_map[0]))]) 
         print("\033[2J\033[H")
         print("\n" + "=" * 30)
-        print(tabulate(cooridnate_map, tablefmt="fancy_grid", stralign="center", disable_numparse=True)) # Print out the map
+        # Print out the map
+        print(tabulate(cooridnate_map, tablefmt="fancy_grid", 
+                       stralign="center", disable_numparse=True)) 
+        
 
     def teleport_player(self, teleport_data):
         '''
@@ -136,23 +175,33 @@ class MapManager():
         self.load_map(teleport_data["target_map"](), False)
         return
 
+
     def check_teleport(self, row, col):
         '''
         _ is called teleport_name if needed in future
         '''
-        for _, teleport_data in self.loaded_map_data.get("teleport", {}).items():
-            if row == teleport_data["start_coord"][0] and col == teleport_data["start_coord"][1]:
+        for _, teleport_data in self.loaded_map_data.get(
+            "teleport", {}).items():
+            if row == teleport_data["start_coord"][0] and col == (
+                teleport_data["start_coord"][1]):
                 self.teleport_player(teleport_data)
                 return True
         return False
+
 
     def enter_check_teleport(self):
         """
         Teleport if you press enter then enter
         """
-        for _, teleport_data in self.loaded_map_data.get("enter_teleport", {}).items():
-            if self.player_location["row"] == teleport_data["start_coord"][0] and self.player_location["col"] == teleport_data["start_coord"][1]:
-                move = questionary.select(f'Enter {self.loaded_map_data["location_name"]}',choices=["Yes", "No"]).ask()
+        for _, teleport_data in self.loaded_map_data.get(
+            "enter_teleport", {}).items():
+            if self.player_location["row"] == (
+                teleport_data["start_coord"][0]) and (
+                    self.player_location["col"] == (
+                        teleport_data["start_coord"][1])):
+                move = questionary.select(f'Enter \
+                {self.loaded_map_data["location_name"]}',
+                choices=["Yes", "No"]).ask()
                 match move:
                     case "Yes":
                         self.teleport_player(teleport_data)
@@ -160,7 +209,8 @@ class MapManager():
                     case "No":
                         return
                     case _:
-                        print("Warning: MapManager cannot enter location. Fatal error")
+                        print("Warning: MapManager cannot enter location. \
+                        Fatal error")
                         quit()
                 return True
         return False
@@ -171,10 +221,14 @@ class MapManager():
             '''
             ladders = self.loaded_map_data.get("ladder_teleport", {})
             choices = [name for name, data in ladders.items() 
-                    if self.player_location["row"] == data["start_coord"][0] and self.player_location["col"] == data["start_coord"][1]]
+                    if self.player_location["row"] == (
+                        data["start_coord"][0] 
+                        and self.player_location["col"] == data["start_coord"][1])]
             if not choices:
                 return False
-            move = questionary.select(f'Go {self.loaded_map_data["location_name"]}', choices=["Stay"] + choices).ask()
+            move = questionary.select(f'Go \
+            {self.loaded_map_data["location_name"]}', 
+            choices=["Stay"] + choices).ask()
             if move != "Stay" and move is not None:
                 teleport_data = ladders[move]
                 self.teleport_player(teleport_data)
@@ -182,12 +236,14 @@ class MapManager():
                 
             return False
 
+
     def battle_check(self):
         """
         Check if there is a battle trigger and triggers the battle
         """
         enemy_dict = self.loaded_map_data.get("enemies", {})
-        current_player_location = (self.player_location["row"], self.player_location["col"])
+        current_player_location = (self.player_location["row"], 
+                                   self.player_location["col"])
 
         if current_player_location in enemy_dict:
             enemy_info = enemy_dict[current_player_location]
@@ -202,7 +258,8 @@ class MapManager():
                     character_health=enemy_info["health"],
                     max_character_health=enemy_info.get("max_health", 100)
                 )
-                enemy.description(enemy_info.get("description", "Hostile robot"))
+                enemy.description(enemy_info.get("description", 
+                "Hostile robot"))
                 battle = CharacterBattle(player, enemy)
                 battle.gameloopCharacterBattle()
                 if not enemy.alive:
@@ -218,22 +275,26 @@ class MapManager():
                     quit()
                 return True
             except ImportError as e:
-                print(f"Warning: MapManager could not initiate battle. {e}. Please ensure character_managerV2 file exists.")
+                print(f"Warning: MapManager could not initiate battle. {e}. Please\
+                 ensure character_managerV2 file exists.")
                 quit()
         else:
             print("There are no enemies here to fight.")
             time.sleep(1)
         return False
 
+
     def item_check(self):
         """
         Allows player to pick up items
         """
         item_dict = self.loaded_map_data.get("items", {})
-        current_player_location = (self.player_location["row"], self.player_location["col"])
+        current_player_location = (
+            self.player_location["row"], self.player_location["col"])
         if current_player_location in item_dict:
             item_info = item_dict[current_player_location]
-            print(f"\033[94m[Action] You found something on the ground: {item_info['name']}!\033[0m")
+            print(f"\033[94m[Action] You \
+            found something on the ground: {item_info['name']}!\033[0m")
             time.sleep(1)
             try:
                 IM.add_item(
@@ -243,15 +304,19 @@ class MapManager():
                 )
                 del item_dict[current_player_location]
                 if item_info.get("exit_on_pickup", False):
-                    print(f"\033[92m[Working] Objective complete! Leaving location...\033[0m")
+                    print(f"\033[92m[Working] Objective complete!\
+                     Leaving location...\033[0m")
                     time.sleep(1.5)
                     return "EXIT_KEY_FOUND"
                 self.continue_game()
                 return True
             except Exception as e:
-                print(f"\033[91mWarning: MapManager could not add item. {e}. Please ensure inventory system is installed.\033[0m")
+                print(f"\033[91mWarning: MapManager could\
+                 not add item. {e}. Please ensure inventory \
+                system is installed.\033[0m")
                 quit()
         return False
+
 
     def continue_game(self):
         """
@@ -305,11 +370,13 @@ class MapManager():
                 quit()
         if self.check_teleport(new_row, new_col):
             return
-        if 0 <= new_row < len(self.active_map) and 0 <=new_col < len(self.active_map[0]):
+        if 0 <= new_row < len(self.active_map) and 0 <= (
+            new_col < len(self.active_map[0])):
             if self.active_map[new_row][new_col] is not None:
                 self.player_location["row"] = new_row
                 self.player_location["col"] = new_col
                 return self.item_check()
+
 
     def gameloopMapManager(self):
         '''
@@ -317,12 +384,17 @@ class MapManager():
         '''
         self.update_map()
         print(self.player_location)
-        print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
+        print(f"Current location: \
+        {self.active_map[self.player_location['row']][
+            self.player_location['col']]}")
         enemy_dict = self.loaded_map_data.get("enemies", None)
         if enemy_dict is not None and not enemy_dict: 
-            print("\033[92m[Map Cleared!]\033[0m All enemies have been cleared.")
+            print("\033[92m[Map Cleared!]\033[0m All\
+             enemies have been cleared.")
             return False
-        while (command := input("W, A, S, D, E, F, Q, R, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?", "q", "r"}:
+        while (command := input("W, A, S, D, E, F, Q, \
+        R, ?: ").strip().lower()) not in {"w", "a", "s", "\
+        d", "e", "f", "?", "q", "r"}:
                 print("Wrong Move")
         else:
             result = self.move_player(command)
