@@ -27,9 +27,9 @@ def figure_out_attacks_(character:str):
             "stun": False } 
     elif(character == "Helper Robot"):
         power_data_list["Zap"] = {
-            "strength": 500,
+            "strength": 40,
             "power": "ZAPS",
-            "description": "uses your fists",
-            "stun": False } 
+            "description": "Zaps you with lightning",
+            "stun": True } 
         
     
