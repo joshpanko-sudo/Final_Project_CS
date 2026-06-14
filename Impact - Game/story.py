@@ -53,5 +53,9 @@ battle = CharacterBattle(Player1, Enemy1)
 battle.gameloopCharacterBattle()
 
 Narrator.say("""
-
+Narrator: The battle is over. You have won successfully. 
+Narrator: You look around, the surroundings are dark. You start shivering
+Narrator: You see a small figure out ahead, walking towards you.
+Narrator: When the figure gets close, you realize it is a small robot. The robot introduces itself as Helper, and offers to help you with things.
+Narrator: 
 """)
