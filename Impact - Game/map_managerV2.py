@@ -305,7 +305,7 @@ class MapManager():
                 quit()
         if self.check_teleport(new_row, new_col):
             return
-        if 0 <= new_row < len(self.active_map) and 0 <=new_col < len(self.active_map[0]):
+        if 0 <= new_row < len(self.active_map) and 0 <= new_col < len(self.active_map[0]):
             if self.active_map[new_row][new_col] is not None:
                 self.player_location["row"] = new_row
                 self.player_location["col"] = new_col
