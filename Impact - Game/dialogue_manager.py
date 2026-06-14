@@ -56,6 +56,6 @@ class character_say():
             purged_chunk = chunk.strip()
             if purged_chunk:
                 time.sleep(self.delay) # Delay the print
-                slow_print_system.slow_print(purged_chunk, 0)
+                slow_print_system.slow_print(purged_chunk, 0.1)
 
 # Akira...
