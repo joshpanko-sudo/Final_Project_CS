@@ -208,8 +208,8 @@ class MapManager():
                         return "CLEARED"
                     self.continue_game()
                 else:
-                    print(f"\033[91m[Error] You were defeated or fled from battle.\033[0m")
-                    # quit()
+                    print(f"\033[91m[Error] You were defeated.\033[0m")
+                    quit()
                 return True
             except ImportError as e:
                 print(f"Warning: MapManager could not initiate battle. {e}. Please ensure character_managerV2 file exists.")

@@ -57,6 +57,7 @@ print(f"Importing files for {game_name}".center(20, "-"))
 try:
     from map_managerV2 import MapManager
     MM = MapManager()
+    import story
 except ImportError:
     game_warnings("Game File Error")
     safe_mode()
@@ -80,7 +81,7 @@ def startup():
     option = questionary.select("Main Menu", choices=["Start Game", "Quit", "Credits"]).ask()
     match option:
         case "Start Game":
-            start_story()
+            story()
         case "Quit":
             quit()
         case "Credits":
@@ -94,10 +95,6 @@ def startup():
 
 def main():
     startup()
-
-    
-def start_story():
-    pass
     
     
 
