@@ -62,14 +62,20 @@ Narrator: When the figure gets close, you realize it is a small robot. The robot
 Narrator: The robot gets closer but runs away. You chase after it...
 """)
 
-# MM = MapManager()
-# MM.load_map(game_maps.battle_1, True)
-# MM.update_map()
+MM = MapManager()
+MM.load_map(game_maps.battle_1, True)
+MM.update_map()
 
-# while True:
-#     map_active = MM.gameloopMapManager()
-#     if not map_active:
-#         print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
-#         break
+while True:
+    map_active = MM.gameloopMapManager()
+    if not map_active:
+        print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
+        break
 
-print("JKWNFKJNFJKQNF")
+Narrator.say("""
+Narrator: You finally manage to close on on the little robot. It stops running away from you.
+Narrator: The robot says that it can help fix your warp portal system, but you need to find a special key.
+Narrator: Thus, you set off to find the key...
+""")
+
+MM.load_map(game_maps.tutorial_spawn, True)

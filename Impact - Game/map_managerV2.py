@@ -284,16 +284,16 @@ class MapManager():
             
 
 
-mm = MapManager()
-mm.load_map(game_maps.battle_1, True)
-mm.update_map()
+# mm = MapManager()
+# mm.load_map(game_maps.battle_1, True)
+# mm.update_map()
 
-# # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
-while True:
-    map_active = mm.gameloopMapManager()
-    if not map_active:
-        print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
-        break
+# # # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
+# while True:
+#     map_active = mm.gameloopMapManager()
+#     if not map_active:
+#         print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
+#         break
     
 
 
