@@ -39,8 +39,8 @@ battle_1 = {
     "tutorial": "Move around with W, A, S, D, and use F, and E to \
     go to other areas. If you need help, type ?",
 
-    "actual_tutorial": "The spider robot is ahead of you! Move the \
-    player with WASD to the spider bot, and press Q to start the battle!",
+    #"actual_tutorial": "The spider robot is ahead of you! Move the \
+#player with WASD to the spider bot, and press Q to start the battle!",
 
     "default_player_location": {"row":1, "col":0},
 
@@ -59,6 +59,11 @@ battle_1 = {
     "enter_teleport":
     {
 
+    },
+
+    "ladder_teleport":
+    {
+        
     },
 
     "enemies": {
@@ -93,7 +98,7 @@ tutorial_spawn = {
     "location_name": "Tutorial Spawn",
 
     "tutorial": "Move around with W, A, S, D, and use F, and E to go \
-    to other areas. If you need help, type ?",
+to other areas. If you need help, type ?",
 
     "actual_tutorial": "Try to find the key. It should be here somewhere...",
 

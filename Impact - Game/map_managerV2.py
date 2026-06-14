@@ -24,37 +24,42 @@ Error template:
 try:
     from tabulate import tabulate
 except ImportError as e:
-    print(f"Warning: MapManager could not load tabulate. {e}. \
-    Perhaps you have not installed it?")
+    print(
+        f"Warning: MapManager could not load tabulate. {e}. "
+        "Perhaps you have not installed it?"
+    )
     quit()
 
 try:
     import questionary
 except ImportError as e:
-    print(f"Warning: MapManager could not load questionary. {e}. \
-    Perhaps you have not installed it?")
+    print(
+        f"Warning: MapManager could not load questionary. {e}. "
+        "Perhaps you have not installed it?"
+    )
     quit()
 
 try:
     import time
 except ImportError as e:
-    print(f"Warning: MapManager could not load time. {e}. \
-    Make sure time is loaded.")
+    print(f"Warning: MapManager could not load time. {e}. "
+    "Make sure time is loaded."
+    )
     quit()
 
 try:
     import game_maps
 except ImportError as e:
-    print(f"Warning: MapManager could not load game_maps.py. {e}. \
-    Make sure game_maps.py is within the same directory.")
+    print(f"Warning: MapManager could not load game_maps.py. {e}. "
+    "Make sure game_maps.py is within the same directory.")
     quit()
 
 try:
     from dialogue_manager import character_say
     SP = character_say("")
 except ImportError as e:
-    print(f"Warning: MapManager could not load DialogueManager. {e}. \
-    Make sure dialogue_manager.py is within the same directory.")
+    print(f"Warning: MapManager could not load DialogueManager. {e}. "
+    "Make sure dialogue_manager.py is within the same directory.")
     quit()
 
 try:
@@ -62,8 +67,8 @@ try:
     IM = ItemManager("Player Inventory")
     IM.set_capacity(5)
 except ImportError as e:
-    print(f"Warning: MapManager could not load DialogueManager. {e}. \
-    Make sure dialogue_manager.py is within the same directory.")
+    print(f"Warning: MapManager could not load DialogueManager. {e}. "
+    "Make sure dialogue_manager.py is within the same directory.")
     quit()
 
 
@@ -216,25 +221,25 @@ class MapManager():
         return False
     
     def ladder_check_teleport(self):
-            '''
-            Go up or down with teleport
-            '''
-            ladders = self.loaded_map_data.get("ladder_teleport", {})
-            choices = [name for name, data in ladders.items() 
-                    if self.player_location["row"] == (
-                        data["start_coord"][0] 
-                        and self.player_location["col"] == data["start_coord"][1])]
-            if not choices:
-                return False
-            move = questionary.select(f'Go \
-            {self.loaded_map_data["location_name"]}', 
-            choices=["Stay"] + choices).ask()
-            if move != "Stay" and move is not None:
-                teleport_data = ladders[move]
-                self.teleport_player(teleport_data)
-                return True
-                
+        '''
+        Go up or down with teleport
+        '''
+        ladders = self.loaded_map_data.get("ladder_teleport", {})
+        choices = [name for name, data in ladders.items() 
+                if self.player_location["row"] == (
+                    data["start_coord"][0] 
+                    and self.player_location["col"] == data["start_coord"][1])]
+        if not choices:
             return False
+        move = questionary.select(f'Go \
+        {self.loaded_map_data["location_name"]}', 
+        choices=["Stay"] + choices).ask()
+        if move != "Stay" and move is not None:
+            teleport_data = ladders[move]
+            self.teleport_player(teleport_data)
+            return True
+            
+        return False
 
 
     def battle_check(self):
@@ -361,7 +366,7 @@ class MapManager():
                 return
             case "?":
                 if self.tutorial_data:
-                    SP(self.tutorial_data)
+                    SP.say(self.tutorial_data)
                     self.continue_game()
                 return
              
@@ -370,12 +375,13 @@ class MapManager():
                 quit()
         if self.check_teleport(new_row, new_col):
             return
-        if 0 <= new_row < len(self.active_map) and 0 <= (
-            new_col < len(self.active_map[0])):
+        if (
+            0 <= new_row < len(self.active_map)
+            and 0 <= new_col < len(self.active_map[0])):
             if self.active_map[new_row][new_col] is not None:
                 self.player_location["row"] = new_row
                 self.player_location["col"] = new_col
-                return self.item_check()
+                self.item_check()
 
 
     def gameloopMapManager(self):
@@ -407,16 +413,16 @@ d", "e", "f", "?", "q", "r"}:
             
 
 
-# mm = MapManager()
-# mm.load_map(game_maps.battle_1, True)
-# mm.update_map()
+mm = MapManager()
+mm.load_map(game_maps.battle_1, True)
+mm.update_map()
 
-# # # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
-# while True:
-#     map_active = mm.gameloopMapManager()
-#     if not map_active:
-#         print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
-#         break
+# # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
+while True:
+    map_active = mm.gameloopMapManager()
+    if not map_active:
+        print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
+        break
     
 
 

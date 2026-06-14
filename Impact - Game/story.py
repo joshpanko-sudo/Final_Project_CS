@@ -73,8 +73,8 @@ def play_story():
      you, its top mounted gun charging to fire.|<><>|
     """)
     MM.continue_game()
-    Enemy1 = Enemy("Spider Droid", 80, 80)
-    Player1 = Player("Player", 100, 100)
+    Enemy1 = Enemy("Spider Droid", 40, 80)
+    Player1 = Player("Player", 150, 100)
 
     battle = CharacterBattle(Player1, Enemy1)
     battle.gameloopCharacterBattle()
