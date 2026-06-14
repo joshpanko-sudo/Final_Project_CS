@@ -1,3 +1,17 @@
+#-----------------------------------------------------------------------------
+# Created By: Allen Feng
+# Created Date: 06/01/2026
+# Version 2.5 (Fully working)
+#-----------------------------------------------------------------------------
+"""
+Due to this program's nature and my coding, me and Josh made many versions of
+the main script, as we did not know what was going to be the actual main
+script.
+
+This is the main game file. Run this to play the game or view the credits of
+the creators.
+"""
+#-----------------------------------------------------------------------------
 game_name = "Impact"
 
 # extensions_loaded = True
@@ -8,23 +22,18 @@ game_name = "Impact"
 
 print(f"Loading {game_name}...")
 
-
 def game_warnings(warning: str):
     match warning:
         case "Invalid Input":
             print("Invalid Input Detected")
-
         case "Import Error":
             print("Warning: main.py has failed to load extensions, please reinstall extensions\n")
             print("Required Extensions: Questionary, Tabulate, \n")
-    
         case "Game File Error":
             print("Warning: main.py has failed to load game files, please repair game files")
-
         case "Fatal Error":
             print("Warning: main.py has encountered a fatal error")
             quit()
-
         case _:
             print("Warning: main.py cannot operate properly. Fatal Error")
             quit()
@@ -89,11 +98,9 @@ def startup():
             print_credits()
 
 
-
 def main():
     startup()
-    
-    
+      
 
 if __name__ == "__main__":
     main()
