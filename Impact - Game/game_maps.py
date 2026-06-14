@@ -29,7 +29,7 @@ battle_1 = {
 
     "tutorial": "Move around with W, A, S, D, and use F, and E to go to other areas. If you need help, type ?",
 
-    "actual_tutorial": "The spider robot is ahead of you! Move the player with WASD to the spide bot, and press Q to start the battle!",
+    "actual_tutorial": "The spider robot is ahead of you! Move the player with WASD to the spider bot, and press Q to start the battle!",
 
     "default_player_location": {"row":1, "col":0},
 
@@ -55,13 +55,13 @@ battle_1 = {
             "name": "Spider Droid",
             "health": 80,
             "max_health": 100,
-            "description": "An engineered mechanical nightmare."
+            "description": "A spider like robot."
         },
         (0, 4): {
-            "name": "Helper Robot",
-            "health": 50,
-            "max_health": 50,
-            "description": "A malfunctioning maintenance unit."
+            "name": "Spider Droid",
+            "health": 60,
+            "max_health": 70,
+            "description": "A spider like robot."
         }
     },
 

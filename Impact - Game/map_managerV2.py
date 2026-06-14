@@ -38,7 +38,8 @@ except ImportError as e:
     quit()
 
 try:
-    from dialogue_manager import character_say as SP
+    from dialogue_manager import character_say
+    SP = character_say("")
 except ImportError as e:
     print(f"Warning: MapManager could not load DialogueManager. {e}. Make sure dialogue_manager.py is within the same directory.")
     quit()
@@ -68,7 +69,7 @@ class MapManager():
         self.tutorial_data = map_data["tutorial"] if map_data.get("tutorial") is not None else False
         self.actual_tutorial = map_data["actual_tutorial"] if map_data.get("actual_tutorial") is not None else False
         if self.actual_tutorial:
-            SP("", self.actual_tutorial)
+            SP.say(self.actual_tutorial)
             self.continue_game()
         self.find_longest_map_name()
         # print(self.loaded_map_data)
@@ -190,6 +191,10 @@ class MapManager():
                 if not enemy.alive:
                     print(f"{enemy_info['name']} has been cleared")
                     del enemy_dict[current_player_location]
+                    if not enemy_dict:
+                        print("\033[92m[Map Cleared!]\033[0m All enemies have been defeated!")
+                        time.sleep(1.5)
+                        return "CLEARED"
                     self.continue_game()
                 else:
                     print(f"\033[91m[Error] You were defeated or fled from battle.\033[0m")
@@ -234,7 +239,10 @@ class MapManager():
             case "f":
                 self.ladder_check_teleport()
             case "q":
-                self.battle_check()
+                status = self.battle_check()
+                if status == "CLEARED":
+                    return "CLEARED"
+
                 return
             case "?":
                 if self.tutorial_data:
@@ -259,10 +267,18 @@ class MapManager():
         self.update_map()
         print(self.player_location)
         print(f"Current location: {self.active_map[self.player_location['row']][self.player_location['col']]}")
+        enemy_dict = self.loaded_map_data.get("enemies", {})
+        if not enemy_dict: 
+            print("\033[92m[Map Cleared!]\033[0m")
+            return False
         while (command := input("W, A, S, D, E, F, Q, ?: ").strip().lower()) not in {"w", "a", "s", "d", "e", "f", "?", "q"}:
                 print("Wrong Move")
         else:
-                self.move_player(command)
+            result = self.move_player(command)
+            if result == "CLEARED":
+                return False
+            return True
+
                 
        
             
@@ -274,7 +290,11 @@ mm.update_map()
 
 # # print(list(maps.minimap_3["ladder_teleport"].keys())[0])
 while True:
-    mm.gameloopMapManager()
+    map_active = mm.gameloopMapManager()
+    if not map_active:
+        print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
+        break
+    
 
 
 
