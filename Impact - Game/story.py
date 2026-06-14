@@ -4,7 +4,11 @@ from map_managerV2 import MapManager
 import game_maps
 MM = MapManager()
 
+
 def play_story():
+    """
+    Plays the story for the game
+    """
     Narrator = character_say("--Narrator--", 0.25)
     Narrator.say("""
     Narrator: The date is June 5, 2030. You arrive home after a long day of research.|<><>|
@@ -52,7 +56,6 @@ def play_story():
     Enemy1 = Enemy("Spider Droid", 80, 80)
     Player1 = Player("Player", 100, 100)
 
-
     battle = CharacterBattle(Player1, Enemy1)
     battle.gameloopCharacterBattle()
 
@@ -64,7 +67,6 @@ def play_story():
     Narrator: The robot gets closer but runs away. You chase after it...|<><>|
     """)
 
-   
     MM.load_map(game_maps.battle_1, True)
     MM.update_map()
 
@@ -89,12 +91,10 @@ def play_story():
             print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
             break
 
-
     Narrator.say("""
     Narrator: You find the key and meet up with the helper robot.|<><>|
     Narrator: The helper robot walks to a clearing, and tells you to follow it...|<><>|
     """)
-
 
     helper_robot = character_say("Helper Robot", 0.1)
 
@@ -112,6 +112,3 @@ def play_story():
         if not map_active:
             print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
             break
-
-
-
