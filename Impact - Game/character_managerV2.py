@@ -119,7 +119,7 @@ class CharacterManager:
         if self.health <= 0:
             self.health = 0
             self.alive = False
-            if damaged_by == "Unknown"
+            if damaged_by == "Unknown":
                 print(f"{self.name} was defeated") 
             else: 
                 print(f"{self.name} was defeated by {damaged_by}.")
