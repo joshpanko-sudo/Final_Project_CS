@@ -1,3 +1,12 @@
+# -----------------------------------------------------------------------------
+# Created By: Josh Pank & Allen Feng
+# Created Date: 05/19/2026
+# Version 1.0 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+Print out the dialogue of the characters
+"""
+# -----------------------------------------------------------------------------
 '''
 Legend:
 - Name: DialogueManager
@@ -8,7 +17,8 @@ Highlight Codes:
 - Blue: Action being done
 
 Error template:
-- Warning: DialogueManager could not {Error Here}. {e}. Please {Possible Solution Here}
+- Warning: DialogueManager could not {Error Here}. {e}. Please {Possible 
+Solution Here}
 
 
 '''
@@ -16,14 +26,16 @@ try:
     import sys
 except ImportError as e:
     print(
-        f"Warning: DialogueManager could not load sys. {e}. Perhaps you have not installed it?")
+        f"Warning: DialogueManager could not load sys. {e}. "
+        "Perhaps you have not installed it?")
     quit()
 
 try:
     import time
 except ImportError as e:
     print(
-        f"Warning: DialogueManager could not load time. {e}. Perhaps you have not installed it?")
+        f"Warning: DialogueManager could not load time. {e}. "
+        "Perhaps you have not installed it?")
     quit()
 
 
@@ -43,13 +55,16 @@ class slow_print_system():
 
 class character_say():
     '''
-    A more advanced systen for printing out character dialogue. You can specify character name and what they should say
-    The printing system uses the slow print above and lines print out with a delay that defaults to 0.75
+    A more advanced systen for printing out character dialogue. 
+    You can specify character name and what they should say
+    The printing system uses the slow print above and lines print 
+    out with a delay that defaults to 0.75
     '''
 
     def __init__(self, name: str, delay=0.75):
         self.name = name  # Character name
         self.delay = delay  # Line print delay
+
 
     # Special character that allows for one long string to be broken up and
     # print out seperatly as lines

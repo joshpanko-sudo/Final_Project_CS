@@ -133,9 +133,5 @@ def main():
     startup()
 
 
-# test.py
-def  f():  print(  "x" )
-
-
 if __name__ == "__main__":
     main()

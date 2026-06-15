@@ -1,3 +1,13 @@
+# -----------------------------------------------------------------------------
+# Created By: Allen Feng
+# Created Date: 05/19/2026
+# Version 1.0 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+Main story for the game
+"""
+# -----------------------------------------------------------------------------
+
 from dialogue_manager import character_say
 from character_managerV2 import Player, Enemy, CharacterBattle
 from map_managerV2 import MapManager
@@ -112,3 +122,4 @@ def play_story():
         if not map_active:
             print("\033[94m[Action] Transitioning out of cleared map...\033[0m")
             break
+
