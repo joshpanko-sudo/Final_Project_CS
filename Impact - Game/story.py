@@ -131,7 +131,7 @@ def play_story():
         "to follow it...|<><>|\n"
     )
 
-    helper_robot = character_say("Helper Robot", 0.1)
+    helper_robot = character_say("--Helper Robot--", 0.1)
 
     helper_robot.say(
         "\nHelper Robot: ............|<><>|\n"
