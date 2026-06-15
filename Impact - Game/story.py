@@ -144,7 +144,7 @@ def play_story():
     )
 
     MM.load_map(game_maps.tutorial_House, True)
-    MM.update_map()  # Added missing () to call the function
+    MM.update_map() 
     while True:
         map_active = MM.gameloopMapManager()
         if not map_active:
