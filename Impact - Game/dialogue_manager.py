@@ -41,6 +41,9 @@ except ImportError as e:
 
 
 class slow_print_system():
+    '''
+    Print out things one char at a time
+    '''
     @staticmethod
     def slow_print(text: str, delay=0.1):
         '''

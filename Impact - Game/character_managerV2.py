@@ -61,6 +61,10 @@ except ImportError as e:
 
 
 class CharacterManager:
+    '''
+    Character class for creating and
+    battling characters
+    '''
     # Defaults the max character health to 100
     def __init__(self, character_name: str, character_health: float, 
                  max_character_health: float = 100) -> None:
@@ -153,6 +157,9 @@ class CharacterManager:
 
 
 class Player(CharacterManager):
+    '''
+    Player instance, can damage enemies
+    '''
     def __init__(self, character_name: str, character_health: float, 
                  max_character_health: float = 100) -> None:
         """
@@ -183,6 +190,9 @@ class Player(CharacterManager):
 
 
 class Enemy(CharacterManager):
+    '''
+    Enemy instance, can damage player
+    '''
     def __init__(self, character_name: str, character_health: 
                  float, max_character_health: float = 100) -> None:
         super().__init__(character_name, character_health, 
@@ -210,6 +220,9 @@ class Enemy(CharacterManager):
 
 
 class CharacterBattle():
+    '''
+    Battle the characters
+    '''
     def __init__(self, p1: Player, e1: Enemy) -> None:
         self.p1 = p1
         self.e1 = e1

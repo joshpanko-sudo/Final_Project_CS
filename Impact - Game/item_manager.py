@@ -40,6 +40,9 @@ except ImportError as e:
 
 
 class CraftManager():
+    '''
+    Crafting system
+    '''
     def __init__(self):  # 1. Renamed to standard initializer
         '''
         Initialize the class
@@ -87,6 +90,9 @@ class CraftManager():
 
 
 class ItemManager():
+    '''
+    Item manager and inventory system
+    '''
     def __init__(self, inventory_name: str) -> None:
         '''
         Intialize the class

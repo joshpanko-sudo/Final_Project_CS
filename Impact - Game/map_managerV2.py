@@ -76,6 +76,9 @@ except ImportError as e:
 
 
 class MapManager():
+    '''
+    Main class
+    '''
     def __init__(self) -> None:
         '''
         Initilize the class
