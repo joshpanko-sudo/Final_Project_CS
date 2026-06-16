@@ -22,7 +22,7 @@ Possible Solution Here}
 
 
 '''
-
+# Imports & Global Variables --------------------------------------------------
 try:
     from tabulate import tabulate
 except ImportError as e:

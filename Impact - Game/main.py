@@ -12,6 +12,8 @@ This is the main game file. Run this to play the game or view the credits of
 the creators.
 """
 # -----------------------------------------------------------------------------
+
+# Imports & Global Variables --------------------------------------------------
 game_name = "Impact"
 
 # extensions_loaded = True

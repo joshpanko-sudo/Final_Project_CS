@@ -20,7 +20,7 @@ Error template:
 - Warning: CharacterManager could not {Error Here}. {e}. Please 
 {Possible Solution Here}
 """
-
+# Imports & Global Variables --------------------------------------------------
 try:
     from tabulate import tabulate
 except ImportError as e:

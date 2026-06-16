@@ -8,6 +8,7 @@ Main story for the game
 """
 # -----------------------------------------------------------------------------
 
+# Imports & Global Variables --------------------------------------------------
 from dialogue_manager import character_say
 from character_managerV2 import Player, Enemy, CharacterBattle
 from map_managerV2 import MapManager

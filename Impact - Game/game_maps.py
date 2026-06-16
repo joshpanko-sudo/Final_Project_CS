@@ -8,6 +8,7 @@ Maps and the system for the game. Very nice dict usage
 """
 # -----------------------------------------------------------------------------
 
+
 '''
 Rigid means that data must be there and exist
 Soft means the data is optional and does not need to exist
@@ -31,9 +32,9 @@ map_name = {
 
 }
 
-
-
 '''
+
+# Imports & Global Variables --------------------------------------------------
 battle_1 = {"location_name": "Battle 1!",
             "tutorial": "Move around with W, A, S, D, and use F, and E to go to "
             "other areas. If you need help, type ?",
