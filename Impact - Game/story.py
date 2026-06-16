@@ -9,10 +9,38 @@ Main story for the game
 # -----------------------------------------------------------------------------
 
 # Imports & Global Variables --------------------------------------------------
-from dialogue_manager import character_say
-from character_managerV2 import Player, Enemy, CharacterBattle
-from map_managerV2 import MapManager
-import game_maps
+try:
+    from dialogue_manager import character_say
+except ImportError as e:
+    print(
+        f"Warning: story.py could not load character_say. {e}. "
+        "Perhaps you have not installed it?")
+    quit()
+
+try:
+    from character_managerV2 import Player, Enemy, CharacterBattle
+except ImportError as e:
+    print(
+        f"Warning: story.py could not load Player, Enemy, "
+        f"CharacterBattle. {e}. Perhaps you have not installed it?")
+    quit()
+
+try:
+    from map_managerV2 import MapManager
+except ImportError as e:
+    print(
+        f"Warning: story.py could not load MapManager"
+        f". {e}. Perhaps you have not installed it?")
+    quit()
+    
+try:
+    import game_maps
+except ImportError as e:
+    print(
+        f"Warning: story.py could not load game_maps"
+        f". {e}. Perhaps you have not installed it?")
+    quit()
+
 
 MM = MapManager()
 
