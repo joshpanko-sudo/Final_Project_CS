@@ -153,3 +153,5 @@ def play_story():
                 "cleared map...\033[0m"
             )
             break
+
+play_story()
