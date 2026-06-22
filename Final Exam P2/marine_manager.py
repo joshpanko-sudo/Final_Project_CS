@@ -1,4 +1,12 @@
-
+# -----------------------------------------------------------------------------
+# Created By: Allen
+# Created Date: 05/19/2026
+# Version 1.0 (Fully working)
+# -----------------------------------------------------------------------------
+"""
+A code to make the names for the sea creatures and put them into a report.
+"""
+# -----------------------------------------------------------------------------
 class marineVessel():
     def __init__(self, name:str, speed:int, x:int, 
                  y:int, tracking:list):
@@ -16,7 +24,6 @@ class seaCreature():
         self.tag_number = tag_number
         self.x = x
         self.y = y
-
 
     def __str__(self):
         return self.name
@@ -38,7 +45,6 @@ class reportMaker():
     def __init__(self):
         pass
 
-
     def get_data(self, input):
         name = input.name
         speed = input.speed
@@ -53,28 +59,31 @@ class reportMaker():
             print(speed)
             print(coordinates)
     
-
     def load_report(self, report_name:str, input, make_name):
-        with open(report_name, "r") as file:
-            full_text = file.read()
-        full_text = full_text.replace("_V_E_S_S_E_L_1_", input.name)
-        full_text = full_text.replace("_S_P_E_E_D_1_", f"{input.speed} km/h")
-        for i in range (3):
-            full_text = full_text.replace(f"_C_R_E_A_T_U_R_E_{i}_", 
-                                          str(input.tracking[i]))
-            full_text = full_text.replace(f"_D_S_T_A_N_C_E_{i}_", 
-                        str(pow((((input.x - input.tracking[i].x) ** 2) + 
-                         ((input.y - input.tracking[i].y) ** 2)),(1/2))))
-            full_text = full_text.replace(f"_T_I_M_E_{i}_", 
-                    str((pow((((input.x - input.tracking[i].x) ** 2) 
-                              + ((input.y - input.tracking[i].y) ** 2)),
-                              (1/2))/input.speed)*60))
-        # print(input.tracking)
-        print(full_text)
-        report_name = make_name
-        with open(report_name + ".txt", "a") as _:
-            _.write(full_text)
-
+        try:
+            with open(report_name, "r") as file:
+                full_text = file.read()
+            full_text = full_text.replace("_V_E_S_S_E_L_1_", input.name)
+            full_text = full_text.replace("_S_P_E_E_D_1_", 
+                                          f"{input.speed} km/h")
+            for i in range(3):
+                full_text = full_text.replace(f"_C_R_E_A_T_U_R_E_{i}_", 
+                                            str(input.tracking[i]))
+                full_text = full_text.replace(f"_D_S_T_A_N_C_E_{i}_", 
+                            str(pow((((input.x - input.tracking[i].x) ** 2) + 
+                            ((input.y - input.tracking[i].y) ** 2)),(1/2))))
+                full_text = full_text.replace(f"_T_I_M_E_{i}_", 
+                        str((pow((((input.x - input.tracking[i].x) ** 2) 
+                                + ((input.y - input.tracking[i].y) ** 2)),
+                                (1/2))/input.speed)*60))
+            # print(input.tracking)
+            print(full_text)
+            report_name = make_name
+            with open(report_name + ".txt", "a") as _:
+                _.write(full_text)
+        except:
+            print("ERROR")
+            quit()
 
 report1 = reportMaker()
 report1.load_report("marine_report.txt", marine_tracker, "Report#1")
