@@ -26,6 +26,10 @@ class marineVessel():
             case "Name":
                 print(self.name)
                 return self.name
+            case "x":
+                return self.x
+            case "y":
+                return self.y
 
 
 class seaCreature():
@@ -45,6 +49,26 @@ class seaCreature():
             case "y":
                 return self.y
 
+
+
+class get_distances_times():
+    def __init__(self, sea_creature_x, sea_creature_y, vessel_x, vessel_y):
+        self.sea_creature_x = sea_creature_x
+        self.sea_creature_y = sea_creature_y
+        self.vessel_x = vessel_x
+        self.vessel_y = vessel_y
+
+    def calculate(self):
+        distance = pow(((self.sea_creature_x - self.vessel_x) ** 2) + ((self.sea_creature_y - self.vessel_y) ** 2), (1/2))
+        return distance
+
+
+# marine_tracker = marineVessel("Marine Tracker", 25, 0, 0, [blue_whale, pacific_dolphin, orca])
+    # def solve_for_distance(self):
+
+
+    
+        
 
 class generateReport():
     def __init__(self, name, speed, creature_index:list, distance_index:list):
@@ -84,6 +108,8 @@ ocean_explorer = marineVessel("Ocean Explorer", 20, 100, 100, [blue_whale, pacif
 deep_current = marineVessel("Deep Crrent", 18, 400, 400, [blue_whale, humpback_whale, sea_turtle])
 # marine_tracker.tracking_description()
 
+# for i in range(3):
+    # get_distances_times(orca.details("x"), marine_tracker.tracking_description("x"), orca.details("y"), marine_tracker.tracking_description("y"))
 
-marine_database = generateReport(marine_tracker.tracking_description("Name"), marine_tracker.tracking_description("Speed"), [blue_whale, pacific_dolphin, orca])
+marine_database = generateReport(marine_tracker.tracking_description("Name"), marine_tracker.tracking_description("Speed"), [blue_whale, pacific_dolphin, orca], [get_distances_times(orca.details("x"), marine_tracker.tracking_description("x"), orca.details("y"), marine_tracker.tracking_description("y"))])
 marine_database.load_report("marine_report.txt")
