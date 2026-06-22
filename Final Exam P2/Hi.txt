@@ -1,6 +1,6 @@
 Marine Wildlife Tracking Report
 
-Vessel: _V_E_S_S_E_L_1_
+Vessel: Marine Tracker
 
 Speed: _S_P_E_E_D_1_
 

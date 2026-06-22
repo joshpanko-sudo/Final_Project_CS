@@ -8,10 +8,24 @@ class marineVessel():
         self.y = y
         self.tracking = tracking
 
-    def tracking_description(self):
+    def tracking_description(self, details:str):
         # print(self.tracking)
-        for _ in self.tracking:
-            print(_)
+        match details:
+            case "Tracking0":
+                return self.tracking[0]
+                # for _ in self.tracking:
+                #     print(_)
+                #     return _
+            case "Tracking1":
+                return self.tracking[1]
+            case "Tracking2":
+                return self.tracking[2]
+            case "Speed":
+                print(self.speed)
+                return self.speed
+            case "Name":
+                print(self.name)
+                return self.name
 
 
 class seaCreature():
@@ -23,17 +37,36 @@ class seaCreature():
 
     def __str__(self):
         return self.name
+    
+    def details(self, details_to_use):
+        match details_to_use:
+            case "x":
+                return self.x
+            case "y":
+                return self.y
 
 
 class generateReport():
-    def __init__(self):
-        pass
+    def __init__(self, name, speed, creature_index:list, distance_index:list):
+        self.vessel_name = name
+        self.vessel_speed = speed
+        self.creature_index = creature_index
+        self.distance_index = distance_index
 
     def load_report(self, report_name:str):
         with open(report_name, "r") as file:
             full_text = file.read()
         
-        full_text = full_text.replace("")
+        full_text = full_text.replace("_V_E_S_S_E_L_1_", self.vessel_name)
+        full_text = full_text.replace("_S_P_E_E_D_1_", str(self.vessel_speed) + " km\h")
+        full_text = full_text.replace("_C_R_E_A_T_U_R_E_1_", str(self.creature_index[0]))
+        full_text = full_text.replace("_C_R_E_A_T_U_R_E_2_", str(self.creature_index[1]))
+        full_text = full_text.replace("_C_R_E_A_T_U_R_E_3_", str(self.creature_index[2]))
+        full_text = full_text.replace("_D_I_S_T_A_N_C_E_1_", str(self.distance_index[0]))
+        print(full_text)
+        report_name = input("Title your report: ")
+        with open(report_name + ".txt", "w") as _:
+            _.write(full_text)
 
 
 
@@ -49,4 +82,8 @@ sea_turtle = seaCreature("TURT", "THISISATRUTLE", 50, 50)
 marine_tracker = marineVessel("Marine Tracker", 25, 0, 0, [blue_whale, pacific_dolphin, orca])
 ocean_explorer = marineVessel("Ocean Explorer", 20, 100, 100, [blue_whale, pacific_dolphin, sea_turtle])
 deep_current = marineVessel("Deep Crrent", 18, 400, 400, [blue_whale, humpback_whale, sea_turtle])
-marine_tracker.tracking_description()
+# marine_tracker.tracking_description()
+
+
+marine_database = generateReport(marine_tracker.tracking_description("Name"), marine_tracker.tracking_description("Speed"), [blue_whale, pacific_dolphin, orca])
+marine_database.load_report("marine_report.txt")
