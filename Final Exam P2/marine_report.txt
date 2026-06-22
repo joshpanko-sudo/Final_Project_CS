@@ -4,10 +4,10 @@ Vessel: _V_E_S_S_E_L_1_
 
 Speed: _S_P_E_E_D_1_
 
-Creatures                       Distance (km)                       Arrival Time (min)
+Creatures:                       Distance (km):                       Arrival Time (min):
+_C_R_E_A_T_U_R_E_0_             _D_S_T_A_N_C_E_0_                   _T_I_M_E_0_
 _C_R_E_A_T_U_R_E_1_             _D_S_T_A_N_C_E_1_                   _T_I_M_E_1_
 _C_R_E_A_T_U_R_E_2_             _D_S_T_A_N_C_E_2_                   _T_I_M_E_2_
-_C_R_E_A_T_U_R_E_3_             _D_S_T_A_N_C_E_3_                   _T_I_M_E_3_
 
 
 

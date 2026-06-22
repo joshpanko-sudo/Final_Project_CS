@@ -1,0 +1,42 @@
+Marine Wildlife Tracking Report
+
+Vessel: Marine Tracker
+
+Speed: 25 km/h
+
+Creatures:                       Distance (km):                       Arrival Time (min):
+Blue Whale             141.4213562373095                   339.4112549695428
+Pacific Dolphin             1131.370849898476                   2715.2900397563426
+Orca             353.5533905932738                   848.5281374238571
+
+
+
+
+Marine Wildlife Tracking Report
+
+Vessel: Deep Crrent
+
+Speed: 18 km/h
+
+Creatures:                       Distance (km):                       Arrival Time (min):
+Blue Whale             424.26406871192853                   1414.213562373095
+Humpback Whale             424.26406871192853                   1414.213562373095
+TURT             494.9747468305833                   1649.915822768611
+
+
+
+
+Marine Wildlife Tracking Report
+
+Vessel: Ocean Explorer
+
+Speed: 20 km/h
+
+Creatures:                       Distance (km):                       Arrival Time (min):
+Blue Whale             0.0                   0.0
+Pacific Dolphin             989.9494936611666                   2969.8484809835
+TURT             70.71067811865476                   212.13203435596427
+
+
+
+
