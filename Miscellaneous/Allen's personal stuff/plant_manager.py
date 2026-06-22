@@ -131,11 +131,12 @@ class Plant():
 #         self.garden_data = {"location_name": self.name_garden,"maps": self.garden}
 #         return self.garden_data
 
-# carrot = Plant("Carrot", "Vegetable", "Very yummy and commonly associated with rabbits")
-# lily = Plant("Lily", "Flower", "Very beautiful and refreshing to look at")
-# tulip = Plant("Tulip", "Flower", "Very beautiful to look at and very calming to the mind")
-# tomoto = Plant("Tomoto", "Vegetable", "Sour and yummy to eat")
-# apple = Plant("Apple", "fruit", "A tech company. Recently did WWDC 26")
+carrot = Plant("Carrot", "Vegetable", "Very yummy and commonly associated with rabbits")
+lily = Plant("Lily", "Flower", "Very beautiful and refreshing to look at")
+tulip = Plant("Tulip", "Flower", "Very beautiful to look at and very calming to the mind")
+tomoto = Plant("Tomoto", "Vegetable", "Sour and yummy to eat")
+apple = Plant("Apple", "fruit", "A tech company. Recently did WWDC 26")
+print(tomoto)
 
 # garden1 = Garden("I love me", [[carrot, carrot, carrot],[lily, tulip, carrot],[apple, lily, tomoto]])
 # # garden1.generate_garden
